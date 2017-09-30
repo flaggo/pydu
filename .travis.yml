@@ -11,5 +11,5 @@ notifications:
   email:
     recipients:
       - wangbinxin001@126.com
-    on_success: never
+    on_success: always
     on_failure: always
