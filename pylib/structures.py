@@ -4,10 +4,10 @@ import collections
 
 class AttrDict(dict):
     """
-    A Storage object is like a dictionary except `obj.foo` can be used
+    A AttrDict object is like a dictionary except `obj.foo` can be used
     in addition to `obj['foo']`.
 
-        >>> o = storage(a=1)
+        >>> o = AttrDict(a=1)
         >>> o.a
         1
         >>> o['a']
@@ -40,9 +40,6 @@ class AttrDict(dict):
 
     def __repr__(self):
         return '<AttrDict ' + dict.__repr__(self) + '>'
-
-
-attrdict = AttrDict
 
 
 class CaseInsensitiveDict(collections.MutableMapping):
