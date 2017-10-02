@@ -1,4 +1,4 @@
-from .structures import AttrDict, attrdict
+from .structures import AttrDict
 from .py3helpers import PY2, itervalues, iteritems, text_type, string_types, imap, is_iter
 
 
@@ -38,7 +38,7 @@ def attrdictify(mapping, *requireds, **defaults):
 
     # if _unicode is callable object, use it convert a string to unicode.
     to_unicode = safeunicode
-    if _unicode is not False and hasattr(_unicode, "__call__"):
+    if _unicode is not False and hasattr(_unicode, '__call__'):
         to_unicode = _unicode
 
     def unicodify(s):
@@ -146,16 +146,16 @@ def _strips(direction, text, remove):
             return text[len(remove):]
     elif direction == 'r':
         if text.endswith(remove):
-            return text[:-len(remove)]
+            return text[:-len(remove) or None]
     else:
-        raise ValueError("Direction needs to be r or l.")
+        raise ValueError('Direction needs to be r or l.')
     return text
 
 
 def rstrips(text, remove):
     """
     removes the string `remove` from the right of `text`
-        >>> rstrips("foobar", "bar")
+        >>> rstrips('foobar', 'bar')
         'foo'
 
     """
@@ -166,10 +166,8 @@ def lstrips(text, remove):
     """
     removes the string `remove` from the left of `text`
 
-        >>> lstrips("foobar", "foo")
+        >>> lstrips('foobar', 'foo')
         'bar'
-        >>> lstrips('http://foo.org/', ['http://', 'https://'])
-        'foo.org/'
         >>> lstrips('FOOBARBAZ', ['FOO', 'BAR'])
         'BAZ'
         >>> lstrips('FOOBARBAZ', ['BAR', 'FOO'])
@@ -182,7 +180,7 @@ def lstrips(text, remove):
 def strips(text, remove):
     """
     removes the string `remove` from the both sides of `text`
-        >>> strips("foobarfoo", "foo")
+        >>> strips('foobarfoo', 'foo')
         'bar'
 
     """
