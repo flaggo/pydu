@@ -1,3 +1,4 @@
+# coding: utf-8
 from .structures import AttrDict
 from .py3helpers import PY2, itervalues, iteritems, text_type, string_types, imap, is_iter
 
@@ -89,8 +90,8 @@ def safeunicode(obj, encoding='utf-8'):
         u'hello'
         >>> safeunicode(2)
         u'2'
-        >>> safeunicode('\xe1\x88\xb4')
-        u'\u1234'
+        >>> safeunicode('\xe4\xb8\xad\xe6\x96\x87')
+        u'中文'
     """
     t = type(obj)
     if t is text_type:
@@ -115,7 +116,7 @@ def safestr(obj, encoding='utf-8'):
 
     if PY2 and isinstance(obj, unicode):
         return obj.encode(encoding)
-    elif is_iter(obj):
+    elif is_iter(obj) or isinstance(obj, iters):
         return imap(safestr, obj)
     else:
         return str(obj)
