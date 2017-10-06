@@ -13,3 +13,4 @@ contributors.
 
 It is with Python versions from **2.7 to 3.6**.
 
+For more information, see `documentation <http://pydu.readthedocs.io/>`_.
