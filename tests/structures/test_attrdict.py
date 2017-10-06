@@ -1,5 +1,5 @@
 import pytest
-from pylib.structures import AttrDict
+from pydu.structures import AttrDict
 
 
 def test_attr_access_with_init():

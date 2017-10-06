@@ -1,5 +1,5 @@
 import pytest
-from pylib.structures import CaseInsensitiveDict
+from pydu.structures import CaseInsensitiveDict
 
 
 @pytest.fixture(scope='function')

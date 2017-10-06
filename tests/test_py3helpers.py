@@ -1,5 +1,5 @@
-from pylib.py3helpers import (iterkeys, itervalues, iteritems, is_iter,
-                              text_type, string_types, numeric_types)
+from pydu.py3helpers import (iterkeys, itervalues, iteritems, is_iter,
+                             text_type, string_types, numeric_types)
 
 
 def test_iter():
@@ -27,8 +27,8 @@ def test_types():
 
 
 def test_urljoin():
-    from pylib.py3helpers import urljoin
+    from pydu.py3helpers import urljoin
 
 
 def test_imap():
-    from pylib.py3helpers import imap
+    from pydu.py3helpers import imap

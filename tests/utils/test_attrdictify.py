@@ -1,5 +1,5 @@
-from pylib.structures import AttrDict
-from pylib.utils import attrdictify
+from pydu.structures import AttrDict
+from pydu.utils import attrdictify
 
 
 def test_attrdictify():

@@ -1,11 +1,11 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="pylib",
+    name="pydu",
     version="0.0.1",
-    description="pylib",
+    description="pydu",
     author="Prodesire",
-    url="https://github.com/Prodesire/pylib",
+    url="https://github.com/Prodesire/pydu",
     setup_requires=['pytest-runner'],
     packages=find_packages(),
 )

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# pylib documentation build configuration file, created by
+# pydu documentation build configuration file, created by
 # sphinx-quickstart on Fri Oct  6 23:05:59 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -46,7 +46,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'pylib'
+project = 'pydu'
 copyright = '2017, Prodesire'
 author = 'Prodesire'
 
@@ -115,7 +115,7 @@ html_sidebars = {
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'pylib-doc'
+htmlhelp_basename = 'pydu-doc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -142,7 +142,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'pylib.tex', 'pylib Documentation',
+    (master_doc, 'pydu.tex', 'pydu Documentation',
      'Prodesire', 'manual'),
 ]
 
@@ -152,7 +152,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'pylib', 'pylib Documentation',
+    (master_doc, 'pydu', 'pydu Documentation',
      [author], 1)
 ]
 
@@ -163,8 +163,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'pylib', 'pylib Documentation',
-     author, 'pylib', 'One line description of project.',
+    (master_doc, 'pydu', 'pydu Documentation',
+     author, 'pydu', 'One line description of project.',
      'Miscellaneous'),
 ]
 

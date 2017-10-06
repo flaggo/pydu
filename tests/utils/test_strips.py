@@ -1,4 +1,4 @@
-from pylib.utils import strips, lstrips, rstrips
+from pydu.utils import strips, lstrips, rstrips
 
 
 def test_lstrips():

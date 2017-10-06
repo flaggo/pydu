@@ -1,5 +1,5 @@
 import pytest
-from pylib.structures import LookupDict
+from pydu.structures import LookupDict
 
 
 @pytest.fixture(scope='function')
