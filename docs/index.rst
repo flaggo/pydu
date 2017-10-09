@@ -137,27 +137,35 @@ Dict
     1
 
 
-
-
-    >>> from pydu.structures import LookupDict
-    >>> d = LookupDict()
-    >>> d['key']
-    None
-    >>> d['key'] = 1
-    >>> d['key']
-    1
-
-
-
-
-  >>> from pydu.structures import LookupDict
-  >>> d = LookupDict()
-  >>> d['key']
-  None
-  >>> d['key'] = 1
-  >>> d['key']
-  1
-
-
 Utils
 =====
+
+String
+------
+
+.. function:: pydu.utils.lstrips(text, remove)
+
+  Removes the string `remove` from the left of `text`.
+
+    >>> lstrips('foobar', 'foo')
+    'bar'
+    >>> lstrips('FOOBARBAZ', ['FOO', 'BAR'])
+    'BAZ'
+    >>> lstrips('FOOBARBAZ', ['BAR', 'FOO'])
+    'BARBAZ'
+
+
+.. function:: pydu.utils.rstrips(text, remove)
+
+  Removes the string `remove` from the right of `text`.
+
+    >>> rstrips('foobar', 'bar')
+    'foo'
+
+
+.. function:: pydu.utils.strips(text, remove)
+
+  Removes the string `remove` from the both sides of `text`.
+
+    >>> strips('foobarfoo', 'foo')
+    'bar'
