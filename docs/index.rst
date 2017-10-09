@@ -169,3 +169,4 @@ String
 
     >>> strips('foobarfoo', 'foo')
     'bar'
+
