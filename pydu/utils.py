@@ -1,85 +1,21 @@
 # coding: utf-8
 from .structures import AttrDict
-from .py3helpers import PY2, itervalues, iteritems, text_type, string_types, imap, is_iter
+from .py3helpers import PY2, text_type, imap, is_iter
 
 
-def attrdictify(mapping, *requireds, **defaults):
-    """
-    Creates a `AttrDict` object from dictionary `mapping`, raising `KeyError` if
-    d doesn't have all of the keys in `requireds` and using the default
-    values for keys found in `defaults`.
-    For example, `attrdictify({'a':1, 'c':3}, b=2, c=0)` will return the equivalent of
-    `AttrDict({'a':1, 'b':2, 'c':3})`.
-
-    If a `attrdictify` value is a list (e.g. multiple values in a form submission),
-    `attrdictify` returns the last element of the list, unless the key appears in
-    `defaults` as a list. Thus:
-
-        >>> attrdictify({'a':[1, 2]}).a
-        2
-        >>> attrdictify({'a':[1, 2]}, a=[]).a
-        [1, 2]
-        >>> attrdictify({'a':1}, a=[]).a
-        [1]
-        >>> attrdictify({}, a=[]).a
-        []
-
-    Similarly, if the value has a `value` attribute, `attrdictify will return _its_
-    value, unless the key appears in `defaults` as a dictionary.
-
-        >>> attrdictify({'a':attrdict(value=1)}).a
-        1
-        >>> attrdictify({'a':attrdict(value=1)}, a={}).a
-        <AttrDict {'value': 1}>
-        >>> attrdictify({}, a={}).a
-        {}
-
-    """
-    _unicode = defaults.pop('_unicode', False)
-
-    # if _unicode is callable object, use it convert a string to unicode.
-    to_unicode = safeunicode
-    if _unicode is not False and hasattr(_unicode, '__call__'):
-        to_unicode = _unicode
-
-    def unicodify(s):
-        if _unicode and isinstance(s, str):
-            return to_unicode(s)
-        else:
-            return s
-
-    def getvalue(x):
-        if hasattr(x, 'file') and hasattr(x, 'value'):
-            return x.value
-        elif hasattr(x, 'value'):
-            return unicodify(x.value)
-        else:
-            return unicodify(x)
-
-    attrd = AttrDict()
-    for key in requireds + tuple(mapping.keys()):
-        value = mapping[key]
-        if isinstance(value, list):
-            if isinstance(defaults.get(key), list):
-                value = [getvalue(x) for x in value]
-            else:
-                value = value[-1]
-        if not isinstance(defaults.get(key), dict):
-            value = getvalue(value)
-        if isinstance(defaults.get(key), list) and not isinstance(value, list):
-            value = [value]
-
-        setattr(attrd, key, value)
-
-    for (key, value) in iteritems(defaults):
-        result = value
-        if hasattr(attrd, key):
-            result = attrd[key]
-        if value == () and not isinstance(result, tuple):
-            result = (result,)
-        setattr(attrd, key, result)
-
-    return attrd
+def attrify(obj):
+    if isinstance(obj, (list, tuple)):
+        for i, v in enumerate(obj):
+            obj[i] = attrify(v)
+        return obj
+    elif isinstance(obj, dict):
+        attrd = AttrDict()
+        for key, value in obj.items():
+            value = attrify(value)
+            setattr(attrd, key, value)
+        return attrd
+    else:
+        return obj
 
 
 def safeunicode(obj, encoding='utf-8'):
