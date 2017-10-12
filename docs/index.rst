@@ -88,7 +88,7 @@ Dict
   All keys are expected to be strings. The structure remembers the
   case of the last key to be set, and ``iter(instance)``, ``keys()``,
   ``items()``, ``iterkeys()``, and ``iteritems()`` will contain
-    case-sensitive keys.
+  case-sensitive keys.
 
     >>> from pydu.structures import CaseInsensitiveDict
     >>> cid = CaseInsensitiveDict()
@@ -138,6 +138,28 @@ Dict
 
 Utils
 =====
+
+Dict
+----
+
+.. function:: pydu.utils.attrify(obj)
+
+  Attrify obj into `AttriDict` or list or `AttriDict` if the obj is list.
+
+    >>> from pydu.utils import attrify
+    >>> attrd = attrify({
+        'a': [1, 2, {'b': 'b'}],
+        'c': 'c',
+    })
+    >>> attrd
+    <AttrDict {'a': [1, 2, <AttrDict {'b': 'b'}>], 'c': 'c'}>
+    >>> attrd.a
+    1
+    >>> attrd.a[2].b
+    b
+    >>> attrd.c
+    c
+
 
 String
 ------
