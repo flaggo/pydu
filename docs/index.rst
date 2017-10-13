@@ -191,3 +191,14 @@ String
     >>> strips('foobarfoo', 'foo')
     'bar'
 
+
+.. function:: pydu.utils.safeunicode(obj, encoding='utf-8')
+
+  Converts any given object to unicode string.
+
+    >>> safeunicode('hello')
+    u'hello'
+    >>> safeunicode(2)
+    u'2'
+    >>> safeunicode('\xe4\xb8\xad\xe6\x96\x87')
+    u'中文'
