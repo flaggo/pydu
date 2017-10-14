@@ -164,6 +164,30 @@ Dict
 String
 ------
 
+.. function:: pydu.utils.safeunicode(obj, encoding='utf-8')
+
+  Converts any given object to unicode string.
+
+    >>> safeunicode('hello')
+    u'hello'
+    >>> safeunicode(2)
+    u'2'
+    >>> safeunicode('\xe4\xb8\xad\xe6\x96\x87')
+    u'中文'
+
+
+.. function:: pydu.utils.safestr(obj, encoding='utf-8')
+
+  Converts any given object to utf-8 encoded string.
+
+    >>> safestr('hello')
+    'hello'
+    >>> safestr(2)
+    '2'
+    >>> safestr(u'中文')
+    '中文'
+
+
 .. function:: pydu.utils.lstrips(text, remove)
 
   Removes the string `remove` from the left of `text`.
@@ -192,13 +216,3 @@ String
     'bar'
 
 
-.. function:: pydu.utils.safeunicode(obj, encoding='utf-8')
-
-  Converts any given object to unicode string.
-
-    >>> safeunicode('hello')
-    u'hello'
-    >>> safeunicode(2)
-    u'2'
-    >>> safeunicode('\xe4\xb8\xad\xe6\x96\x87')
-    u'中文'
