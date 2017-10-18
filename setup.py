@@ -1,8 +1,10 @@
+from pydu import __version__
 from setuptools import setup, find_packages
+
 
 setup(
     name="pydu",
-    version="0.0.1",
+    version=__version__,
     description="pydu",
     author="Prodesire",
     url="https://github.com/Prodesire/pydu",
