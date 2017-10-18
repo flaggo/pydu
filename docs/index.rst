@@ -64,20 +64,21 @@ Dict
 
 
 
-  >>> from pydu.structures import AttrDict
-  >>> o = AttrDict(a=1)
-  o.a
-  1
-  >>> o['a']
-  1
-  >>> o.a = 2
-  >>> o['a']
-  2
-  >>> del o.a
-  >>> o.a
-  Traceback (most recent call last):
-      ...
-  AttributeError: 'a'
+
+    >>> from pydu.structures import AttrDict
+    >>> o = AttrDict(a=1)
+    o.a
+    1
+    >>> o['a']
+    1
+    >>> o.a = 2
+    >>> o['a']
+    2
+    >>> del o.a
+    >>> o.a
+    Traceback (most recent call last):
+        ...
+    AttributeError: 'a'
 
 
 .. class:: pydu.structures.CaseInsensitiveDict(data=None, **kwargs)
@@ -100,7 +101,7 @@ Dict
 
 
 
-    case-sensitive keys.
+  case-sensitive keys.
 
     >>> from pydu.structures import CaseInsensitiveDict
     >>> cid = CaseInsensitiveDict()
@@ -114,13 +115,13 @@ Dict
 
   case-sensitive keys.
 
-  >>> from pydu.structures import CaseInsensitiveDict
-  >>> cid = CaseInsensitiveDict()
-  >>> cid['Accept'] = 'application/json'
-  >>> cid['aCCEPT'] == 'application/json'
-  True
-  >>> list(cid) == ['Accept']
-  True
+    >>> from pydu.structures import CaseInsensitiveDict
+    >>> cid = CaseInsensitiveDict()
+    >>> cid['Accept'] = 'application/json'
+    >>> cid['aCCEPT'] == 'application/json'
+    True
+    >>> list(cid) == ['Accept']
+    True
 
 
 .. class:: pydu.structures.LookupDict(name=None)
