@@ -44,43 +44,6 @@ Dict
     AttributeError: 'a'
 
 
-
-
-    >>> from pydu.structures import AttrDict
-    >>> o = AttrDict(a=1)
-    o.a
-    1
-    >>> o['a']
-    1
-    >>> o.a = 2
-    >>> o['a']
-    2
-    >>> del o.a
-    >>> o.a
-    Traceback (most recent call last):
-        ...
-    AttributeError: 'a'
-
-
-
-
-
-    >>> from pydu.structures import AttrDict
-    >>> o = AttrDict(a=1)
-    o.a
-    1
-    >>> o['a']
-    1
-    >>> o.a = 2
-    >>> o['a']
-    2
-    >>> del o.a
-    >>> o.a
-    Traceback (most recent call last):
-        ...
-    AttributeError: 'a'
-
-
 .. class:: pydu.structures.CaseInsensitiveDict(data=None, **kwargs)
 
   A case-insensitive ``dict``-like object.
@@ -98,20 +61,6 @@ Dict
     True
     >>> list(cid) == ['Accept']
     True
-
-
-
-  case-sensitive keys.
-
-    >>> from pydu.structures import CaseInsensitiveDict
-    >>> cid = CaseInsensitiveDict()
-    >>> cid['Accept'] = 'application/json'
-    >>> cid['aCCEPT'] == 'application/json'
-    True
-    >>> list(cid) == ['Accept']
-    True
-
-
 
   case-sensitive keys.
 
@@ -135,6 +84,22 @@ Dict
     >>> d['key'] = 1
     >>> d['key']
     1
+
+
+Set
+----
+
+.. class:: pydu.structures.OrderedSet(iterable=None)
+
+  A set which keeps the ordering of the inserted items.
+
+    >>> from pydu.structures import OrderedSet
+    >>> s = OrderedSet([1, 3, 1, 2])
+    >>> list(s)
+    [1, 3, 2]
+    >>> s.discard(3)
+    >>> list(s)
+    [1, 2]
 
 
 Utils
@@ -215,5 +180,3 @@ String
 
     >>> strips('foobarfoo', 'foo')
     'bar'
-
-
