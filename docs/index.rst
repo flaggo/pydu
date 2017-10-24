@@ -23,12 +23,12 @@ Data Structures
 Dict
 ----
 
-.. class:: pydu.structures.AttrDict(seq=None, **kwargs)
+.. class:: pydu.datastructures.dict.AttrDict(seq=None, **kwargs)
 
   A AttrDict object is like a dictionary except `obj.foo` can be used
   in addition to `obj['foo']`.
 
-    >>> from pydu.structures import AttrDict
+    >>> from pydu.datastructures.dict import AttrDict
     >>> o = AttrDict(a=1)
     o.a
     1
@@ -44,7 +44,7 @@ Dict
     AttributeError: 'a'
 
 
-.. class:: pydu.structures.CaseInsensitiveDict(data=None, **kwargs)
+.. class:: pydu.datastructures.dict.CaseInsensitiveDict(data=None, **kwargs)
 
   A case-insensitive ``dict``-like object.
   Implements all methods and operations of ``collections.MutableMapping``
@@ -54,7 +54,7 @@ Dict
   ``items()``, ``iterkeys()``, and ``iteritems()`` will contain
   case-sensitive keys.
 
-    >>> from pydu.structures import CaseInsensitiveDict
+    >>> from pydu.datastructures.dict import CaseInsensitiveDict
     >>> cid = CaseInsensitiveDict()
     >>> cid['Accept'] = 'application/json'
     >>> cid['aCCEPT'] == 'application/json'
@@ -64,7 +64,7 @@ Dict
 
   case-sensitive keys.
 
-    >>> from pydu.structures import CaseInsensitiveDict
+    >>> from pydu.datastructures.dict import CaseInsensitiveDict
     >>> cid = CaseInsensitiveDict()
     >>> cid['Accept'] = 'application/json'
     >>> cid['aCCEPT'] == 'application/json'
@@ -73,11 +73,11 @@ Dict
     True
 
 
-.. class:: pydu.structures.LookupDict(name=None)
+.. class:: pydu.datastructures.dict.LookupDict(name=None)
 
   Dictionary lookup object.
 
-    >>> from pydu.structures import LookupDict
+    >>> from pydu.datastructures.dict import LookupDict
     >>> d = LookupDict()
     >>> d['key']
     None
@@ -89,11 +89,11 @@ Dict
 Set
 ----
 
-.. class:: pydu.structures.OrderedSet(iterable=None)
+.. class:: pydu.datastructures.set.OrderedSet(iterable=None)
 
   A set which keeps the ordering of the inserted items.
 
-    >>> from pydu.structures import OrderedSet
+    >>> from pydu.datastructures.set import OrderedSet
     >>> s = OrderedSet([1, 3, 1, 2])
     >>> list(s)
     [1, 3, 2]
@@ -130,10 +130,11 @@ Dict
 String
 ------
 
-.. function:: pydu.utils.safeunicode(obj, encoding='utf-8')
+.. function:: pydu.utils.string.safeunicode(obj, encoding='utf-8')
 
   Converts any given object to unicode string.
 
+    >>> from pydu.utils.string import safeunicode
     >>> safeunicode('hello')
     u'hello'
     >>> safeunicode(2)
@@ -142,10 +143,11 @@ String
     u'中文'
 
 
-.. function:: pydu.utils.safestr(obj, encoding='utf-8')
+.. function:: pydu.utils.string.safestr(obj, encoding='utf-8')
 
   Converts any given object to utf-8 encoded string.
 
+    >>> from pydu.utils.string import safestr
     >>> safestr('hello')
     'hello'
     >>> safestr(2)
@@ -154,10 +156,11 @@ String
     '中文'
 
 
-.. function:: pydu.utils.lstrips(text, remove)
+.. function:: pydu.utils.string.lstrips(text, remove)
 
   Removes the string `remove` from the left of `text`.
 
+    >>> from pydu.utils.string import lstrips
     >>> lstrips('foobar', 'foo')
     'bar'
     >>> lstrips('FOOBARBAZ', ['FOO', 'BAR'])
@@ -166,17 +169,19 @@ String
     'BARBAZ'
 
 
-.. function:: pydu.utils.rstrips(text, remove)
+.. function:: pydu.utils.string.rstrips(text, remove)
 
   Removes the string `remove` from the right of `text`.
 
+    >>> from pydu.utils.string import rstrips
     >>> rstrips('foobar', 'bar')
     'foo'
 
 
-.. function:: pydu.utils.strips(text, remove)
+.. function:: pydu.utils.string.strips(text, remove)
 
   Removes the string `remove` from the both sides of `text`.
 
+    >>> from pydu.utils.string import strips
     >>> strips('foobarfoo', 'foo')
     'bar'

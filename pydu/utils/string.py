@@ -1,21 +1,5 @@
 # coding: utf-8
-from .structures import AttrDict
-from .py3helpers import PY2, text_type, imap, is_iter
-
-
-def attrify(obj):
-    if isinstance(obj, (list, tuple)):
-        for i, v in enumerate(obj):
-            obj[i] = attrify(v)
-        return obj
-    elif isinstance(obj, dict):
-        attrd = AttrDict()
-        for key, value in obj.items():
-            value = attrify(value)
-            setattr(attrd, key, value)
-        return attrd
-    else:
-        return obj
+from pydu.compatibility import PY2, text_type, imap, is_iter
 
 
 def safeunicode(obj, encoding='utf-8'):

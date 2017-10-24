@@ -1,4 +1,4 @@
-from pydu.structures import OrderedSet
+from pydu.datastructures.set import OrderedSet
 
 
 def test_ordered_set():
