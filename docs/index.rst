@@ -185,3 +185,34 @@ String
     >>> from pydu.utils.string import strips
     >>> strips('foobarfoo', 'foo')
     'bar'
+
+
+Miscellanea
+-----------
+
+.. function:: pydu.utils.trace(obj)
+
+  Tracing every statement and line number for running program, like `bash -x`.
+  In `test.py`, you may write like below:
+
+  .. code-block:: python
+
+    from pydu.utils import trace
+    @trace
+    def f():
+        print(1)
+        a = 1 + 5
+        b = [a]
+        print(2)
+    f()
+
+  Ant run `test.py`, will see below output from console:
+
+  .. code-block:: console
+
+    test.py(4):     print(1)
+    1
+    test.py(5):     a = 1 + 5
+    test.py(6):     b = [a]
+    test.py(7):     print(2)
+    2
