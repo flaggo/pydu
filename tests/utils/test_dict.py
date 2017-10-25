@@ -1,4 +1,4 @@
-from pydu.utils import attrify
+from pydu.utils.dict import attrify
 
 
 def test_attrify():
