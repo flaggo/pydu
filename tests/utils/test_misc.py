@@ -1,9 +1,9 @@
 import sys
 from pydu.utils import trace
 try:
-    from io import StringIO
+    from cStringIO import StringIO  # py2
 except ImportError:
-    from StringIO import StringIO
+    from io import StringIO  # py3
 
 
 def test_trace():
@@ -15,15 +15,15 @@ def test_trace():
         print(2)
 
     old_stdout = sys.stdout
-
-    sys.stdout = StringIO()
-    f()
-    sys.stdout.seek(0)
-    stdout = sys.stdout.read()
-    for statement in ('print(1)',
-                      'a = 1 + 5',
-                      'b = [a]',
-                      'print(2)'):
-        assert statement in stdout
-
-    sys.stdout = old_stdout
+    try:
+        sys.stdout = StringIO()
+        f()
+        sys.stdout.seek(0)
+        stdout = sys.stdout.read()
+        for statement in ('print(1)',
+                          'a = 1 + 5',
+                          'b = [a]',
+                          'print(2)'):
+            assert statement in stdout
+    finally:
+        sys.stdout = old_stdout
