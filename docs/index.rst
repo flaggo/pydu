@@ -108,11 +108,11 @@ Utils
 Dict
 ----
 
-.. function:: pydu.utils.attrify(obj)
+.. function:: pydu.utils.dict.attrify(obj)
 
   Attrify obj into `AttriDict` or list or `AttriDict` if the obj is list.
 
-    >>> from pydu.utils import attrify
+    >>> from pydu.utils.dict import attrify
     >>> attrd = attrify({
         'a': [1, 2, {'b': 'b'}],
         'c': 'c',
