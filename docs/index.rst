@@ -190,6 +190,24 @@ String
 Miscellanea
 -----------
 
+.. function:: pydu.utils.unix_timeout(seconds)
+
+  This func decorates any func which may be hang for a while. The param `seconds`
+  should be integer. `unix_timeout` can only be used on unix-like system.
+  In `test.py`, you may write like below:
+
+  .. code-block:: python
+
+    import time
+    from pydu.utils import unix_timeout
+    @unix_timeout(1)
+    def f():
+        time.sleep(1.01)
+    f()
+
+  Ant run `test.py`, will see `TimeoutError`
+
+
 .. function:: pydu.utils.trace(obj)
 
   Tracing every statement and line number for running program, like `bash -x`.
