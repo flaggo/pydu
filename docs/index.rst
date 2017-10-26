@@ -25,8 +25,8 @@ Dict
 
 .. class:: pydu.datastructures.dict.AttrDict(seq=None, **kwargs)
 
-  A AttrDict object is like a dictionary except `obj.foo` can be used
-  in addition to `obj['foo']`.
+  A AttrDict object is like a dictionary except ``obj.foo`` can be used
+  in addition to ``obj['foo']``.
 
     >>> from pydu.datastructures.dict import AttrDict
     >>> o = AttrDict(a=1)
@@ -110,7 +110,7 @@ Dict
 
 .. function:: pydu.utils.dict.attrify(obj)
 
-  Attrify obj into `AttriDict` or list or `AttriDict` if the obj is list.
+  Attrify obj into ``AttriDict`` or list or ``AttriDict`` if the obj is list.
 
     >>> from pydu.utils.dict import attrify
     >>> attrd = attrify({
@@ -158,7 +158,7 @@ String
 
 .. function:: pydu.utils.string.lstrips(text, remove)
 
-  Removes the string `remove` from the left of `text`.
+  Removes the string ``remove`` from the left of ``text``.
 
     >>> from pydu.utils.string import lstrips
     >>> lstrips('foobar', 'foo')
@@ -171,7 +171,7 @@ String
 
 .. function:: pydu.utils.string.rstrips(text, remove)
 
-  Removes the string `remove` from the right of `text`.
+  Removes the string ``remove`` from the right of ``text``.
 
     >>> from pydu.utils.string import rstrips
     >>> rstrips('foobar', 'bar')
@@ -180,7 +180,7 @@ String
 
 .. function:: pydu.utils.string.strips(text, remove)
 
-  Removes the string `remove` from the both sides of `text`.
+  Removes the string ``remove`` from the both sides of ``text``.
 
     >>> from pydu.utils.string import strips
     >>> strips('foobarfoo', 'foo')
@@ -192,8 +192,8 @@ Miscellanea
 
 .. function:: pydu.utils.unix_timeout(seconds)
 
-  This func decorates any func which may be hang for a while. The param `seconds`
-  should be integer. `unix_timeout` can only be used on unix-like system.
+  This func decorates any func which may be hang for a while. The param ``seconds``
+  should be integer. ``unix_timeout`` can only be used on ``unix-like`` system.
   In `test.py`, you may write like below:
 
   .. code-block:: python
@@ -205,12 +205,12 @@ Miscellanea
         time.sleep(1.01)
     f()
 
-  Ant run `test.py`, will see `TimeoutError`
+  Ant run `test.py`, will see ``TimeoutError``.
 
 
 .. function:: pydu.utils.trace(obj)
 
-  Tracing every statement and line number for running program, like `bash -x`.
+  Tracing every statement and line number for running program, like ``bash -x``.
   In `test.py`, you may write like below:
 
   .. code-block:: python
