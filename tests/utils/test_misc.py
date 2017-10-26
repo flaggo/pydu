@@ -11,13 +11,13 @@ except ImportError:
 
 @pytest.mark.skipif(WINDOWS, reason='unix_timeout only supports unix-like system')
 def test_unix_timeout():
-    @unix_timeout(0.02)
+    @unix_timeout(1)
     def f1():
         time.sleep(0.01)
 
-    @unix_timeout(0.001)
+    @unix_timeout(1)
     def f2():
-        time.sleep(0.01)
+        time.sleep(1.01)
 
     f1()
 
