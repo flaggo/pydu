@@ -1,9 +1,28 @@
 import sys
-from pydu.utils import trace
+import time
+import pytest
+from pydu import WINDOWS
+from pydu.utils import trace, unix_timeout, TimeoutError
 try:
     from cStringIO import StringIO  # py2
 except ImportError:
     from io import StringIO  # py3
+
+
+@pytest.mark.skipif(WINDOWS, reason='unix_timeout only supports unix-like system')
+def test_unix_timeout():
+    @unix_timeout(0.02)
+    def f1():
+        time.sleep(0.01)
+
+    @unix_timeout(0.001)
+    def f2():
+        time.sleep(0.01)
+
+    f1()
+
+    with pytest.raises(TimeoutError):
+        f2()
 
 
 def test_trace():
