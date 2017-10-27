@@ -23,7 +23,7 @@ import stat
 import tarfile
 import zipfile
 
-from pydu.compatibility import string_types
+from pydu.compat import string_types
 
 
 class ArchiveException(Exception):
@@ -38,12 +38,12 @@ class UnrecognizedArchiveFormat(ArchiveException):
     """
 
 
-def extract(path, to_path=''):
+def extract(path, to_path='', ext=''):
     """
-    Unpack the tar or zip file at the specified path to the directory
+    Unpack the tar or zip file at the specified path or file to the directory
     specified by to_path.
     """
-    with Archive(path) as archive:
+    with Archive(path, ext=ext) as archive:
         archive.extract(to_path)
 
 
@@ -51,12 +51,21 @@ class Archive(object):
     """
     The external API class that encapsulates an archive implementation.
     """
-    def __init__(self, file):
-        self._archive = self._archive_cls(file)(file)
+    def __init__(self, file, ext=''):
+        """
+        Arguments:
+        * 'file' can be a string path to a file or a file-like object.
+        * Optional 'ext' argument can be given to override the file-type
+          guess that is normally performed using the file extension of the
+          given 'file'.  Should start with a dot, e.g. '.tar.gz'.
+        """
+        self._archive = self._archive_cls(file, ext=ext)(file)
 
     @staticmethod
-    def _archive_cls(file):
-        cls = None
+    def _archive_cls(file, ext=''):
+        """
+        Return the proper Archive implementation class, based on the file type.
+        """
         if isinstance(file, string_types):
             filename = file
         else:
@@ -65,7 +74,9 @@ class Archive(object):
             except AttributeError:
                 raise UnrecognizedArchiveFormat(
                     "File object not a recognized archive format.")
-        base, tail_ext = os.path.splitext(filename.lower())
+        lookup_filename = filename + ext
+        base, tail_ext = os.path.splitext(lookup_filename.lower())
+        print(base, tail_ext)
         cls = extension_map.get(tail_ext)
         if not cls:
             base, ext = os.path.splitext(base)
@@ -86,6 +97,9 @@ class Archive(object):
 
     def list(self):
         self._archive.list()
+
+    def filenames(self):
+        return self._archive.filenames()
 
     def close(self):
         self._archive.close()
@@ -108,7 +122,8 @@ class BaseArchive(object):
     def split_leading_dir(self, path):
         path = str(path)
         path = path.lstrip('/').lstrip('\\')
-        if '/' in path and (('\\' in path and path.find('/') < path.find('\\')) or '\\' not in path):
+        if '/' in path and (('\\' in path and path.find('/') < path.find(
+                '\\')) or '\\' not in path):
             return path.split('/', 1)
         elif '\\' in path:
             return path.split('\\', 1)
@@ -131,20 +146,33 @@ class BaseArchive(object):
                 return False
         return True
 
-    def extract(self):
-        raise NotImplementedError('subclasses of BaseArchive must provide an extract() method')
+    def extract(self, to_path):
+        raise NotImplementedError(
+            'subclasses of BaseArchive must provide an extract() method')
 
     def list(self):
-        raise NotImplementedError('subclasses of BaseArchive must provide a list() method')
+        raise NotImplementedError(
+            'subclasses of BaseArchive must provide a list() method')
+
+    def filenames(self):
+        """
+        Return a list of the filenames contained in the archive.
+        """
+        raise NotImplementedError()
+
+    def __del__(self):
+        if hasattr(self, "_archive"):
+            self._archive.close()
 
 
 class TarArchive(BaseArchive):
 
     def __init__(self, file):
-        self._archive = tarfile.open(file)
-
-    def list(self, *args, **kwargs):
-        self._archive.list(*args, **kwargs)
+        # tarfile's open uses different parameters for file path vs. file obj.
+        if isinstance(file, string_types):
+            self._archive = tarfile.open(name=file)
+        else:
+            self._archive = tarfile.open(fileobj=file)
 
     def extract(self, to_path):
         members = self._archive.getmembers()
@@ -176,6 +204,12 @@ class TarArchive(BaseArchive):
                     if extracted:
                         extracted.close()
 
+    def list(self, *args, **kwargs):
+        self._archive.list(*args, **kwargs)
+
+    def filenames(self):
+        return self._archive.getnames()
+
     def close(self):
         self._archive.close()
 
@@ -183,10 +217,8 @@ class TarArchive(BaseArchive):
 class ZipArchive(BaseArchive):
 
     def __init__(self, file):
+        # ZipFile's 'file' parameter can be path (string) or file-like obj.
         self._archive = zipfile.ZipFile(file)
-
-    def list(self, *args, **kwargs):
-        self._archive.printdir(*args, **kwargs)
 
     def extract(self, to_path):
         namelist = self._archive.namelist()
@@ -210,6 +242,12 @@ class ZipArchive(BaseArchive):
                 # Convert ZipInfo.external_attr to mode
                 mode = info.external_attr >> 16
                 self._copy_permissions(mode, filename)
+
+    def list(self, *args, **kwargs):
+        self._archive.printdir(*args, **kwargs)
+
+    def filenames(self):
+        return self._archive.namelist()
 
     def close(self):
         self._archive.close()
