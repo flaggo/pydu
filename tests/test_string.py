@@ -1,5 +1,5 @@
 # coding: utf-8
-from pydu.utils.string import safestr, safeunicode, strips, lstrips, rstrips
+from pydu.string import safestr, safeunicode, strips, lstrips, rstrips
 
 
 def test_safestr():

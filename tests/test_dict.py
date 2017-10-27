@@ -1,6 +1,7 @@
 import pytest
 import unittest
-from pydu.datastructures.dict import AttrDict, LookupDict, CaseInsensitiveDict
+
+from pydu.dict import AttrDict, LookupDict, CaseInsensitiveDict, attrify
 
 
 class TestAttrDict(object):
@@ -59,3 +60,13 @@ class TestCaseInsensitiveDict(unittest.TestCase):
     def test_ci_dict_copy_and_equal(self):
         d = self.d.copy()
         assert d == self.d
+
+
+def test_attrify():
+    attrd = attrify({
+        'a': [1, 2, {'b': 'b'}],
+        'c': 'c',
+    })
+    assert attrd.a == [1, 2, {'b': 'b'}]
+    assert attrd.a[2].b == 'b'
+    assert attrd.c == 'c'

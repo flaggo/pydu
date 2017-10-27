@@ -2,7 +2,7 @@ import sys
 import time
 import pytest
 from pydu import WINDOWS
-from pydu.utils import trace, unix_timeout, TimeoutError
+from pydu.misc import trace, unix_timeout, TimeoutError
 try:
     from cStringIO import StringIO  # py2
 except ImportError:

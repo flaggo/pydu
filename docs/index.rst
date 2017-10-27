@@ -23,12 +23,12 @@ Data Structures
 Dict
 ----
 
-.. class:: pydu.datastructures.dict.AttrDict(seq=None, **kwargs)
+.. class:: pydu.dict.AttrDict(seq=None, **kwargs)
 
   A AttrDict object is like a dictionary except ``obj.foo`` can be used
   in addition to ``obj['foo']``.
 
-    >>> from pydu.datastructures.dict import AttrDict
+    >>> from pydu.dict import AttrDict
     >>> o = AttrDict(a=1)
     o.a
     1
@@ -40,11 +40,10 @@ Dict
     >>> del o.a
     >>> o.a
     Traceback (most recent call last):
-        ...
-    AttributeError: 'a'
+     ...    AttributeError: 'a'
 
 
-.. class:: pydu.datastructures.dict.CaseInsensitiveDict(data=None, **kwargs)
+.. class:: pydu.dict.CaseInsensitiveDict(data=None, **kwargs)
 
   A case-insensitive ``dict``-like object.
   Implements all methods and operations of ``collections.MutableMapping``
@@ -54,17 +53,7 @@ Dict
   ``items()``, ``iterkeys()``, and ``iteritems()`` will contain
   case-sensitive keys.
 
-    >>> from pydu.datastructures.dict import CaseInsensitiveDict
-    >>> cid = CaseInsensitiveDict()
-    >>> cid['Accept'] = 'application/json'
-    >>> cid['aCCEPT'] == 'application/json'
-    True
-    >>> list(cid) == ['Accept']
-    True
-
-  case-sensitive keys.
-
-    >>> from pydu.datastructures.dict import CaseInsensitiveDict
+    >>> from pydu.dict import CaseInsensitiveDict
     >>> cid = CaseInsensitiveDict()
     >>> cid['Accept'] = 'application/json'
     >>> cid['aCCEPT'] == 'application/json'
@@ -73,11 +62,11 @@ Dict
     True
 
 
-.. class:: pydu.datastructures.dict.LookupDict(name=None)
+.. class:: pydu.dict.LookupDict(name=None)
 
   Dictionary lookup object.
 
-    >>> from pydu.datastructures.dict import LookupDict
+    >>> from pydu.dict import LookupDict
     >>> d = LookupDict()
     >>> d['key']
     None
@@ -89,11 +78,11 @@ Dict
 Set
 ----
 
-.. class:: pydu.datastructures.set.OrderedSet(iterable=None)
+.. class:: pydu.set.OrderedSet(iterable=None)
 
   A set which keeps the ordering of the inserted items.
 
-    >>> from pydu.datastructures.set import OrderedSet
+    >>> from pydu.set import OrderedSet
     >>> s = OrderedSet([1, 3, 1, 2])
     >>> list(s)
     [1, 3, 2]
@@ -108,11 +97,11 @@ Utils
 Dict
 ----
 
-.. function:: pydu.utils.dict.attrify(obj)
+.. function:: pydu.dict.attrify(obj)
 
-  Attrify obj into ``AttriDict`` or list or ``AttriDict`` if the obj is list.
+  Attrify obj into ``AttriDict`` or ``list of AttriDict`` if the obj is list.
 
-    >>> from pydu.utils.dict import attrify
+    >>> from pydu.dict import attrify
     >>> attrd = attrify({
         'a': [1, 2, {'b': 'b'}],
         'c': 'c',
@@ -130,11 +119,11 @@ Dict
 String
 ------
 
-.. function:: pydu.utils.string.safeunicode(obj, encoding='utf-8')
+.. function:: pydu.string.safeunicode(obj, encoding='utf-8')
 
   Converts any given object to unicode string.
 
-    >>> from pydu.utils.string import safeunicode
+    >>> from pydu.string import safeunicode
     >>> safeunicode('hello')
     u'hello'
     >>> safeunicode(2)
@@ -143,24 +132,11 @@ String
     u'中文'
 
 
-.. function:: pydu.utils.string.safestr(obj, encoding='utf-8')
-
-  Converts any given object to utf-8 encoded string.
-
-    >>> from pydu.utils.string import safestr
-    >>> safestr('hello')
-    'hello'
-    >>> safestr(2)
-    '2'
-    >>> safestr(u'中文')
-    '中文'
-
-
-.. function:: pydu.utils.string.lstrips(text, remove)
+.. function:: pydu.string.lstrips(text, remove)
 
   Removes the string ``remove`` from the left of ``text``.
 
-    >>> from pydu.utils.string import lstrips
+    >>> from pydu.string import lstrips
     >>> lstrips('foobar', 'foo')
     'bar'
     >>> lstrips('FOOBARBAZ', ['FOO', 'BAR'])
@@ -169,20 +145,20 @@ String
     'BARBAZ'
 
 
-.. function:: pydu.utils.string.rstrips(text, remove)
+.. function:: pydu.string.rstrips(text, remove)
 
   Removes the string ``remove`` from the right of ``text``.
 
-    >>> from pydu.utils.string import rstrips
+    >>> from pydu.string import rstrips
     >>> rstrips('foobar', 'bar')
     'foo'
 
 
-.. function:: pydu.utils.string.strips(text, remove)
+.. function:: pydu.string.strips(text, remove)
 
   Removes the string ``remove`` from the both sides of ``text``.
 
-    >>> from pydu.utils.string import strips
+    >>> from pydu.string import strips
     >>> strips('foobarfoo', 'foo')
     'bar'
 
@@ -190,7 +166,7 @@ String
 Miscellanea
 -----------
 
-.. function:: pydu.utils.unix_timeout(seconds)
+.. function:: pydu.unix_timeout(seconds)
 
   This func decorates any func which may be hang for a while. The param ``seconds``
   should be integer. ``unix_timeout`` can only be used on ``unix-like`` system.
@@ -208,14 +184,14 @@ Miscellanea
   Ant run `test.py`, will see ``TimeoutError``.
 
 
-.. function:: pydu.utils.trace(obj)
+.. function:: pydu.trace(obj)
 
   Tracing every statement and line number for running program, like ``bash -x``.
   In `test.py`, you may write like below:
 
   .. code-block:: python
 
-    from pydu.utils import trace
+    from pydu import trace
     @trace
     def f():
         print(1)
