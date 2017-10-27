@@ -1,5 +1,5 @@
-from pydu.compatibility import (iterkeys, itervalues, iteritems, is_iter,
-                                text_type, string_types, numeric_types)
+from pydu.compat import (iterkeys, itervalues, iteritems, is_iter,
+                         text_type, string_types, numeric_types)
 
 
 def test_iter():
@@ -27,8 +27,8 @@ def test_types():
 
 
 def test_urljoin():
-    from pydu.compatibility import urljoin
+    from pydu.compat import urljoin
 
 
 def test_imap():
-    from pydu.compatibility import imap
+    from pydu.compat import imap
