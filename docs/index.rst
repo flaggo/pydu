@@ -17,7 +17,7 @@ It is with Python versions from **2.7 to 3.6**.
 The pydu documentation you're reading is distributed as a single HTML page.
 
 
-Data Structures
+Content
 ===============
 
 Dict
@@ -75,28 +75,6 @@ Dict
     1
 
 
-Set
-----
-
-.. class:: pydu.set.OrderedSet(iterable=None)
-
-  A set which keeps the ordering of the inserted items.
-
-    >>> from pydu.set import OrderedSet
-    >>> s = OrderedSet([1, 3, 1, 2])
-    >>> list(s)
-    [1, 3, 2]
-    >>> s.discard(3)
-    >>> list(s)
-    [1, 2]
-
-
-Utils
-=====
-
-Dict
-----
-
 .. function:: pydu.dict.attrify(obj)
 
   Attrify obj into ``AttriDict`` or ``list of AttriDict`` if the obj is list.
@@ -114,6 +92,22 @@ Dict
     b
     >>> attrd.c
     c
+
+
+Set
+----
+
+.. class:: pydu.set.OrderedSet(iterable=None)
+
+  A set which keeps the ordering of the inserted items.
+
+    >>> from pydu.set import OrderedSet
+    >>> s = OrderedSet([1, 3, 1, 2])
+    >>> list(s)
+    [1, 3, 2]
+    >>> s.discard(3)
+    >>> list(s)
+    [1, 2]
 
 
 String
