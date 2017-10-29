@@ -188,7 +188,7 @@ Miscellanea
   .. code-block:: python
 
     import time
-    from pydu.utils import unix_timeout
+    from pydu.misc import unix_timeout
     @unix_timeout(1)
     def f():
         time.sleep(1.01)
