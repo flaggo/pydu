@@ -14,9 +14,6 @@ It is collected from open source projects and created by contributors.
 
 It is with Python versions from **2.7 to 3.6**.
 
-The pydu documentation you're reading is distributed as a single HTML page.
-
-
 Content
 ===============
 
