@@ -1,0 +1,45 @@
+String
+------
+
+.. function:: pydu.string.safeunicode(obj, encoding='utf-8')
+
+  Converts any given object to unicode string.
+
+    >>> from pydu.string import safeunicode
+    >>> safeunicode('hello')
+    u'hello'
+    >>> safeunicode(2)
+    u'2'
+    >>> safeunicode('\xe4\xb8\xad\xe6\x96\x87')
+    u'中文'
+
+
+.. function:: pydu.string.lstrips(text, remove)
+
+  Removes the string ``remove`` from the left of ``text``.
+
+    >>> from pydu.string import lstrips
+    >>> lstrips('foobar', 'foo')
+    'bar'
+    >>> lstrips('FOOBARBAZ', ['FOO', 'BAR'])
+    'BAZ'
+    >>> lstrips('FOOBARBAZ', ['BAR', 'FOO'])
+    'BARBAZ'
+
+
+.. function:: pydu.string.rstrips(text, remove)
+
+  Removes the string ``remove`` from the right of ``text``.
+
+    >>> from pydu.string import rstrips
+    >>> rstrips('foobar', 'bar')
+    'foo'
+
+
+.. function:: pydu.string.strips(text, remove)
+
+  Removes the string ``remove`` from the both sides of ``text``.
+
+    >>> from pydu.string import strips
+    >>> strips('foobarfoo', 'foo')
+    'bar'
