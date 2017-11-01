@@ -16,7 +16,7 @@ Miscellanea
         time.sleep(1.01)
     f()
 
-  Ant run `test.py`, will see ``TimeoutError``.
+  And run `test.py`, will see ``TimeoutError``.
 
 
 .. function:: pydu.trace(obj)
@@ -35,7 +35,7 @@ Miscellanea
         print(2)
     f()
 
-  Ant run `test.py`, will see below output from console:
+  And run `test.py`, will see below output from console:
 
   .. code-block:: console
 
