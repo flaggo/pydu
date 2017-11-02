@@ -1,5 +1,5 @@
-Dict
-----
+Itercompat
+----------
 
 .. class:: pydu.itercompat.is_iterable(x)
 
