@@ -22,6 +22,7 @@ Content
 
    archive
    dict
+   itercompat
    misc
    set
    string
