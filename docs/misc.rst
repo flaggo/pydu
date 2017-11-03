@@ -4,7 +4,7 @@ Miscellanea
 .. function:: pydu.unix_timeout(seconds)
 
   This func decorates any func which may be hang for a while. The param ``seconds``
-  should be integer. ``unix_timeout`` can only be used on ``unix-like`` system.
+  should be integer.
   In `test.py`, you may write like below:
 
   .. code-block:: python
@@ -17,6 +17,8 @@ Miscellanea
     f()
 
   And run `test.py`, will see ``TimeoutError``.
+
+  .. note:: ``unix_timeout`` can only be used on ``unix-like`` system.
 
 
 .. function:: pydu.trace(obj)
