@@ -1,8 +1,9 @@
-from pydu.compat import (iterkeys, itervalues, iteritems, is_iter,
-                         text_type, string_types, numeric_types)
+from pydu.compat import (PY2, iterkeys, itervalues, iteritems,
+                         text_type, string_types, numeric_types,
+                         is_iterable, has_next_attr)
 
 
-def test_iter():
+def test_itersth():
     d = dict(a=1, b=2)
     for key in iterkeys(d):
         assert key in ('a', 'b')
@@ -13,7 +14,26 @@ def test_iter():
     for items in iteritems(d):
         assert items in (('a', 1), ('b', 2))
 
-    assert is_iter(iter([]))
+
+def test_has_next_attr():
+    if PY2:
+        class NextAttr:
+            def next(self):
+                pass
+    else:
+        class NextAttr:
+            def __next__(self):
+                pass
+    assert has_next_attr(NextAttr())
+    assert not has_next_attr('')
+
+
+def test_is_iterable():
+    assert is_iterable(list())
+    assert is_iterable(tuple())
+    assert is_iterable(dict())
+    assert is_iterable(set())
+    assert not is_iterable(1)
 
 
 def test_types():

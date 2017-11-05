@@ -30,13 +30,25 @@ else:
     string_types = (str,)
     numeric_types = (int,)
 
-if PY2:
-    is_iter = lambda x: x and hasattr(x, 'next')
-else:
-    is_iter = lambda x: x and hasattr(x, '__next__')
-
 # imap
 if PY2:
     from itertools import imap
 else:
     imap = map
+
+# next
+if PY2:
+    has_next_attr = lambda x: x and hasattr(x, 'next')
+else:
+    has_next_attr = lambda x: x and hasattr(x, '__next__')
+
+
+# is iterable
+def is_iterable(x):
+    """An implementation independent way of checking for iterables."""
+    try:
+        iter(x)
+    except TypeError:
+        return False
+    else:
+        return True

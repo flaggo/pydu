@@ -1,5 +1,5 @@
 # coding: utf-8
-from pydu.compat import PY2, text_type, imap, is_iter
+from pydu.compat import PY2, text_type, imap, has_next_attr
 
 
 def safeunicode(obj, encoding='utf-8'):
@@ -36,7 +36,7 @@ def safestr(obj, encoding='utf-8'):
 
     if PY2 and isinstance(obj, unicode):
         return obj.encode(encoding)
-    elif is_iter(obj) or isinstance(obj, iters):
+    elif has_next_attr(obj) or isinstance(obj, iters):
         return imap(safestr, obj)
     else:
         return str(obj)
