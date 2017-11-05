@@ -1,11 +1,11 @@
 Compat
 ------
 
-.. class:: pydu.itercompat.is_iterable(x)
+.. class:: pydu.compat.is_iterable(x)
 
     An implementation independent way of checking for iterables.
 
-    >>> from pydu.itercompat import is_iterable
+    >>> from pydu.compat import is_iterable
     >>> is_iterable([])
     True
     >>> is_iterable(1)
