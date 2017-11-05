@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 pydu documentation
-===================
+==================
 
 About
 -----
@@ -15,14 +15,14 @@ It is collected from open source projects and created by contributors.
 It is with Python versions from **2.7 to 3.6**.
 
 Content
-===============
+=======
 
 .. toctree::
    :maxdepth: 1
 
    archive
+   compat
    dict
-   itercompat
    misc
    set
    string
