@@ -18,10 +18,10 @@ def safeunicode(obj, encoding='utf-8'):
         return obj
     elif t is bytes:
         return obj.decode(encoding)
-    elif t in [int, float, bool]:
-        return unicode(obj)
+    elif t is text_type:
+        return t
     else:
-        return unicode(obj)
+        return text_type(obj)
 
 
 def safestr(obj, encoding='utf-8'):
@@ -40,11 +40,6 @@ def safestr(obj, encoding='utf-8'):
         return imap(safestr, obj)
     else:
         return str(obj)
-
-
-if not PY2:
-    # Since Python3, utf-8 encoded strings and unicode strings are the same thing
-    safeunicode = safestr
 
 
 iters = [list, tuple, set, frozenset]
