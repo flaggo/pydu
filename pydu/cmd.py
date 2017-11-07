@@ -5,7 +5,7 @@ from pydu.compat import PY2
 
 if PY2 and WINDOWS:
     # https://bitbucket.org/techtonik/python-wget
-    def sys_argv():
+    def cmdline_argv():
         """
         Uses shell32.GetCommandLineArgvW to get sys.argv as a list of Unicode
         strings.
@@ -38,5 +38,5 @@ if PY2 and WINDOWS:
                 argv.append(raw_argv[i])
         return argv
 else:
-    def sys_argv():
+    def cmdline_argv():
         return sys.argv
