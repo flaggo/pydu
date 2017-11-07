@@ -1,6 +1,15 @@
 import sys
+from subprocess import Popen, PIPE, STDOUT
 from pydu import WINDOWS
 from pydu.compat import PY2
+
+
+def execute(cmd, wait=True, shell=True):
+    p = Popen(cmd, shell=shell, stdout=PIPE, stderr=STDOUT)
+    if wait:
+        stdout, _ = p.communicate()
+        return p.poll(), stdout
+    return p
 
 
 if PY2 and WINDOWS:
