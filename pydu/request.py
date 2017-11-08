@@ -66,6 +66,7 @@ class FileName(object):
         return dst or cls.from_headers(headers) or cls.from_url(url)
 
 
+# http://bitbucket.org/techtonik/python-wget/
 def download(url, dst=None):
     """
     High level function, which downloads URL into tmp file in current
@@ -100,7 +101,6 @@ def download(url, dst=None):
     if dst_:
         filename = os.path.join(dst_, filename)
 
-    # add numeric ' (x)' suffix if filename already exists
     if os.path.exists(filename):
         os.unlink(filename)
     shutil.move(tmpfile, filename)
