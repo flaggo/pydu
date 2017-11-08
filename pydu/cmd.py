@@ -13,7 +13,8 @@ def execute(cmd, wait=True, shell=True):
 
 
 if PY2 and WINDOWS:
-    # https://bitbucket.org/techtonik/python-wget
+    # enable passing unicode arguments from command line in Python 2.x
+    # https://stackoverflow.com/questions/846850/read-unicode-characters
     def cmdline_argv():
         """
         Uses shell32.GetCommandLineArgvW to get sys.argv as a list of Unicode
