@@ -21,6 +21,7 @@ Content
    :maxdepth: 1
 
    archive
+   cmd
    compat
    dict
    misc
