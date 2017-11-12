@@ -26,5 +26,6 @@ Content
    console
    dict
    misc
+   request
    set
    string

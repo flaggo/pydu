@@ -30,7 +30,6 @@ class FileName(object):
         Detect filename from Content-Disposition headers if present.
 
         headers: as dict, list or string
-        filename: from content-disposition header or None
         """
         if not headers:
             return None
@@ -73,9 +72,8 @@ def download(url, dst=None):
     directory and then renames it to filename autodetected from either URL
     or HTTP headers.
 
-    bar: function to track download progress (visualize etc.)
-    out: output filename or directory
-    filename: where URL is downloaded to
+    url: which url to download
+    dst: filename or directory of destination
     """
     # detect of dst is a directory
     dst_ = None
