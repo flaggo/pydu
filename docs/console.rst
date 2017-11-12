@@ -1,7 +1,7 @@
 Console
 -------
 
-.. class:: pydu.console.console_size()
+.. py:function:: pydu.console.console_size()
 
     For Windows, return (width, height) of available window area, (80, 25)
     if no console is allocated.

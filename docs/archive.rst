@@ -1,7 +1,7 @@
 Archive
 -------
 
-.. function:: pydu.archive.extract(path, to_path='', ext='')
+.. py:function:: pydu.archive.extract(path, to_path='', ext='')
 
   Unpack the tar or zip file at the specified path or file to the directory
   specified by ``to_path``. It supports many extensions, like ``.tar``,

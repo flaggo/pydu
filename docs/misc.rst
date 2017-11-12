@@ -1,7 +1,7 @@
 Miscellanea
 -----------
 
-.. function:: pydu.unix_timeout(seconds)
+.. py:function:: pydu.unix_timeout(seconds)
 
   This func decorates any func which may be hang for a while. The param ``seconds``
   should be integer.
@@ -21,7 +21,7 @@ Miscellanea
   .. note:: ``unix_timeout`` can only be used on ``unix-like`` system.
 
 
-.. function:: pydu.trace(obj)
+.. py:function:: pydu.trace(obj)
 
   Tracing every statement and line number for running program, like ``bash -x``.
   In `test.py`, you may write like below:

@@ -1,7 +1,7 @@
 String
 ------
 
-.. function:: pydu.string.safeunicode(obj, encoding='utf-8')
+.. py:function:: pydu.string.safeunicode(obj, encoding='utf-8')
 
   Converts any given object to unicode string.
 
@@ -14,7 +14,7 @@ String
     u'中文'
 
 
-.. function:: pydu.string.lstrips(text, remove)
+.. py:function:: pydu.string.lstrips(text, remove)
 
   Removes the string ``remove`` from the left of ``text``.
 
@@ -27,7 +27,7 @@ String
     'BARBAZ'
 
 
-.. function:: pydu.string.rstrips(text, remove)
+.. py:function:: pydu.string.rstrips(text, remove)
 
   Removes the string ``remove`` from the right of ``text``.
 
@@ -36,7 +36,7 @@ String
     'foo'
 
 
-.. function:: pydu.string.strips(text, remove)
+.. py:function:: pydu.string.strips(text, remove)
 
   Removes the string ``remove`` from the both sides of ``text``.
 

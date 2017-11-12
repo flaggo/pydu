@@ -1,7 +1,7 @@
 Dict
 ----
 
-.. class:: pydu.dict.AttrDict(seq=None, **kwargs)
+.. py:class:: pydu.dict.AttrDict(seq=None, **kwargs)
 
   A AttrDict object is like a dictionary except ``obj.foo`` can be used
   in addition to ``obj['foo']``.
@@ -21,7 +21,7 @@ Dict
      ...    AttributeError: 'a'
 
 
-.. class:: pydu.dict.CaseInsensitiveDict(data=None, **kwargs)
+.. py:class:: pydu.dict.CaseInsensitiveDict(data=None, **kwargs)
 
   A case-insensitive ``dict``-like object.
   Implements all methods and operations of ``collections.MutableMapping``
@@ -40,7 +40,7 @@ Dict
     True
 
 
-.. class:: pydu.dict.LookupDict(name=None)
+.. py:class:: pydu.dict.LookupDict(name=None)
 
   Dictionary lookup object.
 
@@ -53,7 +53,7 @@ Dict
     1
 
 
-.. function:: pydu.dict.attrify(obj)
+.. py:function:: pydu.dict.attrify(obj)
 
   Attrify obj into ``AttriDict`` or ``list of AttriDict`` if the obj is list.
 

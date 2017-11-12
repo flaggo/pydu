@@ -1,7 +1,7 @@
 Set
 ----
 
-.. class:: pydu.set.OrderedSet(iterable=None)
+.. py:class:: pydu.set.OrderedSet(iterable=None)
 
   A set which keeps the ordering of the inserted items.
 

@@ -1,7 +1,7 @@
 Cmd
 -------
 
-.. function:: pydu.cmd.execute(cmd, wait=True, shell=True)
+.. py:function:: pydu.cmd.execute(cmd, wait=True, shell=True)
 
     Execute cmd based on ``subprocess.Popen``.
     If ``wait`` is True, ``execute`` will return the tuple of ``(returncode, stdout)``.
@@ -16,7 +16,7 @@ Cmd
     <subprocess.Popen at 0x22e4010f9e8>
 
 
-.. function:: pydu.cmd.cmdline_argv()
+.. py:function:: pydu.cmd.cmdline_argv()
 
     Get command line argv of self python process. On Windows when using Python 2,
     ``cmdline_argv`` is implemented by using ``shell32.GetCommandLineArgvW`` to get
