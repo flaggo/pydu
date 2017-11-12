@@ -23,6 +23,7 @@ Content
    archive
    cmd
    compat
+   console
    dict
    misc
    set
