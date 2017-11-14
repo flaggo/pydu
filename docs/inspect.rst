@@ -2,6 +2,7 @@ Inspect
 -------
 
 .. py:function:: pydu.inspect.getargspec(func)
+
   Get the names and default values of a function's arguments.
 
   A tuple of four things is returned: (args, varargs, varkw, defaults).
