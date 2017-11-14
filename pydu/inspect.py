@@ -15,7 +15,9 @@ if PY2:
 
     def get_func_args(func):
         argspec = inspect.getargspec(func)
-        return argspec.args[1:]  # ignore 'self'
+        if inspect.ismethod(func):
+            return argspec[1:] # ignore 'self'
+        return argspec.args
 
 
     def get_func_full_args(func):
