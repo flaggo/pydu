@@ -25,6 +25,7 @@ Content
    compat
    console
    dict
+   inspect
    misc
    request
    set
