@@ -2,7 +2,7 @@ import sys
 import time
 import pytest
 from pydu import WINDOWS
-from pydu.misc import trace, unix_timeout, TimeoutError
+from pydu.misc import trace, unix_timeout, TimeoutError, memoize, memoize_when_activated
 try:
     from cStringIO import StringIO  # py2
 except ImportError:
@@ -46,3 +46,71 @@ def test_trace():
             assert statement in stdout
     finally:
         sys.stdout = old_stdout
+
+
+def test_memoize():
+    @memoize
+    def foo(*args, **kwargs):
+        """foo docstring"""
+        calls.append(None)
+        return (args, kwargs)
+
+    calls = []
+    # no args
+    for x in range(2):
+        ret = foo()
+        expected = ((), {})
+        assert ret == expected
+        assert len(calls) == 1
+
+    # with args
+    for x in range(2):
+        ret = foo(1)
+        expected = ((1, ), {})
+        assert ret == expected
+        assert len(calls) == 2
+
+    # with args + kwargs
+    for x in range(2):
+        ret = foo(1, bar=2)
+        expected = ((1, ), {'bar': 2})
+        assert ret == expected
+        assert len(calls) == 3
+
+    # clear cache
+    foo.cache_clear()
+    ret = foo()
+    expected = ((), {})
+    assert ret == expected
+    assert len(calls) == 4
+
+    # docstring
+    assert foo.__doc__ == "foo docstring"
+
+
+def test_memoize_when_activated():
+    class Foo:
+
+        @memoize_when_activated
+        def foo(self):
+            calls.append(None)
+
+    f = Foo()
+    calls = []
+    f.foo()
+    f.foo()
+    assert len(calls) == 2
+
+    # activate
+    calls = []
+    f.foo.cache_activate()
+    f.foo()
+    f.foo()
+    assert len(calls) == 1
+
+    # deactivate
+    calls = []
+    f.foo.cache_deactivate()
+    f.foo()
+    f.foo()
+    assert len(calls) == 2
