@@ -57,6 +57,7 @@ def trace(f):
     return _f
 
 
+# https://github.com/giampaolo/psutil/blob/master/psutil/_common.py
 def memoize(fun):
     """A simple memoize decorator for functions supporting (hashable)
     positional arguments.
@@ -89,6 +90,7 @@ def memoize(fun):
     return wrapper
 
 
+# https://github.com/giampaolo/psutil/blob/master/psutil/_common.py
 def memoize_when_activated(fun):
     """A memoize decorator which is disabled by default. It can be
     activated and deactivated on request.
