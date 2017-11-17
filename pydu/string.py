@@ -24,6 +24,7 @@ def safeunicode(obj, encoding='utf-8'):
         return text_type(obj)
 
 
+# TODO doc
 def safestr(obj, encoding='utf-8'):
     r"""
     Converts any given object to utf-8 encoded string.
