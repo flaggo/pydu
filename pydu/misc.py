@@ -59,7 +59,8 @@ def trace(f):
 
 # https://github.com/giampaolo/psutil/blob/master/psutil/_common.py
 def memoize(fun):
-    """A simple memoize decorator for functions supporting (hashable)
+    """
+    A simple memoize decorator for functions supporting (hashable)
     positional arguments.
     It also provides a cache_clear() function for clearing the cache:
 
@@ -92,7 +93,8 @@ def memoize(fun):
 
 # https://github.com/giampaolo/psutil/blob/master/psutil/_common.py
 def memoize_when_activated(fun):
-    """A memoize decorator which is disabled by default. It can be
+    """
+    A memoize decorator which is disabled by default. It can be
     activated and deactivated on request.
     For efficiency reasons it can be used only against class methods
     accepting no arguments.
