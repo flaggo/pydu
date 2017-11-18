@@ -1,12 +1,11 @@
 # coding: utf-8
-from pydu.string import safestr, safeunicode, strips, lstrips, rstrips
+from pydu.string import safeencode, safeunicode, strips, lstrips, rstrips
 
 
-def test_safestr():
-    assert safestr('hello') == 'hello'
-    assert safestr(1) == '1'
-    assert list(safestr([1, 'a'])) == ['1', 'a']
-    assert safestr(u'中文') == '中文'
+def test_safeencode():
+    assert safeencode('hello') == 'hello'
+    assert safeencode(1) == '1'
+    assert safeencode(u'中文') == '中文'
 
 
 def test_safeunicode():

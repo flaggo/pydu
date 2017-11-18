@@ -14,6 +14,19 @@ String
     u'中文'
 
 
+.. py:function:: pydu.string.safeencode(obj, encoding='utf-8')
+
+  Converts any given object to encoded string (default: utf-8).
+
+    >>> from pydu.string import safeencode
+    >>> safeencode('hello')
+    'hello'
+    >>> safeencode(2)
+    '2'
+    >>> safeencode(u'中文')
+    '\xe4\xb8\xad\xe6\x96\x87'
+
+
 .. py:function:: pydu.string.lstrips(text, remove)
 
   Removes the string ``remove`` from the left of ``text``.

@@ -18,29 +18,26 @@ def safeunicode(obj, encoding='utf-8'):
         return obj
     elif t is bytes:
         return obj.decode(encoding)
-    elif t is text_type:
-        return t
     else:
         return text_type(obj)
 
 
-# TODO doc
-def safestr(obj, encoding='utf-8'):
+def safeencode(obj, encoding='utf-8'):
     r"""
-    Converts any given object to utf-8 encoded string.
+    Converts any given object to encoded string (default: utf-8).
 
         >>> safestr('hello')
         'hello'
         >>> safestr(2)
         '2'
     """
-
-    if PY2 and isinstance(obj, unicode):
+    t = type(obj)
+    if t is text_type:
         return obj.encode(encoding)
-    elif has_next_attr(obj) or isinstance(obj, iters):
-        return imap(safestr, obj)
+    elif t is bytes:
+        return obj
     else:
-        return str(obj)
+        return text_type(obj).encode(encoding)
 
 
 iters = [list, tuple, set, frozenset]
