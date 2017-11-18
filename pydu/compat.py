@@ -10,7 +10,6 @@ if PY2:
 else:
     from urllib.parse import urljoin
 
-# TODO doc
 # Dictionary iteration
 if PY2:
     iterkeys = lambda d: d.iterkeys()
