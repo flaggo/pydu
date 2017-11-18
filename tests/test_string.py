@@ -3,9 +3,9 @@ from pydu.string import safeencode, safeunicode, strips, lstrips, rstrips
 
 
 def test_safeencode():
-    assert safeencode('hello') == 'hello'
-    assert safeencode(1) == '1'
-    assert safeencode(u'中文') == '中文'
+    assert safeencode('hello') == b'hello'
+    assert safeencode(1) == b'1'
+    assert safeencode(u'中文') == b'\xe4\xb8\xad\xe6\x96\x87'
 
 
 def test_safeunicode():
