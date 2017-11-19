@@ -101,9 +101,10 @@ else:
 
     def get_func_args(func):
         sig = inspect.signature(func)
+        print(sig)
         return [
-            arg_name for arg_name, param in sig.parameters.items()
-            if param.kind == inspect.Parameter.POSITIONAL_OR_KEYWORD
+            name for name, param in sig.parameters.items()
+            if param.kind == inspect.Parameter.POSITIONAL_OR_KEYWORD and name != 'self'
         ]
 
 
@@ -149,7 +150,8 @@ else:
 
 
     def func_supports_parameter(func, parameter):
-        return parameter in inspect.signature(func).parameters
+        parameters = [name for name in inspect.signature(func).parameters if name != 'self']
+        return parameter in parameters
 
 
 #########################################
@@ -157,7 +159,7 @@ else:
 #########################################
 def func_has_no_args(func):
     args = inspect.getargspec(func)[0] if PY2 else [
-        p for p in inspect.signature(func).parameters.values()
-        if p.kind == p.POSITIONAL_OR_KEYWORD
+        p for name, p in inspect.signature(func).parameters.items()
+        if p.kind == p.POSITIONAL_OR_KEYWORD and name != 'self'
     ]
     return len(args) == 1
