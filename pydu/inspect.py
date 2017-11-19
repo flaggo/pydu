@@ -27,7 +27,10 @@ if PY2:
         *args and **kwargs are also included.
         """
         argspec = inspect.getargspec(func)
-        args = argspec.args[1:]  # ignore 'self'
+        if inspect.ismethod(func):
+            args = argspec.args[1:] # ignore 'self'
+        else:
+            args = argspec.args
         defaults = argspec.defaults or []
         # Split args into two lists depending on whether they have default value
         no_default = args[:len(args) - len(defaults)]
