@@ -1,5 +1,5 @@
 from pydu.inspect import (get_func_args, get_func_full_args, func_accepts_var_args,
-                          func_accepts_kwargs)
+                          func_accepts_kwargs, func_supports_parameter)
 
 
 class Person:
@@ -73,3 +73,10 @@ def test_func_accepts_kwargs():
     # no kwargs
     assert not func_accepts_kwargs(Person.one_argument)
     assert not func_accepts_kwargs(func_one_argument)
+
+
+def test_func_supports_parameter():
+    for all_kinds in Person.all_kinds, func_all_kinds:
+        assert func_supports_parameter(all_kinds, 'name')
+        assert func_supports_parameter(all_kinds, 'kwargs')
+        assert not func_supports_parameter(all_kinds, 'self')

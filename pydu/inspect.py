@@ -67,7 +67,9 @@ if PY2:
 
     def func_supports_parameter(func, parameter):
         args, varargs, varkw, defaults = inspect.getargspec(func)
-        return parameter in args
+        if inspect.ismethod(func):
+            args = args[1:] # ignore 'self'
+        return parameter in args + [varargs, varkw]
 
 #########################################
 # funcs for PY3
