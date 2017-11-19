@@ -3,18 +3,20 @@ Inspect
 
 .. py:function:: pydu.inspect.getargspec(func)
 
-  Get the names and default values of a function's arguments.
+    Get the names and default values of a function's arguments.
 
-  A tuple of four things is returned: (args, varargs, varkw, defaults).
-  ``args`` is a list of the argument names (it may contain nested lists).
-  ``varargs`` and ``varkw`` are the names of the * and ** arguments or None.
-  ``defaults`` is an n-tuple of the default values of the last n arguments.
+    A tuple of four things is returned: (args, varargs, varkw, defaults).
+    ``args`` is a list of the argument names (it may contain nested lists).
+    ``varargs`` and ``varkw`` are the names of the * and ** arguments or None.
+    ``defaults`` is an n-tuple of the default values of the last n arguments.
 
-  >>> from pydu.inspect import getargspec
-  >>> def f(a, b=1, *c, **d):
-  ...     pass
-  >>> getargspect(f)
-  ArgSpec(args=['a', 'b'], varargs='c', keywords='d', defaults=(1,))
+    >>> from pydu.inspect import getargspec
+    >>> def f(name, address='home', age=25, *args, **kwargs):
+    ...     pass
+    ...
+    >>> getargspect(f)
+    ArgSpec(args=['name', 'address', 'age'], varargs='args', keywords='kwargs', defaults=('home', 25))
+
 
 .. py:function:: pydu.inspect.get_func_args(func)
 
