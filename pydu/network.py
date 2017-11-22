@@ -9,3 +9,12 @@ def dotted_netmask(mask):
     """
     bits = 0xffffffff ^ (1 << 32 - mask) - 1
     return socket.inet_ntoa(struct.pack('>I', bits))
+
+
+# https://github.com/kennethreitz/requests/blob/master/requests/utils.py
+def is_ipv4_address(string_ip):
+    try:
+        socket.inet_aton(string_ip)
+    except socket.error:
+        return False
+    return True
