@@ -3,6 +3,8 @@ import sys
 import linecache
 import signal
 import functools
+import warnings
+import io
 
 
 class TimeoutError(Exception):
@@ -144,3 +146,53 @@ def memoize_when_activated(fun):
     wrapper.cache_activate = cache_activate
     wrapper.cache_deactivate = cache_deactivate
     return wrapper
+
+
+# todo doc test
+# https://github.com/requests/requests/blob/master/requests/utils.py
+def super_len(o):
+    total_length = None
+    current_position = 0
+
+    if hasattr(o, '__len__'):
+        total_length = len(o)
+
+    elif hasattr(o, 'len'):
+        total_length = o.len
+
+    elif hasattr(o, 'fileno'):
+        try:
+            fileno = o.fileno()
+        except io.UnsupportedOperation:
+            pass
+        else:
+            total_length = os.fstat(fileno).st_size
+
+    if hasattr(o, 'tell'):
+        try:
+            current_position = o.tell()
+        except (OSError, IOError):
+            # This can happen in some weird situations, such as when the file
+            # is actually a special file descriptor like stdin. In this
+            # instance, we don't know what the length is, so set it to zero and
+            # let requests chunk it instead.
+            if total_length is not None:
+                current_position = total_length
+        else:
+            if hasattr(o, 'seek') and total_length is None:
+                # StringIO and BytesIO have seek but no useable fileno
+                try:
+                    # seek to end of file
+                    o.seek(0, 2)
+                    total_length = o.tell()
+
+                    # seek back to current position to support
+                    # partially read file-like objects
+                    o.seek(current_position or 0)
+                except (OSError, IOError):
+                    total_length = 0
+
+    if total_length is None:
+        total_length = 0
+
+    return max(0, total_length - current_position)
