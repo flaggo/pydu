@@ -148,7 +148,6 @@ def memoize_when_activated(fun):
     return wrapper
 
 
-# todo doc test
 # https://github.com/requests/requests/blob/master/requests/utils.py
 def super_len(o):
     total_length = None
