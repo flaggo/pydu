@@ -9,6 +9,42 @@ Cmd
     will return object of ``Popen``.
     ``shell`` is same to parameter of ``Popen``.
 
+        >>> from pydu.cmd import run
+        >>> execute('echo hello')
+        (0, b'hello\r\n')  # Python 3
+        >>> execute('echo hello', wait=False)
+        <subprocess.Popen at 0x22e4010f9e8>
+
+
+
+
+        >>> from pydu.cmd import run
+        >>> execute('echo hello')
+        (0, b'hello\r\n')  # Python 3
+        >>> execute('echo hello', wait=False)
+        <subprocess.Popen at 0x22e4010f9e8>
+
+
+
+
+        >>> from pydu.cmd import execute
+        >>> execute('echo hello')
+        (0, b'hello\r\n')  # Python 3
+        >>> run('echo hello', wait=False)
+        <subprocess.Popen at 0x22e4010f9e8>
+
+
+
+
+        >>> from pydu.cmd import execute
+        >>> execute('echo hello')
+        (0, b'hello\r\n')  # Python 3
+        >>> run('echo hello', wait=False)
+        <subprocess.Popen at 0x22e4010f9e8>
+
+
+
+
     >>> from pydu.cmd import execute
     >>> execute('echo hello')
     (0, b'hello\r\n')  # Python 3

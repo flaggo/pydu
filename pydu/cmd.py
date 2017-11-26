@@ -1,15 +1,27 @@
 import sys
+import time
 from subprocess import Popen, PIPE, STDOUT
 from pydu import WINDOWS
 from pydu.compat import PY2
 
 
-def execute(cmd, wait=True, shell=True):
+def run(cmd, wait=True, shell=True, timeout=0, timeinterval=1):
     p = Popen(cmd, shell=shell, stdout=PIPE, stderr=STDOUT)
-    if wait:
+    if not wait:
+        return p
+
+    if not timeout:
         stdout, _ = p.communicate()
         return p.poll(), stdout
-    return p
+
+    while timeout > 0 and p.poll() is None:
+        timeout = timeout - timeinterval
+        time.sleep(timeinterval)
+    if p.poll() is None:
+        p.kill()
+        return p.poll(), 'Run timeout'
+    stdout, _ = p.communicate()
+    return p.poll(), stdout
 
 
 if PY2 and WINDOWS:
