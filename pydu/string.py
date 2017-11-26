@@ -110,3 +110,14 @@ def common_prefix(l):
                 return ''.join(commons)
         commons.append(common)
     return ''.join(commons)
+
+
+def common_suffix(l):
+    commons = []
+    for i in range(min(len(s) for s in l)):
+        common = l[0][-i-1]
+        for c in l[1:]:
+            if c[-i-1] != common:
+                return ''.join(reversed(commons))
+        commons.append(common)
+    return ''.join(reversed(commons))
