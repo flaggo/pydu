@@ -99,3 +99,14 @@ def strips(text, remove):
 
     """
     return rstrips(lstrips(text, remove), remove)
+
+
+def common_prefix(l):
+    commons = []
+    for i in range(len(min(l, key=len))):
+        common = l[0][i]
+        for c in l[1:]:
+            if c[i] != common:
+                return ''.join(commons)
+        commons.append(common)
+    return ''.join(commons)
