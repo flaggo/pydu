@@ -103,7 +103,7 @@ def strips(text, remove):
 
 def common_prefix(l):
     commons = []
-    for i in range(len(min(l, key=len))):
+    for i in range(min(len(s) for s in l)):
         common = l[0][i]
         for c in l[1:]:
             if c[i] != common:
