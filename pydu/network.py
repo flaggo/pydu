@@ -13,7 +13,6 @@ def dotted_netmask(mask):
     return socket.inet_ntoa(struct.pack('>I', bits))
 
 
-# todo doc
 # https://github.com/kennethreitz/requests/blob/master/requests/utils.py
 def is_ipv4_address(ip):
     try:
