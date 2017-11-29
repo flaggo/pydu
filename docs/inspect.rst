@@ -21,7 +21,7 @@ Inspect
 .. py:function:: pydu.inspect.get_func_args(func)
 
     Return a list of the argument names. Arguments such as
-    *args and **kwargs are not included.
+    ``*args`` and ``**kwargs`` are not included.
 
     >>> from pydu.inspect import get_func_args
     >>> def f(name, address='home', age=25, *args, **kwargs):
@@ -35,7 +35,7 @@ Inspect
 
     Return a list of (argument name, default value) tuples. If the argument
     does not have a default value, omit it in the tuple. Arguments such as
-    *args and **kwargs are also included.
+    ``*args`` and ``**kwargs`` are also included.
 
     >>> from pydu.inspect import get_func_full_args
     >>> def f(name, address='home', age=25, *args, **kwargs):
