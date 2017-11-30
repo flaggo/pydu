@@ -4,15 +4,17 @@ import shutil
 
 
 # todo tests and docs
-def makedirs(path, mode=0o755, *, ignore_errors=False):
+def makedirs(path, mode=0o755, ignore_errors=False, exist_ok=True):
     try:
-        os.makedirs(path, mode, exist_ok=True)
+        os.makedirs(path, mode)
     except Exception:
         if not ignore_errors:
-            raise OSError('Create dir: {} error'.format(path))
+            if not exist_ok:
+                raise OSError('{} is exist'.format(path))
+            raise OSError('Create dir: {} error.')
 
 
-def remove(path, *, ignore_errors=False, onerror=None):
+def remove(path, ignore_errors=False, onerror=None):
     if ignore_errors:
         def onerror(*args):
             pass
@@ -29,12 +31,12 @@ def remove(path, *, ignore_errors=False, onerror=None):
             onerror(os.remove, path, sys.exc_info())
 
 
-def removes(*paths, ignore_errors=False, onerror=None):
+def removes(paths, ignore_errors=False, onerror=None):
     for path in paths:
         remove(path, ignore_errors=ignore_errors, onerror=onerror)
 
 
-def open_file(path, mode='wb+', *, buffer_size=-1, ignore_errors=False):
+def open_file(path, mode='wb+', buffer_size=-1, ignore_errors=False):
     f = None
     try:
         if path and not os.path.isdir(path):
@@ -46,7 +48,7 @@ def open_file(path, mode='wb+', *, buffer_size=-1, ignore_errors=False):
     return f
 
 
-def link(src, dst, *, overwrite=False, ignore_errors=False):
+def link(src, dst, overwrite=False, ignore_errors=False):
     try:
         if os.path.exists(dst):
             if overwrite:
@@ -59,7 +61,7 @@ def link(src, dst, *, overwrite=False, ignore_errors=False):
             raise OSError('Link {} to {} error'.format(dst, src))
 
 
-def copy(src, dst, *, ignore_errors=False, follow_symlinks=True):
+def copy(src, dst, ignore_errors=False, follow_symlinks=True):
     try:
         if os.path.isdir(src):
             shutil.copytree(src, dst, symlinks=not follow_symlinks)
