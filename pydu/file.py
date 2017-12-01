@@ -5,12 +5,12 @@ import shutil
 
 # todo tests and docs
 def makedirs(path, mode=0o755, ignore_errors=False, exist_ok=True):
+    if exist_ok and os.path.exists(path):
+        return
     try:
         os.makedirs(path, mode)
     except Exception:
         if not ignore_errors:
-            if not exist_ok:
-                raise OSError('{} is exist'.format(path))
             raise OSError('Create dir: {} error.')
 
 
