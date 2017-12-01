@@ -5,6 +5,12 @@ import shutil
 
 # todo tests and docs
 def makedirs(path, mode=0o755, ignore_errors=False, exist_ok=False):
+    """
+    Create a leaf directory and all intermediate ones.
+
+    Based on os.makedirs, but also supports ignore_errors which will
+    ignore all errors raised by os.makedirs.
+    """
     if exist_ok and os.path.exists(path):
         return
     try:
@@ -15,6 +21,16 @@ def makedirs(path, mode=0o755, ignore_errors=False, exist_ok=False):
 
 
 def remove(path, ignore_errors=False, onerror=None):
+    """
+    Remove a file or directory.
+
+    If ignore_errors is set, errors are ignored; otherwise, if onerror
+    is set, it is called to handle the error with arguments (func,
+    path, exc_info) where func is platform and implementation dependent;
+    path is the argument to that function that caused it to fail; and
+    exc_info is a tuple returned by sys.exc_info().  If ignore_errors
+    is False and onerror is None, an exception is raised.
+    """
     if ignore_errors:
         def onerror(*args):
             pass
@@ -32,11 +48,27 @@ def remove(path, ignore_errors=False, onerror=None):
 
 
 def removes(paths, ignore_errors=False, onerror=None):
+    """
+    Remove a list of file and/or directory.
+
+    If ignore_errors is set, errors are ignored; otherwise, if onerror
+    is set, it is called to handle the error with arguments (func,
+    path, exc_info) where func is platform and implementation dependent;
+    path is the argument to that function that caused it to fail; and
+    exc_info is a tuple returned by sys.exc_info().  If ignore_errors
+    is False and onerror is None, an exception is raised.
+    """
     for path in paths:
         remove(path, ignore_errors=ignore_errors, onerror=onerror)
 
 
 def open_file(path, mode='wb+', buffer_size=-1, ignore_errors=False):
+    """
+    Open a file, defualt mode 'wb+'.
+
+    If path not exists, it will be created automatically.
+    If ignore_errors is set, errors are ignored.
+    """
     f = None
     try:
         if path and not os.path.isdir(path):
