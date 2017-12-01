@@ -4,7 +4,7 @@ import shutil
 
 
 # todo tests and docs
-def makedirs(path, mode=0o755, ignore_errors=False, exist_ok=True):
+def makedirs(path, mode=0o755, ignore_errors=False, exist_ok=False):
     if exist_ok and os.path.exists(path):
         return
     try:
