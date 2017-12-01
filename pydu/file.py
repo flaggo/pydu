@@ -72,7 +72,7 @@ def open_file(path, mode='wb+', buffer_size=-1, ignore_errors=False):
     f = None
     try:
         if path and not os.path.isdir(path):
-            makedirs(os.path.dirname(path))
+            makedirs(os.path.dirname(path), exist_ok=True)
             f = open(path, mode, buffer_size)
     except Exception:
         if not ignore_errors:
