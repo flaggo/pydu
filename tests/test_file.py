@@ -1,5 +1,5 @@
 import os
-from pydu.file import makedirs
+from pydu.file import makedirs,remove
 import pytest
 
 
@@ -30,3 +30,29 @@ class Testmakedirs():
         path = str(tmpdir.join('test/test'))
         makedirs(path)
         assert os.path.exists(path)
+
+class Testremove():
+    def test_remove_dir(self, tmpdir):
+        path = str(tmpdir.join('test'))
+        makedirs(path)
+        remove(path)
+        assert not os.path.exists(path)
+
+    def test_remove_file(self, tmpdir):
+        file = str(tmpdir.join('test.txt'))
+        open(file, 'w')
+        remove(file)
+        assert not os.path.exists(file)
+
+    def test_remove_mutil_dirs(self, tmpdir):
+        path = str(tmpdir.join('test/test'))
+        makedirs(path)
+        path = str(tmpdir.join('test'))
+        remove(path)
+        assert not os.path.exists(path)
+
+    def test_remove_with_ignore_error(self):
+        pass
+
+    def test_remove_without_ignore_error(self):
+        pass
