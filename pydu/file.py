@@ -92,6 +92,11 @@ def copy(src, dst, ignore_errors=False, follow_symlinks=True):
             raise OSError('Copy {} to {} error'.format(src, dst))
 
 
+def touch(path):
+    with open(path, 'w'):
+        pass
+
+
 if not WINDOWS:
     def link(src, dst, overwrite=False, ignore_errors=False):
         try:

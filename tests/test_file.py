@@ -1,6 +1,10 @@
 import os
 import pytest
-from pydu.file import makedirs
+from pydu.platform import WINDOWS
+from pydu.file import makedirs, remove, removes, open_file, copy, touch
+
+if not WINDOWS:
+    from pydu.file import link
 
 
 class TestMakeDirs:
@@ -35,3 +39,17 @@ class TestMakeDirs:
         assert os.path.exists(path)
 
 
+def test_touch(tmpdir):
+    path = str(tmpdir.join('test'))
+    touch(path)
+    assert os.path.isfile(path)
+
+
+@pytest.mark.skipIf(WINDOWS)
+class TestLink:
+    def test_link(self, tmpdir):
+        src = str(tmpdir.join('src'))
+        dst = str(tmpdir.join('dst'))
+        touch(src)
+        link(src, dst)
+        assert os.path.exists(dst)
