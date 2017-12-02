@@ -93,10 +93,23 @@ def link(src, dst, overwrite=False, ignore_errors=False):
             raise OSError('Link {} to {} error'.format(dst, src))
 
 
+def symlink(src, dst, overwrite=False, ignore_errors=False):
+    try:
+        if os.path.exists(dst):
+            if overwrite:
+                remove(dst)
+            else:
+                return
+        os.symlink(src, dst)
+    except Exception:
+        if not ignore_errors:
+            raise OSError('Link {} to {} error'.format(dst, src))
+
+
 def copy(src, dst, ignore_errors=False, follow_symlinks=True):
     try:
         if os.path.isdir(src):
-            shutil.copytree(src, dst, symlinks=not follow_symlinks)
+            shutil.copytree(src, dst, symlinks=follow_symlinks)
         else:
             if not follow_symlinks and os.path.islink(src):
                 os.symlink(os.readlink(src), dst)
