@@ -98,7 +98,10 @@ def copy(src, dst, ignore_errors=False, follow_symlinks=True):
         if os.path.isdir(src):
             shutil.copytree(src, dst, symlinks=not follow_symlinks)
         else:
-            shutil.copy(src, dst, follow_symlinks=follow_symlinks)
+            if not follow_symlinks and os.path.islink(src):
+                os.symlink(os.readlink(src), dst)
+            else:
+                shutil.copy(src, dst)
     except Exception:
         if not ignore_errors:
             raise OSError('Copy {} to {} error'.format(src, dst))
