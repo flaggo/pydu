@@ -1,6 +1,7 @@
 import os
-from pydu.file import makedirs,remove,link
-from pydu.file import removes,open_file,copy
+from pydu.file import makedirs, remove
+from pydu.file import removes, open_file, copy
+from pydu.file import link, symlink
 import pytest
 import sys
 
@@ -158,6 +159,31 @@ class Testlink():
             link(dirname, link_dirname)
 
 
+@pytest.mark.skipif(sys.platform == 'win32',
+                    reason="does not run on windows")
+class Testsymlink():
+    def test_link_a_file(self, tmpdir):
+        file = str(tmpdir.join('test.txt'))
+        link_file = str(tmpdir.join('test.link'))
+        open(file, 'w')
+        symlink(file, link_file)
+        assert os.path.exists(link_file)
+        assert os.path.islink(link_file)
+
+    def test_link_with_ignore_error(self, tmpdir):
+        dirname = str(tmpdir.join('test'))
+        link_dirname = str(tmpdir.join('test.link'))
+        makedirs(dirname)
+        link(dirname, link_dirname, ignore_errors=True)
+
+    def test_link_without_ignore_error(self, tmpdir):
+        dirname = str(tmpdir.join('test'))
+        link_dirname = str(tmpdir.join('test.link'))
+        makedirs(dirname)
+        with pytest.raises(Exception) as e:
+            link(dirname, link_dirname)
+
+
 class Testcopy():
     def test_copy_file(self,tmpdir):
         f = str(tmpdir.join('test.txt'))
@@ -195,7 +221,7 @@ class Testcopy():
         os.symlink(f, link_f)
         copy(d, d_copy, follow_symlinks=True)
         assert os.path.exists(d_copy)
-        assert not os.path.islink(new_link_f)
+        assert os.path.islink(new_link_f)
 
     @pytest.mark.skipif(sys.platform == 'win32',
                         reason="does not run on windows")
@@ -210,7 +236,7 @@ class Testcopy():
         os.symlink(f, link_f)
         copy(d, d_copy, follow_symlinks=False)
         assert os.path.exists(d_copy)
-        assert os.path.islink(new_link_f)
+        assert not os.path.islink(new_link_f)
 
     @pytest.mark.skipif(sys.platform == 'win32',
                         reason="does not run on windows")
