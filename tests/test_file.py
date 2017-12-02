@@ -231,7 +231,7 @@ class Testcopy():
         link_file = str(tmpdir.join('test.link'))
         copy_link_file = str(tmpdir.join('test_copy.link'))
         open(file, 'w')
-        link(file, link_file)
+        os.symlink(file, link_file)
         copy(link_file, copy_link_file, follow_symlinks=False)
         assert os.path.exists(copy_link_file)
         assert os.path.islink(copy_link_file)
