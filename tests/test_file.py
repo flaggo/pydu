@@ -1,7 +1,8 @@
 import os
-from pydu.file import makedirs,remove
-from pydu.file import removes,open_file
+from pydu.file import makedirs,remove,link
+from pydu.file import removes,open_file,copy
 import pytest
+import sys
 
 
 class Testmakedirs():
@@ -133,22 +134,150 @@ class Testopenfile():
             open_file(f, mode='r')
 
 
+@pytest.mark.skipif(sys.platform == 'win32',
+                    reason="does not run on windows")
 class Testlink():
     def test_link_a_file(self, tmpdir):
-        pass
+        file = str(tmpdir.join('test.txt'))
+        link_file = str(tmpdir.join('test.link'))
+        open(file)
+        link(file, link_file)
+        assert os.path.exists(link_file)
 
     def test_link_a_dir(self, tmpdir):
-        pass
+        dirname = str(tmpdir.join('test'))
+        link_dirname = str(tmpdir.join('test.link'))
+        makedirs(dirname)
+        link(dirname, link_dirname)
+        assert os.path.exists(link_dirname)
 
-    def test_link_with_overwrite(self,tmpdir):
-        pass
+    def test_link_with_overwrite(self, tmpdir):
+        dirname = str(tmpdir.join('test'))
+        link_dirname = str(tmpdir.join('test.link'))
+        makedirs(dirname)
+        link(dirname, link_dirname)
+        link(dirname, link_dirname, overwrite=True)
+        assert os.path.exists(link_dirname)
 
-    def test_link_without_link(self,tmpdir):
-        pass
+    def test_link_without_overwrite(self, tmpdir):
+        dirname = str(tmpdir.join('test'))
+        link_dirname = str(tmpdir.join('test.link'))
+        makedirs(dirname)
+        link(dirname, link_dirname)
+        with pytest.raises(Exception) as e:
+            link(dirname, link_dirname)
 
-    def test_link_with_ignore_error(self,tmpdir):
-        pass
+    def test_link_with_ignore_error(self, tmpdir):
+        dirname = str(tmpdir.join('test'))
+        link_dirname = str(tmpdir.join('test.link'))
+        makedirs(dirname)
+        link(dirname, link_dirname)
+        link(dirname, link_dirname, ignore_errors=True)
 
-    def test_link_without_error(self,tmpdir):
-        pass
+    def test_link_without_ignore_error(self, tmpdir):
+        dirname = str(tmpdir.join('test'))
+        link_dirname = str(tmpdir.join('test.link'))
+        makedirs(dirname)
+        link(dirname, link_dirname)
+        with pytest.raises(Exception) as e:
+            link(dirname, link_dirname)
 
+
+class Testcopy():
+    def test_copy_file(self,tmpdir):
+        f = str(tmpdir.join('test.txt'))
+        f_copy = str(tmpdir.join('test_copy.txt'))
+        open(f, 'w')
+        copy(f, f_copy)
+        assert os.path.exists(f_copy)
+
+    def test_copy_non_empty_dir(self, tmpdir):
+        f = str(tmpdir.join('test/test.txt'))
+        d = str(tmpdir.join('test'))
+        d_copy = str(tmpdir.join('test_copy'))
+        os.makedirs(d)
+        open(f, 'w')
+        copy(d, d_copy)
+        assert os.path.exists(d_copy)
+
+    def test_copy_empty_dir(self,tmpdir):
+        d = str(tmpdir.join('test'))
+        d_copy = str(tmpdir.join('test_copy'))
+        makedirs(d)
+        copy(d,d_copy)
+        assert os.path.exists(d_copy)
+
+    @pytest.mark.skipif(sys.platform == 'win32',
+                        reason="does not run on windows")
+    def test_copy_dir_follow_symlink(self, tmpdir):
+        f = str(tmpdir.join('test/test.txt'))
+        d = str(tmpdir.join('test'))
+        link_f = str(tmpdir.join('test/test_link.txt'))
+        d_copy = str(tmpdir.join('test_copy'))
+        new_link_f = str(tmpdir.join('test_copy/test_link.txt'))
+        open(f)
+        os.symlink(f, link_f)
+        copy(d, d_copy, follow_symlinks=True)
+        assert os.path.exists(d_copy)
+        assert os.path.islink(new_link_f)
+
+    @pytest.mark.skipif(sys.platform == 'win32',
+                        reason="does not run on windows")
+    def test_copy_dir_not_follow_symlink(self, tmpdir):
+        f = str(tmpdir.join('test/test.txt'))
+        d = str(tmpdir.join('test'))
+        link_f = str(tmpdir.join('test/test_link.txt'))
+        d_copy = str(tmpdir.join('test_copy'))
+        new_link_f = str(tmpdir.join('test_copy/test_link.txt'))
+        open(f)
+        os.symlink(f, link_f)
+        copy(d, d_copy)
+        assert os.path.exists(d_copy)
+        assert not os.path.islink(new_link_f)
+
+    @pytest.mark.skipif(sys.platform == 'win32',
+                        reason="does not run on windows")
+    def test_copy_file_follow_symlink(self, tmpdir):
+        file = str(tmpdir.join('test.txt'))
+        link_file = str(tmpdir.join('test.link'))
+        copy_link_file = str(tmpdir.join('test_copy.link'))
+        open(file)
+        link(file, link_file)
+        copy(link_file, copy_link_file,follow_symlinks=True)
+        assert os.path.exists(copy_link_file)
+        assert not os.path.islink(copy_link_file)
+
+    @pytest.mark.skipif(sys.platform == 'win32',
+                        reason="does not run on windows")
+    def test_copy_file_not_follow_symlink(self, tmpdir):
+        file = str(tmpdir.join('test.txt'))
+        link_file = str(tmpdir.join('test.link'))
+        copy_link_file = str(tmpdir.join('test_copy.link'))
+        open(file)
+        link(file, link_file)
+        copy(link_file, copy_link_file, follow_symlinks=False)
+        assert os.path.exists(copy_link_file)
+        assert os.path.islink(copy_link_file)
+
+    def test_copy_path_to_exits_path(self, tmpdir):
+        dir1 = str(tmpdir.join('test1'))
+        dir2 = str(tmpdir.join('test2'))
+        makedirs(dir1)
+        makedirs(dir2)
+        with pytest.raises(Exception) as e:
+            copy(dir1, dir2)
+
+    def test_copy_without_ignore_error(self, tmpdir):
+        dir1 = str(tmpdir.join('test1'))
+        dir2 = str(tmpdir.join('test2'))
+        makedirs(dir1)
+        makedirs(dir2)
+        with pytest.raises(Exception) as e:
+            copy(dir1, dir2, ignore_errors=False)
+
+    def test_copy_with_ignore_error(self, tmpdir):
+        dir1 = str(tmpdir.join('test1'))
+        dir2 = str(tmpdir.join('test2'))
+        makedirs(dir1)
+        makedirs(dir2)
+        copy(dir1, dir2, ignore_errors=True)
