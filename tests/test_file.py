@@ -1,9 +1,9 @@
 import os
-from pydu.file import makedirs
 import pytest
+from pydu.file import makedirs
 
 
-class Testmakedirs():
+class TestMakeDirs:
     def test_makedirs(self, tmpdir):
         path = str(tmpdir.join('test'))
         makedirs(path)
@@ -33,3 +33,5 @@ class Testmakedirs():
         path = str(tmpdir.join('test/test'))
         makedirs(path)
         assert os.path.exists(path)
+
+
