@@ -195,7 +195,7 @@ class Testcopy():
         os.symlink(f, link_f)
         copy(d, d_copy, follow_symlinks=True)
         assert os.path.exists(d_copy)
-        assert os.path.islink(new_link_f)
+        assert not os.path.islink(new_link_f)
 
     @pytest.mark.skipif(sys.platform == 'win32',
                         reason="does not run on windows")
@@ -208,9 +208,9 @@ class Testcopy():
         makedirs(d)
         open(f, 'w')
         os.symlink(f, link_f)
-        copy(d, d_copy)
+        copy(d, d_copy, follow_symlinks=False)
         assert os.path.exists(d_copy)
-        assert not os.path.islink(new_link_f)
+        assert os.path.islink(new_link_f)
 
     @pytest.mark.skipif(sys.platform == 'win32',
                         reason="does not run on windows")
