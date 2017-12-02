@@ -144,41 +144,16 @@ class Testlink():
         link(file, link_file)
         assert os.path.exists(link_file)
 
-    def test_link_a_dir(self, tmpdir):
-        dirname = str(tmpdir.join('test'))
-        link_dirname = str(tmpdir.join('test.link'))
-        makedirs(dirname)
-        link(dirname, link_dirname)
-        assert os.path.exists(link_dirname)
-
-    def test_link_with_overwrite(self, tmpdir):
-        dirname = str(tmpdir.join('test'))
-        link_dirname = str(tmpdir.join('test.link'))
-        makedirs(dirname)
-        link(dirname, link_dirname)
-        link(dirname, link_dirname, overwrite=True)
-        assert os.path.exists(link_dirname)
-
-    def test_link_without_overwrite(self, tmpdir):
-        dirname = str(tmpdir.join('test'))
-        link_dirname = str(tmpdir.join('test.link'))
-        makedirs(dirname)
-        link(dirname, link_dirname)
-        with pytest.raises(Exception) as e:
-            link(dirname, link_dirname)
-
     def test_link_with_ignore_error(self, tmpdir):
         dirname = str(tmpdir.join('test'))
         link_dirname = str(tmpdir.join('test.link'))
         makedirs(dirname)
-        link(dirname, link_dirname)
         link(dirname, link_dirname, ignore_errors=True)
 
     def test_link_without_ignore_error(self, tmpdir):
         dirname = str(tmpdir.join('test'))
         link_dirname = str(tmpdir.join('test.link'))
         makedirs(dirname)
-        link(dirname, link_dirname)
         with pytest.raises(Exception) as e:
             link(dirname, link_dirname)
 
