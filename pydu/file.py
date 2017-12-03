@@ -73,7 +73,7 @@ def open_file(path, mode='wb+', buffer_size=-1, ignore_errors=False):
     f = None
     try:
         if path and not os.path.isdir(path):
-            makedirs(os.path.dirname(path))
+            makedirs(os.path.dirname(path), exist_ok=True)
             f = open(path, mode, buffer_size)
     except Exception:
         if not ignore_errors:
@@ -84,9 +84,12 @@ def open_file(path, mode='wb+', buffer_size=-1, ignore_errors=False):
 def copy(src, dst, ignore_errors=False, follow_symlinks=True):
     try:
         if os.path.isdir(src):
-            shutil.copytree(src, dst, symlinks=not follow_symlinks)
+            shutil.copytree(src, dst, symlinks=follow_symlinks)
         else:
-            shutil.copy(src, dst, follow_symlinks=follow_symlinks)
+            if not follow_symlinks and os.path.islink(src):
+                os.symlink(os.readlink(src), dst)
+            else:
+                shutil.copy(src, dst)
     except Exception:
         if not ignore_errors:
             raise OSError('Copy {} to {} error'.format(src, dst))
@@ -95,6 +98,19 @@ def copy(src, dst, ignore_errors=False, follow_symlinks=True):
 def touch(path):
     with open(path, 'w'):
         pass
+
+
+def symlink(src, dst, overwrite=False, ignore_errors=False):
+    try:
+        if os.path.exists(dst):
+            if overwrite:
+                remove(dst)
+            else:
+                return
+        os.symlink(src, dst)
+    except Exception:
+        if not ignore_errors:
+            raise OSError('Link {} to {} error'.format(dst, src))
 
 
 if not WINDOWS:
