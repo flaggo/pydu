@@ -1,6 +1,7 @@
 import os
 import sys
 import shutil
+from pydu.platform import WINDOWS
 
 
 # todo tests and docs
@@ -80,17 +81,23 @@ def open_file(path, mode='wb+', buffer_size=-1, ignore_errors=False):
     return f
 
 
-def link(src, dst, overwrite=False, ignore_errors=False):
+def copy(src, dst, ignore_errors=False, follow_symlinks=True):
     try:
-        if os.path.exists(dst):
-            if overwrite:
-                remove(dst)
+        if os.path.isdir(src):
+            shutil.copytree(src, dst, symlinks=follow_symlinks)
+        else:
+            if not follow_symlinks and os.path.islink(src):
+                os.symlink(os.readlink(src), dst)
             else:
-                return
-        os.link(src, dst)
+                shutil.copy(src, dst)
     except Exception:
         if not ignore_errors:
-            raise OSError('Link {} to {} error'.format(dst, src))
+            raise OSError('Copy {} to {} error'.format(src, dst))
+
+
+def touch(path):
+    with open(path, 'w'):
+        pass
 
 
 def symlink(src, dst, overwrite=False, ignore_errors=False):
@@ -106,15 +113,15 @@ def symlink(src, dst, overwrite=False, ignore_errors=False):
             raise OSError('Link {} to {} error'.format(dst, src))
 
 
-def copy(src, dst, ignore_errors=False, follow_symlinks=True):
-    try:
-        if os.path.isdir(src):
-            shutil.copytree(src, dst, symlinks=follow_symlinks)
-        else:
-            if not follow_symlinks and os.path.islink(src):
-                os.symlink(os.readlink(src), dst)
-            else:
-                shutil.copy(src, dst)
-    except Exception:
-        if not ignore_errors:
-            raise OSError('Copy {} to {} error'.format(src, dst))
+if not WINDOWS:
+    def link(src, dst, overwrite=False, ignore_errors=False):
+        try:
+            if os.path.exists(dst):
+                if overwrite:
+                    remove(dst)
+                else:
+                    return
+            os.link(src, dst)
+        except Exception:
+            if not ignore_errors:
+                raise OSError('Link {} to {} error'.format(dst, src))
