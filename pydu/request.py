@@ -1,7 +1,7 @@
 import os
 import shutil
 import tempfile
-from pydu.compat import string_types, ulib, urlparse
+from pydu.compat import PY2, string_types, ulib, urlparse
 from pydu.string import safeunicode
 
 
