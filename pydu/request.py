@@ -1,15 +1,8 @@
 import os
 import shutil
 import tempfile
-from pydu.compat import PY2, string_types
+from pydu.compat import PY2, string_types, ulib, urlparse
 from pydu.string import safeunicode
-
-if PY2:
-    import urllib as ulib
-    import urlparse
-else:
-    import urllib.request as ulib
-    import urllib.parse as urlparse
 
 
 class FileName(object):
