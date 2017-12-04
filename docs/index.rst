@@ -25,6 +25,7 @@ Content
    compat
    console
    dict
+   file
    inspect
    misc
    network
