@@ -82,6 +82,26 @@ def open_file(path, mode='wb+', buffer_size=-1, ignore_errors=False):
 
 
 def copy(src, dst, ignore_errors=False, follow_symlinks=True):
+    """Copy data and mode bits ("cp src dst").
+
+    Both the source and destination may be a directory.
+
+    When copy a directory,which a symlink, If the optional symlinks
+    flag is true, symbolic links in the source tree result in symbolic
+    links in the destination tree; if it is false, the contents of
+    the files pointed to by symbolic links are copied. If the file
+    pointed by the symlink doesn't exist, an exception will be raise
+
+    When copy a file,if follow_symlinks is false and src is a symbolic
+    link, a new symlink will be created instead of copying the file it
+    points to,else the contents of the file pointed to by symbolic links
+    is copied.
+
+    If source and destination are the same file, a SameFileError will be
+    raised.
+
+    If ignore_errors is set, errors are ignored.
+    """
     try:
         if os.path.isdir(src):
             shutil.copytree(src, dst, symlinks=follow_symlinks)
@@ -99,22 +119,34 @@ def touch(path):
     with open(path, 'w'):
         pass
 
+if not WINDOWS:
+    def symlink(src, dst, overwrite=False, ignore_errors=False):
+        """Create a symbolic link pointing to source named link_name.
 
-def symlink(src, dst, overwrite=False, ignore_errors=False):
-    try:
-        if os.path.exists(dst):
-            if overwrite:
-                remove(dst)
-            else:
-                return
-        os.symlink(src, dst)
-    except Exception:
-        if not ignore_errors:
-            raise OSError('Link {} to {} error'.format(dst, src))
+        If dist is exist and overwrite is true,a new symlink will be created
+
+        If ignore_errors is set, errors are ignored.
+        """
+        try:
+            if os.path.exists(dst):
+                if overwrite:
+                    remove(dst)
+                else:
+                    return
+            os.symlink(src, dst)
+        except Exception:
+            if not ignore_errors:
+                raise OSError('Link {} to {} error'.format(dst, src))
 
 
 if not WINDOWS:
     def link(src, dst, overwrite=False, ignore_errors=False):
+        """Create a hard link pointing to source named link_name.
+
+        If dist is exist and overwrite is true,a new symlink will be created
+
+        If ignore_errors is set, errors are ignored.
+        """
         try:
             if os.path.exists(dst):
                 if overwrite:
