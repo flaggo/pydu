@@ -1,4 +1,8 @@
-from pydu.request import FileName
+import os
+from tempfile import mkdtemp
+
+from pydu.request import FileName, download
+from pydu.file import remove
 
 
 def test_filename_from_url():
@@ -36,3 +40,11 @@ def test_filename_from_headers():
 
     headers = 'Content-Disposition: attachment; filename='
     assert FileName.from_headers(headers) is None
+
+
+def test_download():
+    file_url = 'https://www.cnblogs.com/images/logo_small.gif'
+    file_dir = mkdtemp()
+    file_path = download(file_url, file_dir)
+    assert os.path.exists(file_path)
+    remove(file_dir)
