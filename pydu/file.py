@@ -82,7 +82,8 @@ def open_file(path, mode='wb+', buffer_size=-1, ignore_errors=False):
 
 
 def copy(src, dst, ignore_errors=False, follow_symlinks=True):
-    """Copy data and mode bits ("cp src dst").
+    """
+    Copy data and mode bits ("cp src dst").
 
     Both the source and destination may be a directory.
 
@@ -121,7 +122,8 @@ def touch(path):
 
 if not WINDOWS:
     def symlink(src, dst, overwrite=False, ignore_errors=False):
-        """Create a symbolic link pointing to source named link_name.
+        """
+        Create a symbolic link pointing to source named link_name.
 
         If dist is exist and overwrite is true,a new symlink will be created
 
@@ -141,7 +143,8 @@ if not WINDOWS:
 
 if not WINDOWS:
     def link(src, dst, overwrite=False, ignore_errors=False):
-        """Create a hard link pointing to source named link_name.
+        """
+        Create a hard link pointing to source named link_name.
 
         If dist is exist and overwrite is true,a new symlink will be created
 
