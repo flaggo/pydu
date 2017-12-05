@@ -201,8 +201,10 @@ class TarArchive(BaseArchive):
                         shutil.copyfileobj(extracted, outfile)
                         self._copy_permissions(member.mode, filename)
                 finally:
-                    if extracted:
+                    try:
                         extracted.close()
+                    except NameError:
+                        pass
 
     def list(self, *args, **kwargs):
         self._archive.list(*args, **kwargs)
