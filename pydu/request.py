@@ -103,6 +103,10 @@ def download(url, dst=None):
 
 
 def check_connect(ip, port, retry=1, timeout=0.5):
+    """
+    Check whether given ip and port could connect or not.
+    It will retry and timeout on given.
+    """
     while retry:
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
