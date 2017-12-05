@@ -39,13 +39,13 @@ class UnrecognizedArchiveFormat(ArchiveException):
     """
 
 
-def extract(path, to_path='', ext=''):
+def extract(path, dst='', ext=''):
     """
     Unpack the tar or zip file at the specified path or file to the directory
     specified by to_path.
     """
     with Archive(path, ext=ext) as archive:
-        archive.extract(to_path)
+        archive.extract(dst)
 
 
 class Archive(object):
@@ -92,8 +92,8 @@ class Archive(object):
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
 
-    def extract(self, to_path=''):
-        self._archive.extract(to_path)
+    def extract(self, dst=''):
+        self._archive.extract(dst)
 
     def list(self):
         self._archive.list()
@@ -146,7 +146,7 @@ class BaseArchive(object):
                 return False
         return True
 
-    def extract(self, to_path):
+    def extract(self, dst):
         raise NotImplementedError(
             'subclasses of BaseArchive must provide an extract() method')
 
@@ -174,14 +174,14 @@ class TarArchive(BaseArchive):
         else:
             self._archive = tarfile.open(fileobj=file)
 
-    def extract(self, to_path):
+    def extract(self, dst):
         members = self._archive.getmembers()
         leading = self.has_leading_dir(x.name for x in members)
         for member in members:
             name = member.name
             if leading:
                 name = self.split_leading_dir(name)[1]
-            filename = os.path.join(to_path, name)
+            filename = os.path.join(dst, name)
             if member.isdir():
                 if filename and not os.path.exists(filename):
                     os.makedirs(filename)
@@ -220,7 +220,7 @@ class ZipArchive(BaseArchive):
         # ZipFile's 'file' parameter can be path (string) or file-like obj.
         self._archive = zipfile.ZipFile(file)
 
-    def extract(self, to_path):
+    def extract(self, dst):
         namelist = self._archive.namelist()
         leading = self.has_leading_dir(namelist)
         for name in namelist:
@@ -228,7 +228,7 @@ class ZipArchive(BaseArchive):
             info = self._archive.getinfo(name)
             if leading:
                 name = self.split_leading_dir(name)[1]
-            filename = os.path.join(to_path, name)
+            filename = os.path.join(dst, name)
             dirname = os.path.dirname(filename)
             if dirname and not os.path.exists(dirname):
                 os.makedirs(dirname)
