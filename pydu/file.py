@@ -87,11 +87,12 @@ def copy(src, dst, ignore_errors=False, follow_symlinks=True):
 
     Both the source and destination may be a directory.
 
-    When copy a directory,which a symlink, If the optional symlinks
-    flag is true, symbolic links in the source tree result in symbolic
-    links in the destination tree; if it is false, the contents of
-    the files pointed to by symbolic links are copied. If the file
-    pointed by the symlink doesn't exist, an exception will be raise
+    When copy a directory,which contains a symlink, If the optional
+    symlinks flag is true, symbolic links in the source tree result
+    in symbolic links in the destination tree; if it is false, the
+    contents of the files pointed to by symbolic links are copied.
+    If the file pointed by the symlink doesn't exist, an exception
+    will be raise.
 
     When copy a file,if follow_symlinks is false and src is a symbolic
     link, a new symlink will be created instead of copying the file it
