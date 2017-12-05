@@ -23,6 +23,7 @@ import stat
 import tarfile
 import zipfile
 
+from pydu import logger
 from pydu.compat import string_types
 
 
@@ -190,8 +191,8 @@ class TarArchive(BaseArchive):
                 except (KeyError, AttributeError) as exc:
                     # Some corrupt tar files seem to produce this
                     # (specifically bad symlinks)
-                    print("In the tar file %s the member %s is invalid: %s" %
-                          (name, member.name, exc))
+                    logger.error("In the tar file %s the member %s is invalid: %s",
+                                 name, member.name, exc)
                 else:
                     dirname = os.path.dirname(filename)
                     if dirname and not os.path.exists(dirname):
