@@ -1,4 +1,5 @@
-from pydu.request import FileName
+import httpretty
+from pydu.request import FileName, check_connect
 
 
 def test_filename_from_url():
@@ -36,3 +37,10 @@ def test_filename_from_headers():
 
     headers = 'Content-Disposition: attachment; filename='
     assert FileName.from_headers(headers) is None
+
+
+@httpretty.activate
+def test_check_connect():
+    httpretty.register_uri(httpretty.GET, 'http://localhost')
+    assert check_connect('http://localhost', port=80, timeout=0.01)
+    assert not check_connect('http://localhost', port=8000, timeout=0.01)

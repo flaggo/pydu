@@ -1,6 +1,9 @@
 import os
 import shutil
 import tempfile
+import socket
+
+from pydu import logger
 from pydu.compat import PY2, string_types, urlparse, ulib
 from pydu.string import safeunicode
 
@@ -97,3 +100,24 @@ def download(url, dst=None):
     shutil.move(tmpfile, filename)
 
     return filename
+
+
+def check_connect(ip, port, retry=1, timeout=0.5):
+    while retry:
+        try:
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        except socket.error as e:
+            logger.exception(e)
+            retry -= 1
+            continue
+
+        try:
+            s.settimeout(timeout)
+            s.connect((ip, port))
+            return s.getsockname()[0]
+        except socket.error:
+            logger.error("Connect to ip:%s port:%d fail", ip, port)
+            s.close()
+        finally:
+            retry -= 1
+    return None
