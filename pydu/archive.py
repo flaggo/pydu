@@ -76,7 +76,6 @@ class Archive(object):
                     "File object not a recognized archive format.")
         lookup_filename = filename + ext
         base, tail_ext = os.path.splitext(lookup_filename.lower())
-        print(base, tail_ext)
         cls = extension_map.get(tail_ext)
         if not cls:
             base, ext = os.path.splitext(base)
