@@ -6,8 +6,12 @@ PY2 = sys.version_info[0] == 2
 
 # urljoin
 if PY2:
+    import urllib as ulib
+    import urlparse
     from urlparse import urljoin
 else:
+    import urllib.request as ulib
+    import urllib.parse as urlparse
     from urllib.parse import urljoin
 
 # Dictionary iteration
