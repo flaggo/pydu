@@ -26,7 +26,7 @@ class TestAttrDict(object):
         del d.key
         with pytest.raises(AttributeError):
             print(d.key)
-        with pytest.raises(KeyError):
+        with pytest.raises(AttributeError):
             del d.key
 
     def test_repr(self):
