@@ -46,8 +46,8 @@ def test_types():
     assert isinstance(2**50, numeric_types)
 
 
-def test_urljoin():
-    from pydu.compat import urljoin
+def test_urlmisc():
+    from pydu.compat import urljoin, ulib, urlparse
 
 
 def test_imap():
