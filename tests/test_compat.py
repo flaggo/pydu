@@ -1,6 +1,7 @@
 from pydu.compat import (PY2, iterkeys, itervalues, iteritems,
                          text_type, string_types, numeric_types,
-                         is_iterable, has_next_attr)
+                         is_iterable, has_next_attr, urljoin,
+                         imap)
 
 
 def test_itersth():
@@ -46,9 +47,20 @@ def test_types():
     assert isinstance(2**50, numeric_types)
 
 
-def test_urljoin():
-    from pydu.compat import urljoin
+def test_urlmisc():
+    from pydu.compat import urljoin, ulib, urlparse
 
 
 def test_imap():
-    from pydu.compat import imap
+    assert list(imap(pow, (2, 3, 10), (5, 2, 3))) == [32, 9, 1000]
+    assert list(imap(max, (1, 4, 7), (2, 3, 8))) == [2, 4, 8]
+
+
+# TODO: add test case
+def test_ulib():
+    from pydu.compat import ulib
+
+
+# TODO: add test case
+def test_urlparse():
+    from pydu.compat import urlparse

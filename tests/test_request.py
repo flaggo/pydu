@@ -1,4 +1,6 @@
-from pydu.request import FileName
+from .testing import mockserver
+from pydu.network import get_free_port
+from pydu.request import FileName, check_connect
 
 
 def test_filename_from_url():
@@ -36,3 +38,9 @@ def test_filename_from_headers():
 
     headers = 'Content-Disposition: attachment; filename='
     assert FileName.from_headers(headers) is None
+
+
+@mockserver
+def test_check_connect(port=None):
+    assert check_connect('127.0.0.1', port=port, timeout=0.01)
+    assert not check_connect('127.0.0.1', port=get_free_port(), timeout=0.01)

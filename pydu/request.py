@@ -1,15 +1,11 @@
 import os
 import shutil
 import tempfile
-from pydu.compat import PY2, string_types
-from pydu.string import safeunicode
+import socket
 
-if PY2:
-    import urllib as ulib
-    import urlparse
-else:
-    import urllib.request as ulib
-    import urllib.parse as urlparse
+from pydu import logger
+from pydu.compat import PY2, string_types, urlparse, ulib
+from pydu.string import safeunicode
 
 
 class FileName(object):
@@ -104,3 +100,28 @@ def download(url, dst=None):
     shutil.move(tmpfile, filename)
 
     return filename
+
+
+def check_connect(ip, port, retry=1, timeout=0.5):
+    """
+    Check whether given ``ip`` and ``port`` could connect or not.
+    It will ``retry`` and ``timeout`` on given.
+    """
+    while retry:
+        try:
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        except socket.error as e:
+            logger.exception(e)
+            retry -= 1
+            continue
+
+        try:
+            s.settimeout(timeout)
+            s.connect((ip, port))
+            return s.getsockname()[0]
+        except socket.error:
+            logger.error("Connect to ip:%s port:%d fail", ip, port)
+            s.close()
+        finally:
+            retry -= 1
+    return None
