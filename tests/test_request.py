@@ -1,4 +1,5 @@
-import httpretty
+from .testing import mockserver
+from pydu.network import get_free_port
 from pydu.request import FileName, check_connect
 
 
@@ -39,8 +40,7 @@ def test_filename_from_headers():
     assert FileName.from_headers(headers) is None
 
 
-@httpretty.activate
-def test_check_connect():
-    httpretty.register_uri(httpretty.GET, 'http://localhost')
-    assert check_connect('http://localhost', port=80, timeout=0.01)
-    assert not check_connect('http://localhost', port=8000, timeout=0.01)
+@mockserver
+def test_check_connect(port=None):
+    assert check_connect('127.0.0.1', port=port, timeout=0.01)
+    assert not check_connect('127.0.0.1', port=get_free_port(), timeout=0.01)
