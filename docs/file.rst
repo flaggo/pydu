@@ -13,7 +13,7 @@ File
     >>> makedirs('test1',exist_ok=True)
     >>> makedirs('test1')
     Traceback (most recent call last):
-     ...    OSError: Create dir: {} error.
+     ...    OSError: Create dir: test1 error.
 
 
 ..  py:function:: pydu.file.remove(path, mode=0o755, ignore_errors=False, onerror)
@@ -37,7 +37,7 @@ File
     >>> remove('test',ignore_errors=True)
     >>> remove('test')
     Traceback (most recent call last):
-    ...    OSError: Remove path: test error
+     ...    OSError: Remove path: test error
 
 ..  py:function:: pydu.file.removes(paths, mode=0o755, ignore_errors=False, onerror)
 
@@ -62,7 +62,7 @@ File
         test.txt
     >>> open_file('test1.txt',mode='r')
     Traceback (most recent call last):
-    ...    OSError: Open file: test1.txt error
+     ...    OSError: Open file: test1.txt error
 
 .. py:function:: pydu.file.copy(src, dst, ignore_errors=False, follow_symlinks=True):
 
