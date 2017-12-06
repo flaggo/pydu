@@ -1,7 +1,7 @@
 import sys
 import time
 import pytest
-from pydu import WINDOWS
+from pydu.platform import WINDOWS
 from pydu.misc import trace, unix_timeout, TimeoutError, memoize, memoize_when_activated, super_len
 
 try:

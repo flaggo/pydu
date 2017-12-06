@@ -52,7 +52,6 @@ def get_func_args(func):
         return argspec.args
     else:
         sig = inspect.signature(func)
-        print(sig)
         return [
             name for name, param in sig.parameters.items()
             if param.kind == inspect.Parameter.POSITIONAL_OR_KEYWORD and name != 'self'

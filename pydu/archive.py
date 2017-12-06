@@ -23,6 +23,7 @@ import stat
 import tarfile
 import zipfile
 
+from pydu import logger
 from pydu.compat import string_types
 
 
@@ -38,13 +39,13 @@ class UnrecognizedArchiveFormat(ArchiveException):
     """
 
 
-def extract(path, to_path='', ext=''):
+def extract(path, dst='', ext=''):
     """
     Unpack the tar or zip file at the specified path or file to the directory
     specified by to_path.
     """
     with Archive(path, ext=ext) as archive:
-        archive.extract(to_path)
+        archive.extract(dst)
 
 
 class Archive(object):
@@ -76,7 +77,6 @@ class Archive(object):
                     "File object not a recognized archive format.")
         lookup_filename = filename + ext
         base, tail_ext = os.path.splitext(lookup_filename.lower())
-        print(base, tail_ext)
         cls = extension_map.get(tail_ext)
         if not cls:
             base, ext = os.path.splitext(base)
@@ -92,8 +92,8 @@ class Archive(object):
     def __exit__(self, exc_type, exc_value, traceback):
         self.close()
 
-    def extract(self, to_path=''):
-        self._archive.extract(to_path)
+    def extract(self, dst=''):
+        self._archive.extract(dst)
 
     def list(self):
         self._archive.list()
@@ -146,7 +146,7 @@ class BaseArchive(object):
                 return False
         return True
 
-    def extract(self, to_path):
+    def extract(self, dst):
         raise NotImplementedError(
             'subclasses of BaseArchive must provide an extract() method')
 
@@ -174,14 +174,14 @@ class TarArchive(BaseArchive):
         else:
             self._archive = tarfile.open(fileobj=file)
 
-    def extract(self, to_path):
+    def extract(self, dst):
         members = self._archive.getmembers()
         leading = self.has_leading_dir(x.name for x in members)
         for member in members:
             name = member.name
             if leading:
                 name = self.split_leading_dir(name)[1]
-            filename = os.path.join(to_path, name)
+            filename = os.path.join(dst, name)
             if member.isdir():
                 if filename and not os.path.exists(filename):
                     os.makedirs(filename)
@@ -191,8 +191,8 @@ class TarArchive(BaseArchive):
                 except (KeyError, AttributeError) as exc:
                     # Some corrupt tar files seem to produce this
                     # (specifically bad symlinks)
-                    print("In the tar file %s the member %s is invalid: %s" %
-                          (name, member.name, exc))
+                    logger.error("In the tar file %s the member %s is invalid: %s",
+                                 name, member.name, exc)
                 else:
                     dirname = os.path.dirname(filename)
                     if dirname and not os.path.exists(dirname):
@@ -201,8 +201,10 @@ class TarArchive(BaseArchive):
                         shutil.copyfileobj(extracted, outfile)
                         self._copy_permissions(member.mode, filename)
                 finally:
-                    if extracted:
+                    try:
                         extracted.close()
+                    except NameError:
+                        pass
 
     def list(self, *args, **kwargs):
         self._archive.list(*args, **kwargs)
@@ -220,7 +222,7 @@ class ZipArchive(BaseArchive):
         # ZipFile's 'file' parameter can be path (string) or file-like obj.
         self._archive = zipfile.ZipFile(file)
 
-    def extract(self, to_path):
+    def extract(self, dst):
         namelist = self._archive.namelist()
         leading = self.has_leading_dir(namelist)
         for name in namelist:
@@ -228,7 +230,7 @@ class ZipArchive(BaseArchive):
             info = self._archive.getinfo(name)
             if leading:
                 name = self.split_leading_dir(name)[1]
-            filename = os.path.join(to_path, name)
+            filename = os.path.join(dst, name)
             dirname = os.path.dirname(filename)
             if dirname and not os.path.exists(dirname):
                 os.makedirs(dirname)

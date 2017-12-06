@@ -57,9 +57,9 @@ class ArchiveTester(TempDirMixin):
         self.check_files(self.tmpdir)
 
     def test_extract_fileobject(self):
-        f = open(self.archive_path, 'rb')
-        extract(f, self.tmpdir, ext=self.ext)
-        self.check_files(self.tmpdir)
+        with open(self.archive_path, 'rb') as f:
+            extract(f, self.tmpdir, ext=self.ext)
+            self.check_files(self.tmpdir)
 
     def test_extract_no_to_path(self):
         cur_dir = os.getcwd()

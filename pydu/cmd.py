@@ -1,7 +1,7 @@
 import sys
 import time
 from subprocess import Popen, PIPE, STDOUT
-from pydu import WINDOWS
+from pydu.platform import WINDOWS
 from pydu.compat import PY2
 
 

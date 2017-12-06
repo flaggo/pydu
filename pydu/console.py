@@ -1,5 +1,5 @@
 import sys
-from pydu import WINDOWS, POSIX
+from pydu.platform import WINDOWS, POSIX
 
 
 # http://bitbucket.org/techtonik/python-pager
