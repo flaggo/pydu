@@ -169,6 +169,7 @@ class TestLink:
         touch(f)
         link(f, link_f)
         t1 = os.path.getctime(link_f)
+        time.sleep(0.1)
         link(f, link_f, overwrite=True)
         t2 = os.path.getctime(link_f)
         assert t1 != t2
@@ -196,6 +197,7 @@ class TestSymLink:
         touch(f)
         symlink(f, link_f)
         t1 = os.lstat(link_f).st_ctime
+        time.sleep(0.1)
         symlink(f, link_f, overwrite=True)
         t2 = os.lstat(link_f).st_ctime
         assert t1 != t2
