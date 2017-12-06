@@ -118,6 +118,9 @@ def copy(src, dst, ignore_errors=False, follow_symlinks=True):
 
 
 def touch(path):
+    """
+    open a file as write,and then close it.
+    """
     with open(path, 'w'):
         pass
 
