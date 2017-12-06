@@ -164,7 +164,7 @@ class TestLink:
 
     def test_link_with_overwrite(self, tmpdir):
         f = str(tmpdir.join('test.txt'))
-        link_f = str(tmpdir.join('test.txt'))
+        link_f = str(tmpdir.join('test.link'))
         touch(f)
         link(f, link_f)
         t1 = os.path.getctime(link_f)
@@ -191,7 +191,7 @@ class TestSymLink:
 
     def test_symlink_with_overwrite(self, tmpdir):
         f = str(tmpdir.join('test.txt'))
-        link_f = str(tmpdir.join('test.txt'))
+        link_f = str(tmpdir.join('test.link'))
         touch(f)
         symlink(f, link_f)
         t1 = os.path.getctime(link_f)
