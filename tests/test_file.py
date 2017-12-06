@@ -196,10 +196,10 @@ class TestSymLink:
         link_f = str(tmpdir.join('test.link'))
         touch(f)
         symlink(f, link_f)
-        t1 = os.path.getctime(link_f)
+        t1 = os.path.getmtime(link_f)
         time.sleep(1)
         symlink(f, link_f, overwrite=True)
-        t2 = os.path.getctime(link_f)
+        t2 = os.path.getmtime(link_f)
         assert t1 != t2
 
     def test_symlink_without_ignore_error(self, tmpdir):
