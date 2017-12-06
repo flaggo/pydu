@@ -169,7 +169,6 @@ class TestLink:
         touch(f)
         link(f, link_f)
         t1 = os.path.getctime(link_f)
-        time.sleep(1)
         link(f, link_f, overwrite=True)
         t2 = os.path.getctime(link_f)
         assert t1 != t2
@@ -196,10 +195,9 @@ class TestSymLink:
         link_f = str(tmpdir.join('test.link'))
         touch(f)
         symlink(f, link_f)
-        t1 = os.path.getmtime(link_f)
-        time.sleep(1)
+        t1 = os.lstat(link_f).st_ctime
         symlink(f, link_f, overwrite=True)
-        t2 = os.path.getmtime(link_f)
+        t2 = os.lstat(link_f).st_ctime
         assert t1 != t2
 
     def test_symlink_without_ignore_error(self, tmpdir):
