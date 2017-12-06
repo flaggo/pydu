@@ -162,10 +162,20 @@ class TestLink:
         with pytest.raises(Exception):
             link(d, link_d)
 
+    def test_link_with_overwrite(self, tmpdir):
+        f = str(tmpdir.join('test.txt'))
+        link_f = str(tmpdir.join('test.txt'))
+        touch(f)
+        link(f, link_f)
+        t1 = os.path.getctime(link_f)
+        link(f, link_f, overwrite=True)
+        t2 = os.path.getctime(link_f)
+        assert t1 != t2
+
 
 @pytest.mark.skipif(WINDOWS, reason='Not support on windows')
 class TestSymLink:
-    def test_link_a_file(self, tmpdir):
+    def test_symlink_a_file(self, tmpdir):
         f = str(tmpdir.join('test.txt'))
         link_f = str(tmpdir.join('test.link'))
         touch(f)
@@ -173,16 +183,23 @@ class TestSymLink:
         assert os.path.exists(link_f)
         assert os.path.islink(link_f)
 
-    def test_link_with_ignore_error(self, tmpdir):
+    def test_symlink_with_ignore_error(self, tmpdir):
         d = str(tmpdir.join('test'))
         link_d = str(tmpdir.join('test.link'))
         makedirs(d)
         link(d, link_d, ignore_errors=True)
 
-    def test_link_with_overwrite(self,tmpdir):
-        pass
+    def test_symlink_with_overwrite(self, tmpdir):
+        f = str(tmpdir.join('test.txt'))
+        link_f = str(tmpdir.join('test.txt'))
+        touch(f)
+        symlink(f, link_f)
+        t1 = os.path.getctime(link_f)
+        symlink(f, link_f, overwrite=True)
+        t2 = os.path.getctime(link_f)
+        assert t1 != t2
 
-    def test_link_without_ignore_error(self, tmpdir):
+    def test_symlink_without_ignore_error(self, tmpdir):
         d = str(tmpdir.join('test'))
         link_d = str(tmpdir.join('test.link'))
         makedirs(d)
