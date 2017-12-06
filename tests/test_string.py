@@ -14,6 +14,9 @@ def test_safeunicode():
     assert safeunicode(1) == u'1'
     assert safeunicode('中文') == u'中文'
 
+    assert safeunicode(u'hello') == u'hello'
+    assert safeunicode(u'中文') == u'中文'
+
 
 def test_lstrips():
     assert lstrips('foobbar', '') == 'foobbar'

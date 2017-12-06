@@ -16,7 +16,7 @@ def makedirs(path, mode=0o755, ignore_errors=False, exist_ok=False):
         return
     try:
         os.makedirs(path, mode)
-    except Exception:
+    except:
         if not ignore_errors:
             raise OSError('Create dir: {} error.')
 
@@ -44,7 +44,7 @@ def remove(path, ignore_errors=False, onerror=None):
     else:
         try:
             os.remove(path)
-        except Exception:
+        except:
             onerror(os.remove, path, sys.exc_info())
 
 
@@ -75,7 +75,7 @@ def open_file(path, mode='wb+', buffer_size=-1, ignore_errors=False):
         if path and not os.path.isdir(path):
             makedirs(os.path.dirname(path), exist_ok=True)
             f = open(path, mode, buffer_size)
-    except Exception:
+    except:
         if not ignore_errors:
             raise OSError('Open file: {} error'.format(path))
     return f
@@ -90,7 +90,7 @@ def copy(src, dst, ignore_errors=False, follow_symlinks=True):
                 os.symlink(os.readlink(src), dst)
             else:
                 shutil.copy(src, dst)
-    except Exception:
+    except:
         if not ignore_errors:
             raise OSError('Copy {} to {} error'.format(src, dst))
 
@@ -108,7 +108,7 @@ def symlink(src, dst, overwrite=False, ignore_errors=False):
             else:
                 return
         os.symlink(src, dst)
-    except Exception:
+    except:
         if not ignore_errors:
             raise OSError('Link {} to {} error'.format(dst, src))
 
@@ -122,6 +122,6 @@ if not WINDOWS:
                 else:
                     return
             os.link(src, dst)
-        except Exception:
+        except:
             if not ignore_errors:
                 raise OSError('Link {} to {} error'.format(dst, src))

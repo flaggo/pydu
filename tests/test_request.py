@@ -1,5 +1,8 @@
+import pytest
 import httpretty
+
 from pydu.request import FileName, check_connect
+from pydu.platform import WINDOWS
 
 
 def test_filename_from_url():
@@ -39,6 +42,8 @@ def test_filename_from_headers():
     assert FileName.from_headers(headers) is None
 
 
+# TODO: support windows
+@pytest.mark.skipif(WINDOWS, reason='Not support on windows')
 @httpretty.activate
 def test_check_connect():
     httpretty.register_uri(httpretty.GET, 'http://localhost')
