@@ -18,7 +18,7 @@ def makedirs(path, mode=0o755, ignore_errors=False, exist_ok=False):
         os.makedirs(path, mode)
     except:
         if not ignore_errors:
-            raise OSError('Create dir: {} error.')
+            raise OSError('Create dir: {} error.'.format(path))
 
 
 def remove(path, ignore_errors=False, onerror=None):
