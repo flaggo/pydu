@@ -87,7 +87,7 @@ File
         test.txt
         test_copy1.link
         test.link -> test.txt
-    >>> copy('test/test.link','test/test_copy2.link',follow_syslink)
+    >>> copy('test/test.link','test/test_copy2.link',follow_symlink=False)
     >>> ll test
         test.txt
         test_copy1.link
@@ -100,8 +100,6 @@ File
 
     >>> from pydu.file import touch
     >>> touch('test.txt')
-
-
 
 .. py:function:: pydu.file.symlink(src, dst, overwrite=False, ignore_errors=False)
 
