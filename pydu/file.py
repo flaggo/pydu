@@ -124,6 +124,7 @@ def touch(path):
     with open(path, 'w'):
         pass
 
+
 if not WINDOWS:
     def symlink(src, dst, overwrite=False, ignore_errors=False):
         """
@@ -144,7 +145,7 @@ if not WINDOWS:
             if not ignore_errors:
                 raise OSError('Link {} to {} error'.format(dst, src))
 
-if not WINDOWS:
+
     def link(src, dst, overwrite=False, ignore_errors=False):
         """
         Create a hard link pointing to source named link_name.
