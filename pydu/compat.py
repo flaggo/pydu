@@ -1,10 +1,11 @@
 """Utilities for make the code run both on Python2 and Python3.
 """
 import sys
+import types
 
 PY2 = sys.version_info[0] == 2
 
-# urljoin
+# url*
 if PY2:
     import urllib as ulib
     import urlparse
@@ -45,6 +46,13 @@ if PY2:
     has_next_attr = lambda x: x and hasattr(x, 'next')
 else:
     has_next_attr = lambda x: x and hasattr(x, '__next__')
+
+
+# Class Type
+if PY2:
+    ClassTypes = (type, types.ClassType)
+else:
+    ClassTypes = (type,)
 
 
 # is iterable
