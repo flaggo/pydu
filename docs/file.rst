@@ -10,7 +10,6 @@ File
 
     >>> from pydu.file import makedirs
     >>> makedirs('test1/test2')
-    >>> makedirs('test1/test2/test3')
     >>> makedirs('test1',exist_ok=True)
     >>> makedirs('test1')
     Traceback (most recent call last):
@@ -94,6 +93,33 @@ File
         test_copy1.link
         test.link -> test.txt
         test_copy2.link -> test.txt
+
+.. py:function:: pydu.file.touch(path):
+
+    open a file as write,and then close it.
+
+    >>> from pydu.file import touch
+    >>> touch('test.txt')
+
+
+
+.. py:function:: pydu.file.symlink(src, dst, overwrite=False, ignore_errors=False)
+
+   `symlink` only work on `Linux/Unix`,it create a symbolic link pointing
+   to source named link_name.If dist is exist and overwrite is true,a new
+   symlink will be created.
+
+    >>> from pydu.file import symlink
+    >>> symlink('test.txt','test.link')
+
+.. py:function:: pydu.file.link(src, dst, overwrite=False, ignore_errors=False):
+
+    `link` only work on `Linux/Unix`,it create a hard link pointing to
+    source named link_name.If dist is exist and overwrite is true,a
+    new symlink will be created.
+
+    >>> from pydu.file import link
+    >>> link('test.txt','test.link')
 
 
 
