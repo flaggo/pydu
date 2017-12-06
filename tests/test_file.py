@@ -179,6 +179,9 @@ class TestSymLink:
         makedirs(d)
         link(d, link_d, ignore_errors=True)
 
+    def test_link_with_overwrite(self,tmpdir):
+        pass
+
     def test_link_without_ignore_error(self, tmpdir):
         d = str(tmpdir.join('test'))
         link_d = str(tmpdir.join('test.link'))
