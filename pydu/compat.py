@@ -7,11 +7,11 @@ PY2 = sys.version_info[0] == 2
 
 # url*
 if PY2:
-    import urllib as ulib
+    import urllib as urlib
     import urlparse
     from urlparse import urljoin
 else:
-    import urllib.request as ulib
+    import urllib.request as urlib
     import urllib.parse as urlparse
     from urllib.parse import urljoin
 

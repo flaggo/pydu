@@ -1,7 +1,6 @@
 from pydu.compat import (PY2, iterkeys, itervalues, iteritems,
                          text_type, string_types, numeric_types,
-                         is_iterable, has_next_attr, urljoin,
-                         imap, cmp)
+                         is_iterable, has_next_attr, imap, cmp)
 
 
 def test_itersth():
@@ -48,7 +47,7 @@ def test_types():
 
 
 def test_urlmisc():
-    from pydu.compat import urljoin, ulib, urlparse
+    from pydu.compat import urljoin, urlib, urlparse
 
 
 def test_imap():
@@ -60,13 +59,3 @@ def test_cmp():
     assert cmp(1, 2) < 0
     assert cmp(1, 1) == 0
     assert cmp(2, 1) > 0
-
-
-# TODO: add test case
-def test_ulib():
-    from pydu.compat import ulib
-
-
-# TODO: add test case
-def test_urlparse():
-    from pydu.compat import urlparse
