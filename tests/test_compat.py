@@ -1,7 +1,7 @@
 from pydu.compat import (PY2, iterkeys, itervalues, iteritems,
                          text_type, string_types, numeric_types,
                          is_iterable, has_next_attr, urljoin,
-                         imap)
+                         imap, cmp)
 
 
 def test_itersth():
@@ -54,6 +54,12 @@ def test_urlmisc():
 def test_imap():
     assert list(imap(pow, (2, 3, 10), (5, 2, 3))) == [32, 9, 1000]
     assert list(imap(max, (1, 4, 7), (2, 3, 8))) == [2, 4, 8]
+
+
+def test_cmp():
+    assert cmp(1, 2) < 0
+    assert cmp(1, 1) == 0
+    assert cmp(2, 1) > 0
 
 
 # TODO: add test case

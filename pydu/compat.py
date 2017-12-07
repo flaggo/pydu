@@ -47,12 +47,17 @@ if PY2:
 else:
     has_next_attr = lambda x: x and hasattr(x, '__next__')
 
-
 # Class Type
 if PY2:
     ClassTypes = (type, types.ClassType)
 else:
     ClassTypes = (type,)
+
+# cmp
+if PY2:
+    cmp = cmp
+else:
+    cmp = lambda x, y: (x > y) - (x < y)
 
 
 # is iterable
