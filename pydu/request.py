@@ -3,9 +3,9 @@ import shutil
 import tempfile
 import socket
 
-from pydu import logger
-from pydu.compat import PY2, string_types, urlparse, urlib
-from pydu.string import safeunicode
+from . import logger
+from .string import safeunicode
+from .compat import PY2, string_types, urlparse, urlib
 
 
 class FileName(object):

@@ -1,7 +1,8 @@
 import os
 import sys
 import shutil
-from pydu.platform import WINDOWS
+
+from .platform import WINDOWS
 
 
 # todo tests and docs

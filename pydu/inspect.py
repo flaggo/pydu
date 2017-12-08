@@ -2,7 +2,7 @@ from __future__ import absolute_import
 
 import inspect
 
-from pydu.compat import PY2
+from .compat import PY2
 
 
 def getargspec(func):

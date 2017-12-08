@@ -3,7 +3,6 @@ import sys
 import linecache
 import signal
 import functools
-import warnings
 import io
 
 
