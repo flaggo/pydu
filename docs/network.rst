@@ -22,3 +22,12 @@ Network
     True
     >>> is_ipv4('localhost.localdomain')
     False
+
+
+.. py:function:: pydu.network.get_free_port()
+
+    Get free port which could be bound.
+
+    >>> from pydu.network import get_free_port
+    >>> get_free_port()
+    57118
