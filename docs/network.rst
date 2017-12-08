@@ -13,12 +13,12 @@ Network
     '255.255.255.0'
 
 
-.. py:function:: pydu.network.is_ipv4_address(ip)
+.. py:function:: pydu.network.is_ipv4(ip)
 
-    Judge whether the given ``ip`` is IPV4.
+    Judge whether the given ``ip`` is IPV4 address.
 
-    >>> from pydu.network import is_ipv4_address
-    >>> is_ipv4_address('8.8.8.8')
+    >>> from pydu.network import is_ipv4
+    >>> is_ipv4('8.8.8.8')
     True
-    >>> is_ipv4_address('localhost.localdomain')
+    >>> is_ipv4('localhost.localdomain')
     False

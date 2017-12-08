@@ -1,5 +1,5 @@
 import pytest
-from pydu.network import dotted_netmask, is_ipv4_address
+from pydu.network import dotted_netmask, is_ipv4
 
 
 @pytest.mark.parametrize(
@@ -15,8 +15,8 @@ def test_dotted_netmask(mask, expected):
 class TestIsIPv4Address:
 
     def test_valid(self):
-        assert is_ipv4_address('8.8.8.8')
+        assert is_ipv4('8.8.8.8')
 
     @pytest.mark.parametrize('value', ('8.8.8.8.8', 'localhost.localdomain'))
     def test_invalid(self, value):
-        assert not is_ipv4_address(value)
+        assert not is_ipv4(value)

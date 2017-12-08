@@ -14,7 +14,7 @@ def dotted_netmask(mask):
 
 
 # https://github.com/kennethreitz/requests/blob/master/requests/utils.py
-def is_ipv4_address(ip):
+def is_ipv4(ip):
     try:
         socket.inet_aton(ip)
     except socket.error:
