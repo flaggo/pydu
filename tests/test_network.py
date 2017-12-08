@@ -1,5 +1,5 @@
 import pytest
-from pydu.network import dotted_netmask, is_ipv4
+from pydu.network import dotted_netmask, is_ipv4, get_free_port
 
 
 @pytest.mark.parametrize(
@@ -20,3 +20,9 @@ class TestIsIPv4Address:
     @pytest.mark.parametrize('value', ('8.8.8.8.8', 'localhost.localdomain'))
     def test_invalid(self, value):
         assert not is_ipv4(value)
+
+
+def test_get_free_port():
+    port = get_free_port()
+    assert isinstance(port, int)
+    assert port < 65536
