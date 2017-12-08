@@ -1,4 +1,5 @@
 import pytest
+from pydu.platform import WINDOWS
 from pydu.network import dotted_netmask, is_ipv4, is_ipv6, get_free_port
 
 
@@ -12,6 +13,7 @@ def test_dotted_netmask(mask, expected):
     assert dotted_netmask(mask) == expected
 
 
+@pytest.mark.skipif(WINDOWS, reason='Not support on windows')
 class TestIsIPv4Address:
 
     def test_valid(self):
@@ -22,6 +24,7 @@ class TestIsIPv4Address:
         assert not is_ipv4(value)
 
 
+@pytest.mark.skipif(WINDOWS, reason='Not support on windows')
 class TestIsIPv6Address:
 
     def test_valid(self):
