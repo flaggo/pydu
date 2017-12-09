@@ -19,12 +19,12 @@ File
 ..  py:function:: pydu.file.remove(path, mode=0o755, ignore_errors=False, onerror)
     Remove a file or directory.
 
-    If ignore_errors is set, errors are ignored; otherwise, if onerror
-    is set, it is called to handle the error with arguments (func,
-    path, exc_info) where func is platform and implementation dependent;
-    path is the argument to that function that caused it to fail; and
-    exc_info is a tuple returned by sys.exc_info().  If ignore_errors
-    is False and onerror is None, an exception is raised.
+    If ignore_errors is set, errors are ignored; otherwise, if `onerror`
+    is set, it is called to handle the error with arguments (`func` ,
+    `path` , `exc_info` ) where func is platform and implementation dependent;
+    `path` is the argument to that function that caused it to fail; and
+    `exc_info` is a tuple returned by `sys.exc_info()`.  If `ignore_errors`
+    is `False` and `onerror` is None, an exception is raised.
 
     >>> from pydu.file import makedirs
     >>> from pydu.file import remove
@@ -113,7 +113,7 @@ File
 
     `link` only work on `Linux/Unix`,it create a hard link pointing to
     source named link_name.If dist is exist and overwrite is true,a
-    new symlink will be created.
+    new link will be created.
 
     >>> from pydu.file import link
     >>> link('test.txt','test.link')
