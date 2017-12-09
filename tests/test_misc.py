@@ -2,7 +2,9 @@ import sys
 import time
 import pytest
 from pydu.platform import WINDOWS
-from pydu.misc import trace, unix_timeout, TimeoutError, memoize, memoize_when_activated, super_len
+from pydu.misc import (trace, TimeoutError, timeout,
+                       memoize, memoize_when_activated,
+                       super_len)
 
 try:
     from cStringIO import StringIO  # py2
@@ -10,18 +12,18 @@ except ImportError:
     from io import StringIO  # py3
 
 
-@pytest.mark.skipif(WINDOWS, reason='unix_timeout only supports unix-like system')
-def test_unix_timeout():
-    @unix_timeout(1)
+def test_timeout():
+    @timeout(1)
     def f1():
         time.sleep(0.01)
+        return 1
 
-    @unix_timeout(1)
+    @timeout(0.01)
     def f2():
-        time.sleep(1.01)
+        time.sleep(1)
+        return 2
 
-    f1()
-
+    assert f1() == 1
     with pytest.raises(TimeoutError):
         f2()
 

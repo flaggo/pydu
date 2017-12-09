@@ -23,8 +23,8 @@ import stat
 import tarfile
 import zipfile
 
-from pydu import logger
-from pydu.compat import string_types
+from . import logger
+from .compat import string_types
 
 
 class ArchiveException(Exception):

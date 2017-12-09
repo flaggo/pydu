@@ -1,8 +1,9 @@
 import sys
 import time
 from subprocess import Popen, PIPE, STDOUT
-from pydu.platform import WINDOWS
-from pydu.compat import PY2
+
+from .platform import WINDOWS
+from .compat import PY2
 
 
 def run(cmd, wait=True, shell=True, timeout=0, timeinterval=1):
