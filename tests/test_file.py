@@ -2,10 +2,10 @@ import os
 import pytest
 import time
 from pydu.platform import WINDOWS
-from pydu.file import makedirs, remove, removes, open_file, copy, touch, symlink
+from pydu.file import makedirs, remove, removes, open_file, copy, touch
 
 if not WINDOWS:
-    from pydu.file import link
+    from pydu.file import link, symlink
 
 
 class TestMakeDirs:
@@ -197,7 +197,7 @@ class TestSymLink:
         touch(f)
         symlink(f, link_f)
         t1 = os.lstat(link_f).st_ctime
-        time.sleep(0.1)
+        time.sleep(0.01)
         symlink(f, link_f, overwrite=True)
         t2 = os.lstat(link_f).st_ctime
         assert t1 != t2

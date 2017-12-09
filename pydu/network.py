@@ -13,10 +13,26 @@ def dotted_netmask(mask):
     return socket.inet_ntoa(struct.pack('>I', bits))
 
 
-# https://github.com/kennethreitz/requests/blob/master/requests/utils.py
-def is_ipv4_address(ip):
+def is_ipv4(ip):
+    """
+    Returns True if the IPv4 address ia valid, otherwise returns False.
+    """
+    return _is_ip(ip, af=socket.AF_INET)
+
+
+def is_ipv6(ip):
+    """
+    Returns True if the IPv6 address ia valid, otherwise returns False.
+    """
+    return _is_ip(ip, af=socket.AF_INET6)
+
+
+def _is_ip(ip, af):
+    '''
+    Returns True if the IP address ia valid, otherwise returns False.
+    '''
     try:
-        socket.inet_aton(ip)
+        socket.inet_pton(af, ip)
     except socket.error:
         return False
     return True

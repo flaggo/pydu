@@ -1,7 +1,8 @@
 import os
 import sys
 import shutil
-from pydu.platform import WINDOWS
+
+from .platform import WINDOWS
 
 
 # todo tests and docs
@@ -18,7 +19,7 @@ def makedirs(path, mode=0o755, ignore_errors=False, exist_ok=False):
         os.makedirs(path, mode)
     except:
         if not ignore_errors:
-            raise OSError('Create dir: {} error.')
+            raise OSError('Create dir: {} error.'.format(path))
 
 
 def remove(path, ignore_errors=False, onerror=None):
@@ -124,6 +125,7 @@ def touch(path):
     with open(path, 'w'):
         pass
 
+
 if not WINDOWS:
     def symlink(src, dst, overwrite=False, ignore_errors=False):
         """
@@ -144,7 +146,7 @@ if not WINDOWS:
             if not ignore_errors:
                 raise OSError('Link {} to {} error'.format(dst, src))
 
-if not WINDOWS:
+
     def link(src, dst, overwrite=False, ignore_errors=False):
         """
         Create a hard link pointing to source named link_name.

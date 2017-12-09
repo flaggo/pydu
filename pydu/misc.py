@@ -1,31 +1,44 @@
 import os
 import sys
 import linecache
-import signal
 import functools
-import warnings
 import io
+from threading import Thread
+
+from . import logger
 
 
 class TimeoutError(Exception):
     pass
 
 
-def unix_timeout(seconds, error_message='Time out'):
+def timeout(seconds, error_message='Time out'):
     def decorated(func):
-        def _handle_timeout(signum, frame):
-            raise TimeoutError(error_message)
 
+        @functools.wraps(func)
         def wrapper(*args, **kwargs):
-            signal.signal(signal.SIGALRM, _handle_timeout)
-            signal.alarm(seconds)
+            share = [TimeoutError(error_message)]
+
+            def func_with_except():
+                try:
+                    share[0] = func(*args, **kwargs)
+                except Exception as e:
+                    share[0] = e
+
+            t = Thread(target=func_with_except)
+            t.daemon = True
             try:
-                result = func(*args, **kwargs)
-            finally:
-                signal.alarm(0)
+                t.start()
+                t.join(seconds)
+            except Exception as e:
+                logger.error('Starting timeout thread for %s error', e)
+                raise e
+            result = share[0]
+            if isinstance(result, BaseException):
+                raise result
             return result
 
-        return functools.wraps(func)(wrapper)
+        return wrapper
 
     return decorated
 

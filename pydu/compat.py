@@ -7,11 +7,11 @@ PY2 = sys.version_info[0] == 2
 
 # url*
 if PY2:
-    import urllib as ulib
+    import urllib as urlib
     import urlparse
     from urlparse import urljoin
 else:
-    import urllib.request as ulib
+    import urllib.request as urlib
     import urllib.parse as urlparse
     from urllib.parse import urljoin
 
@@ -47,12 +47,17 @@ if PY2:
 else:
     has_next_attr = lambda x: x and hasattr(x, '__next__')
 
-
 # Class Type
 if PY2:
     ClassTypes = (type, types.ClassType)
 else:
     ClassTypes = (type,)
+
+# cmp
+if PY2:
+    cmp = cmp
+else:
+    cmp = lambda x, y: (x > y) - (x < y)
 
 
 # is iterable

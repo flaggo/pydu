@@ -1,5 +1,5 @@
 # coding: utf-8
-from pydu.compat import PY2, text_type, imap, has_next_attr
+from .compat import text_type
 
 
 def safeunicode(obj, encoding='utf-8'):

@@ -6,6 +6,16 @@ Compat
     Specify current Python interpreter is Python 2 or 3.
 
 
+.. py:function:: pydu.compat.urlib(base, url, allow_fragments=True)
+
+    Same to ``urllib`` on PY2 or ``urllib.request`` on PY3.
+
+
+.. py:function:: pydu.compat.urlparse(base, url, allow_fragments=True)
+
+    Same to ``urlparse`` on PY2 or ``urllib.parse`` on PY3.
+
+
 .. py:function:: pydu.compat.urljoin(base, url, allow_fragments=True)
 
     Same to ``urlparse.urljoin`` on PY2 or ``urllib.parse.urljoin`` on PY3.
@@ -44,6 +54,11 @@ Compat
 .. py:function:: pydu.compat.imap
 
     Same to ``itertools.imap`` on PY2 or ``map`` on PY3.
+
+
+.. py:function:: pydu.compat.cmp
+
+    Same to ``cmp`` on PY2, but implement on PY3.
 
 
 .. py:function:: pydu.compat.has_next_attr(x)

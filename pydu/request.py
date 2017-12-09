@@ -3,9 +3,9 @@ import shutil
 import tempfile
 import socket
 
-from pydu import logger
-from pydu.compat import PY2, string_types, urlparse, ulib
-from pydu.string import safeunicode
+from . import logger
+from .string import safeunicode
+from .compat import PY2, string_types, urlparse, urlib
 
 
 class FileName(object):
@@ -90,7 +90,7 @@ def download(url, dst=None):
         binurl = list(urlparse.urlsplit(url))
         binurl[2] = urlparse.quote(binurl[2])
         binurl = urlparse.urlunsplit(binurl)
-    tmpfile, headers = ulib.urlretrieve(binurl, tmpfile)
+    tmpfile, headers = urlib.urlretrieve(binurl, tmpfile)
     filename = FileName.from_any(dst=dst, headers=headers, url=url)
     if dst_:
         filename = os.path.join(dst_, filename)
