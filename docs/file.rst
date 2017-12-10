@@ -75,7 +75,8 @@ File
     symlink will be created instead of copying the file it points to,else
     the contents of the file pointed to by symbolic links is copied.
 
-    example:copy a symlink
+    Example: Copy a symlink
+
     >>> from pydu.file import copy,symlink
     >>> from pydu.file import makedirs,open_fle
     >>> open_fle('test/test.txt')
@@ -85,7 +86,7 @@ File
 
 .. py:function:: pydu.file.touch(path):
 
-    open a file as write,and then close it.
+    Open a file as write,and then close it.
 
     >>> from pydu.file import touch
     >>> touch('test.txt')
@@ -107,8 +108,3 @@ File
 
     >>> from pydu.file import link
     >>> link('test.txt','test.link')
-
-
-
-
-
