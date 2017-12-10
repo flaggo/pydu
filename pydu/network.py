@@ -41,6 +41,6 @@ def _is_ip(ip, af):
 def get_free_port():
     s = socket.socket(socket.AF_INET, type=socket.SOCK_STREAM)
     s.bind(('127.0.0.1', 0))
-    address, port = s.getsockname()
+    _, port = s.getsockname()
     s.close()
     return port
