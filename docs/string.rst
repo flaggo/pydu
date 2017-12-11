@@ -56,3 +56,20 @@ String
     >>> from pydu.string import strips
     >>> strips('foobarfoo', 'foo')
     'bar'
+
+.. py:function:: pydu.string.common_prefix(l)
+
+  Return common prefix of the stings
+
+      >>> from pydu.string import common_prefix
+      >>> common_prefix(['abcd', 'abc1'])
+      'abc'
+
+
+.. py:function:: pydu.string.common_suffix(l)
+
+  Return common suffix of the stings
+
+      >>> from pydu.string import common_suffix
+      >>> common_suffix(['dabc', '1abc'])
+      'abc'
