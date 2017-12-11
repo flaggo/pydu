@@ -102,6 +102,11 @@ def strips(text, remove):
 
 
 def common_prefix(l):
+    """
+    Return common prefix of the stings
+        >>> common_prefix(['abcd', 'abc1'])
+        'abc'
+    """
     commons = []
     for i in range(min(len(s) for s in l)):
         common = l[0][i]
@@ -113,6 +118,11 @@ def common_prefix(l):
 
 
 def common_suffix(l):
+    """
+    Return common suffix of the stings
+        >>> common_suffix(['dabc', '1abc'])
+        'abc'
+    """
     commons = []
     for i in range(min(len(s) for s in l)):
         common = l[0][-i-1]
@@ -121,3 +131,4 @@ def common_suffix(l):
                 return ''.join(reversed(commons))
         commons.append(common)
     return ''.join(reversed(commons))
+
