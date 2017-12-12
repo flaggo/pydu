@@ -1,6 +1,6 @@
 # coding: utf-8
 from pydu.string import (safeencode, safeunicode, strips, lstrips, rstrips,
-                         common_prefix, common_suffix)
+                         common_prefix, common_suffix,sort)
 
 
 def test_safeencode():
@@ -48,3 +48,13 @@ def test_common_prefix():
 def test_common_suffix():
     l = ['dabc', '1abc']
     assert common_suffix(l) == 'abc'
+
+
+def test_sort():
+    assert sort('abc21') == '12abc'
+    assert sort('abc21',reversed=True) == 'cba21'
+
+
+
+
+
