@@ -83,7 +83,7 @@ File
 
 .. py:function:: pydu.file.touch(path):
 
-    open a file as write,and then close it.
+    Open a file as write,and then close it.
 
     >>> from pydu.file import touch
     >>> touch('test.txt')
@@ -105,8 +105,3 @@ File
 
     >>> from pydu.file import link
     >>> link('test.txt','test.link')
-
-
-
-
-
