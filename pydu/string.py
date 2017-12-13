@@ -3,7 +3,7 @@ from .compat import text_type
 
 
 def safeunicode(obj, encoding='utf-8'):
-    r"""
+    """
     Converts any given object to unicode string.
 
         >>> safeunicode('hello')
@@ -23,7 +23,7 @@ def safeunicode(obj, encoding='utf-8'):
 
 
 def safeencode(obj, encoding='utf-8'):
-    r"""
+    """
     Converts any given object to encoded string (default: utf-8).
 
         >>> safestr('hello')
@@ -71,7 +71,6 @@ def rstrips(text, remove):
     removes the string `remove` from the right of `text`
         >>> rstrips('foobar', 'bar')
         'foo'
-
     """
     return _strips('r', text, remove)
 
@@ -96,12 +95,16 @@ def strips(text, remove):
     removes the string `remove` from the both sides of `text`
         >>> strips('foobarfoo', 'foo')
         'bar'
-
     """
     return rstrips(lstrips(text, remove), remove)
 
 
 def common_prefix(l):
+    """
+    Return common prefix of the stings
+        >>> common_prefix(['abcd', 'abc1'])
+        'abc'
+    """
     commons = []
     for i in range(min(len(s) for s in l)):
         common = l[0][i]
@@ -113,6 +116,11 @@ def common_prefix(l):
 
 
 def common_suffix(l):
+    """
+    Return common suffix of the stings
+        >>> common_suffix(['dabc', '1abc'])
+        'abc'
+    """
     commons = []
     for i in range(min(len(s) for s in l)):
         common = l[0][-i-1]
@@ -121,3 +129,7 @@ def common_suffix(l):
                 return ''.join(reversed(commons))
         commons.append(common)
     return ''.join(reversed(commons))
+
+
+def sort(s, reverse=False):
+    return ''.join(sorted(s, reverse=reverse))
