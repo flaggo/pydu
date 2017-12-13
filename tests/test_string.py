@@ -1,6 +1,6 @@
 # coding: utf-8
 from pydu.string import (safeencode, safeunicode, strips, lstrips, rstrips,
-                         common_prefix, common_suffix,sort)
+                         common_prefix, common_suffix, sort)
 
 
 def test_safeencode():
