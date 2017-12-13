@@ -51,10 +51,5 @@ def test_common_suffix():
 
 
 def test_sort():
-    assert sort('abc21') == '12abc'
+    assert sort('acb21') == '12abc'
     assert sort('abc21', reverse=True) == 'cba21'
-
-
-
-
-

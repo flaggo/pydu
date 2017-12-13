@@ -131,7 +131,5 @@ def common_suffix(l):
     return ''.join(reversed(commons))
 
 
-def sort(string, reverse=False):
-    l = list(string)
-    l.sort(reverse=reverse)
-    return "".join(l)
+def sort(s, reverse=False):
+    return ''.join(sorted(s, reverse=reverse))
