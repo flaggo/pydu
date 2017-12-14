@@ -132,4 +132,8 @@ def common_suffix(l):
 
 
 def sort(s, reverse=False):
+    """
+    Sort given string by ascending order.
+    If reverse is True, sorting given string by descending order.
+    """
     return ''.join(sorted(s, reverse=reverse))

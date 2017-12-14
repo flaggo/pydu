@@ -73,3 +73,13 @@ String
         >>> from pydu.string import common_suffix
         >>> common_suffix(['dabc', '1abc'])
         'abc'
+
+
+.. py:function:: pydu.string.sort(s, reversed=False)
+
+    Sort given string by ascending order.
+    If ``reverse`` is True, sorting given string by descending order.
+
+    >>> from pydu.string import sort
+    >>> sort('dabc')
+    'abcd'
