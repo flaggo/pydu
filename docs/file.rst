@@ -90,12 +90,14 @@ File
 
 .. py:function:: pydu.file.symlink(src, dst, overwrite=False, ignore_errors=False)
 
-   ``symlink`` only work on `Unix-like` system, it create a symbolic link pointing
-   to source named link_name.If dist is exist and overwrite is true,a new
-   symlink will be created.
+    ``symlink`` only work on `Unix-like` system, it create a symbolic link pointing
+    to source named link_name.If dist is exist and overwrite is true,a new
+    symlink will be created.
 
     >>> from pydu.file import symlink
     >>> symlink('test.txt','test.link')
+
+    .. note:: ``symlink`` can only be used on ``unix-like`` system.
 
 .. py:function:: pydu.file.link(src, dst, overwrite=False, ignore_errors=False):
 
@@ -105,3 +107,5 @@ File
 
     >>> from pydu.file import link
     >>> link('test.txt','test.link')
+
+    .. note:: ``link`` can only be used on ``unix-like`` system.
