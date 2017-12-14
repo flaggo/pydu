@@ -34,6 +34,8 @@ Network
     >>> is_ipv4('localhost.localdomain')
     False
 
+    .. note:: ``is_ipv6`` can only be used on ``unix-like`` system.
+
 
 .. py:function:: pydu.network.get_free_port()
 

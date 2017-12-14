@@ -27,8 +27,11 @@ Content
    dict
    file
    inspect
+   list
    misc
    network
+   path
+   platform
    request
    set
    string

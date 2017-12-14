@@ -3,7 +3,7 @@ String
 
 .. py:function:: pydu.string.safeunicode(obj, encoding='utf-8')
 
-  Converts any given object to unicode string.
+    Converts any given object to unicode string.
 
     >>> from pydu.string import safeunicode
     >>> safeunicode('hello')
@@ -16,7 +16,7 @@ String
 
 .. py:function:: pydu.string.safeencode(obj, encoding='utf-8')
 
-  Converts any given object to encoded string (default: utf-8).
+    Converts any given object to encoded string (default: utf-8).
 
     >>> from pydu.string import safeencode
     >>> safeencode('hello')
@@ -29,7 +29,7 @@ String
 
 .. py:function:: pydu.string.lstrips(text, remove)
 
-  Removes the string ``remove`` from the left of ``text``.
+    Removes the string ``remove`` from the left of ``text``.
 
     >>> from pydu.string import lstrips
     >>> lstrips('foobar', 'foo')
@@ -42,7 +42,7 @@ String
 
 .. py:function:: pydu.string.rstrips(text, remove)
 
-  Removes the string ``remove`` from the right of ``text``.
+    Removes the string ``remove`` from the right of ``text``.
 
     >>> from pydu.string import rstrips
     >>> rstrips('foobar', 'bar')
@@ -51,7 +51,7 @@ String
 
 .. py:function:: pydu.string.strips(text, remove)
 
-  Removes the string ``remove`` from the both sides of ``text``.
+    Removes the string ``remove`` from the both sides of ``text``.
 
     >>> from pydu.string import strips
     >>> strips('foobarfoo', 'foo')
@@ -59,17 +59,27 @@ String
 
 .. py:function:: pydu.string.common_prefix(l)
 
-  Return common prefix of the stings
+    Return common prefix of the stings
 
-      >>> from pydu.string import common_prefix
-      >>> common_prefix(['abcd', 'abc1'])
-      'abc'
+    >>> from pydu.string import common_prefix
+    >>> common_prefix(['abcd', 'abc1'])
+    'abc'
 
 
 .. py:function:: pydu.string.common_suffix(l)
 
-  Return common suffix of the stings
+    Return common suffix of the stings
 
-      >>> from pydu.string import common_suffix
-      >>> common_suffix(['dabc', '1abc'])
-      'abc'
+    >>> from pydu.string import common_suffix
+    >>> common_suffix(['dabc', '1abc'])
+    'abc'
+
+
+.. py:function:: pydu.string.sort(s, reversed=False)
+
+    Sort given string by ascending order.
+    If ``reverse`` is `True`, sorting given string by descending order.
+
+    >>> from pydu.string import sort
+    >>> sort('dabc')
+    'abcd'

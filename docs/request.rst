@@ -14,6 +14,10 @@ Request
         Detect filename from Content-Disposition headers if present.
         ``headers`` could be a dict, list or string.
 
+    .. py:staticmethod:: from_any(dst=None, headers=None, url=None):
+
+        Detect filename from dst or headers or url.
+
 
 .. py:function:: pydu.request.download(url, dst=None)
 

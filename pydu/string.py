@@ -3,7 +3,7 @@ from .compat import text_type
 
 
 def safeunicode(obj, encoding='utf-8'):
-    r"""
+    """
     Converts any given object to unicode string.
 
         >>> safeunicode('hello')
@@ -23,7 +23,7 @@ def safeunicode(obj, encoding='utf-8'):
 
 
 def safeencode(obj, encoding='utf-8'):
-    r"""
+    """
     Converts any given object to encoded string (default: utf-8).
 
         >>> safestr('hello')
@@ -71,7 +71,6 @@ def rstrips(text, remove):
     removes the string `remove` from the right of `text`
         >>> rstrips('foobar', 'bar')
         'foo'
-
     """
     return _strips('r', text, remove)
 
@@ -96,7 +95,6 @@ def strips(text, remove):
     removes the string `remove` from the both sides of `text`
         >>> strips('foobarfoo', 'foo')
         'bar'
-
     """
     return rstrips(lstrips(text, remove), remove)
 
@@ -133,11 +131,9 @@ def common_suffix(l):
     return ''.join(reversed(commons))
 
 
-def sort(string, reverse=False):
-    l = list(string)
-    l.sort(reverse=reverse)
-    return "".join(l)
-
-
-
-
+def sort(s, reverse=False):
+    """
+    Sort given string by ascending order.
+    If reverse is True, sorting given string by descending order.
+    """
+    return ''.join(sorted(s, reverse=reverse))

@@ -51,12 +51,12 @@ Compat
     The numeric types are ``(int, long)`` on PY2 or ``(int,)`` on PY3.
 
 
-.. py:function:: pydu.compat.imap
+.. py:function:: pydu.compat.imap(function, sequence, *sequence_1)
 
     Same to ``itertools.imap`` on PY2 or ``map`` on PY3.
 
 
-.. py:function:: pydu.compat.cmp
+.. py:function:: pydu.compat.cmp(x, y)
 
     Same to ``cmp`` on PY2, but implement on PY3.
 
