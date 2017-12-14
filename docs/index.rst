@@ -30,6 +30,7 @@ Content
    list
    misc
    network
+   path
    request
    set
    string
