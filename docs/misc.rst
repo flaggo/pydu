@@ -89,3 +89,15 @@ Miscellanea
     >>> foo()
     >>> foo()
     >>>
+
+
+.. py:function:: pydu.misc.super_len(obj)
+
+    Get length of object which has attribute named `__len__`, `len`, `fileno`, `tell`,
+    such as `list`, `tuple`, `dict`, `file` and so on.
+
+    >>> from pydu.misc import super_len
+    >>> super_len([1, 2])
+    2
+    >>> super_len(open('test', 'w'))
+    0
