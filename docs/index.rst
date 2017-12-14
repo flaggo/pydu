@@ -31,6 +31,7 @@ Content
    misc
    network
    path
+   platform
    request
    set
    string
