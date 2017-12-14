@@ -1,24 +1,22 @@
 Miscellanea
 -----------
 
-.. py:function:: pydu.misc.unix_timeout(seconds)
+.. py:function:: pydu.misc.timeout(seconds)
 
   This func decorates any func which may be hang for a while. The param ``seconds``
-  should be integer.
+  can be either integer or float.
   In `test.py`, you may write like below:
 
   .. code-block:: python
 
     import time
     from pydu.misc import unix_timeout
-    @unix_timeout(1)
+    @timeout(1)
     def f():
         time.sleep(1.01)
     f()
 
   And run `test.py`, will see ``TimeoutError``.
-
-  .. note:: ``unix_timeout`` can only be used on ``unix-like`` system.
 
 
 .. py:function:: pydu.misc.trace(obj)
