@@ -6,6 +6,7 @@ setup(
     name="pydu",
     version=__version__,
     description="Useful data structures, utils for Python.",
+    long_description=open('README.rst').read(),
     author="Prodesire",
     author_email='wangbinxin001@126.com',
     license='MIT License',
