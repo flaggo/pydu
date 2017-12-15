@@ -16,7 +16,7 @@ It is with Python versions from **2.7 to 3.6**.
 
 Installation
 ------------
-pip install pydu
+  pip install pydu
 
 
 Document
