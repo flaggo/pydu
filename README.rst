@@ -1,6 +1,15 @@
 pydu
 ====
 
+.. image:: https://img.shields.io/pypi/v/pydu.svg
+    :target: https://pypi.python.org/pypi/pydu
+
+.. image:: https://img.shields.io/pypi/l/pydu.svg
+    :target: https://pypi.python.org/pypi/pydu
+
+.. image:: https://img.shields.io/pypi/pyversions/pydu.svg
+    :target: https://pypi.python.org/pypi/pydu
+
 .. image:: https://travis-ci.org/Prodesire/pydu.svg?branch=master
   :target: https://travis-ci.org/Prodesire/pydu
 
