@@ -35,4 +35,4 @@ class TestIsIPv6Address:
 def test_get_free_port():
     port = get_free_port()
     assert isinstance(port, int)
-    assert port < 65536
+    assert 65536 > port > 0
