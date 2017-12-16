@@ -28,6 +28,7 @@ It is with Python versions from **2.7 to 3.6**.
 Installation
 ------------
 To install pydu, simply:
+
 .. code-block:: bash
 
     $ pip install pydu
