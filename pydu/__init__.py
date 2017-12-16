@@ -1,7 +1,14 @@
-import logging
-
+"""
+Useful data structures, utils for Python.
+"""
 
 __version__ = '0.1.0'
 
 
+# Set logging handler to avoid "No handler found" warnings.
+import logging
+from logging import NullHandler
+
+
 logger = logging.getLogger(__name__)
+logger.addHandler(NullHandler())
