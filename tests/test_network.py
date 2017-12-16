@@ -1,8 +1,5 @@
 import pytest
-from pydu.platform import POSIX
-from pydu.network import dotted_netmask, is_ipv4, get_free_port
-if POSIX:
-    from pydu.network import is_ipv6
+from pydu.network import dotted_netmask, is_ipv4, is_ipv6, get_free_port
 
 
 @pytest.mark.parametrize(
@@ -25,7 +22,6 @@ class TestIsIPv4Address:
         assert not is_ipv4(value)
 
 
-@pytest.mark.skipif(not POSIX, reason='Not support on No-POSIX system')
 class TestIsIPv6Address:
 
     def test_valid(self):
