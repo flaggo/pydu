@@ -19,6 +19,8 @@ help:
 	@echo "    Run pytest with Python 3."
 	@echo "coverage"
 	@echo "    Run pytest and report coverage."
+	@echo "publish"
+	@echo "    Publish pydu to PyPI."
 	@echo "docs"
 	@echo "    Make docs for pydu."
 	@echo "clean"
@@ -43,6 +45,12 @@ coverage:
 	coverage run --source=pydu -m pytest tests
 	coverage report
 
+publish:
+	pip install 'twine>=1.5.0'
+	python setup.py sdist
+	twine upload dist/*
+	rm -rf build dist *.egg-info
+
 docs:
 	cd docs && make html
 	@echo "\033[95m\n\nBuild successful! View the docs homepage at docs/_build/html/index.html.\n\033[0m"
@@ -56,6 +64,4 @@ clean-pyc:
 	find . -name '__pycache__' -exec rm -rf {} +
 
 clean-build:
-	rm -rf build/
-	rm -rf dist/
-	rm -rf *.egg-info
+	rm -rf build dist *.egg-info
