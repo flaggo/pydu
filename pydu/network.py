@@ -1,6 +1,16 @@
 import socket
 import struct
-from pydu.platform import POSIX
+import ctypes
+from pydu.platform import WINDOWS
+
+
+# https://github.com/hickeroar/win_inet_pton/blob/master/win_inet_pton.py
+class _sockaddr(ctypes.Structure):
+    _fields_ = [("sa_family", ctypes.c_short),
+                ("__pad1", ctypes.c_ushort),
+                ("ipv4_addr", ctypes.c_byte * 4),
+                ("ipv6_addr", ctypes.c_byte * 16),
+                ("__pad2", ctypes.c_ulong)]
 
 
 # https://github.com/kennethreitz/requests/blob/master/requests/utils.py
@@ -26,11 +36,24 @@ def is_ipv4(ip):
     return True
 
 
-if POSIX:
-    def is_ipv6(ip):
-        """
-        Returns True if the IPv6 address ia valid, otherwise returns False.
-        """
+def is_ipv6(ip):
+    """
+    Returns True if the IPv6 address ia valid, otherwise returns False.
+    """
+    if WINDOWS:
+        addr = _sockaddr()
+        addr_size = ctypes.c_int(ctypes.sizeof(addr))
+
+        if ctypes.windll.ws2_32.WSAStringToAddressA(
+            ip,
+            socket.AF_INET6,
+            None,
+            ctypes.byref(addr),
+            ctypes.byref(addr_size)
+        ) != 0:
+            return False
+        return True
+    else:
         try:
             socket.inet_pton(socket.AF_INET6, ip)
         except socket.error:
