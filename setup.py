@@ -1,5 +1,37 @@
+import sys
 from pydu import __version__
 from setuptools import setup, find_packages
+from setuptools.command.test import test as TestCommand
+
+
+class PyTest(TestCommand):
+    user_options = [('pytest-args=', 'a', "Arguments to pass into py.test")]
+
+    def initialize_options(self):
+        TestCommand.initialize_options(self)
+        try:
+            from multiprocessing import cpu_count
+            self.pytest_args = ['-n', str(cpu_count()), '--boxed']
+        except (ImportError, NotImplementedError):
+            self.pytest_args = ['-n', '1', '--boxed']
+
+    def finalize_options(self):
+        TestCommand.finalize_options(self)
+        self.test_args = []
+        self.test_suite = True
+
+    def run_tests(self):
+        import pytest
+
+        errno = pytest.main(self.pytest_args)
+        sys.exit(errno)
+
+
+test_requirements = []
+for line in open('requirements-dev.txt'):
+    requirement = line.strip()
+    if requirement:
+        test_requirements.append(requirement)
 
 
 setup(
@@ -11,7 +43,8 @@ setup(
     author_email='wangbinxin001@126.com',
     license='MIT License',
     url="https://github.com/Prodesire/pydu",
-    setup_requires=['pytest-runner'],
+    cmdclass={'test': PyTest},
+    tests_require=test_requirements,
     packages=find_packages(),
     classifiers=[
         'Operating System :: OS Independent',
