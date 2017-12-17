@@ -25,6 +25,7 @@ Content
    compat
    console
    dict
+   exception
    file
    inspect
    list

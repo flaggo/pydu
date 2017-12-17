@@ -2,7 +2,7 @@
 Useful data structures, utils for Python.
 """
 
-__version__ = '0.1.1'
+__version__ = '0.2.0'
 
 
 # Set logging handler to avoid "No handler found" warnings.
