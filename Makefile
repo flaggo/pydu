@@ -49,7 +49,7 @@ publish:
 	pip install 'twine>=1.5.0'
 	python setup.py sdist
 	twine upload dist/*
-	rm -rf build dist *.egg-info
+	rm -rf build dist *.egg-info .eggs
 
 docs:
 	cd docs && make html
@@ -64,4 +64,4 @@ clean-pyc:
 	find . -name '__pycache__' -exec rm -rf {} +
 
 clean-build:
-	rm -rf build dist *.egg-info
+	rm -rf build dist *.egg-info .eggs
