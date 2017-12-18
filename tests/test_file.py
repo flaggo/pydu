@@ -1,8 +1,9 @@
 import os
-import pytest
+import stat
 import time
+import pytest
 from pydu.platform import WINDOWS
-from pydu.file import makedirs, remove, removes, open_file, copy, touch
+from pydu.file import makedirs, remove, removes, open_file, copy, touch, which
 
 if not WINDOWS:
     from pydu.file import link, symlink
@@ -306,3 +307,28 @@ class TestCopy:
         makedirs(d1)
         makedirs(d2)
         copy(d1, d2, ignore_errors=True)
+
+
+@pytest.fixture()
+def mycmd(tmpdir):
+    mycmd = str(tmpdir.join('mycmd'))
+    touch(mycmd)
+    os.chmod(mycmd, os.F_OK | stat.S_IXUSR)
+    os.environ['PATHEXT'] = ''
+    return mycmd
+
+
+@pytest.mark.usefixtures('mycmd')
+class TestWhich:
+    def test_dir_cmd(self, mycmd):
+        assert which('noexists/mycmd') is None
+        assert which(mycmd) == mycmd
+
+    def test_cmd_path(self, tmpdir, mycmd):
+        path = str(tmpdir)
+        assert which('mycmd') is None
+        assert which('mycmd', path=path) == mycmd
+
+        os.environ['PATH'] = path + os.pathsep + \
+                             os.environ.get('PATH', os.defpath)
+        assert which('mycmd') == mycmd
