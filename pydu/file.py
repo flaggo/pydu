@@ -5,7 +5,6 @@ import shutil
 from .platform import WINDOWS
 
 
-# todo tests and docs
 def makedirs(path, mode=0o755, ignore_errors=False, exist_ok=False):
     """
     Create a leaf directory and all intermediate ones.
