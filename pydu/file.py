@@ -233,13 +233,20 @@ if not WINDOWS:
                 raise OSError('Link {} to {} error'.format(dst, src))
 
 
-    def chmod(src, mode=0o755):
-        if not os.path.exists(src):
-            raise OSError('%s is not exists' % src)
+    def chmod(path, mode=0o755):
+        """
+        Change the access permissions of a file or directory
 
-        if os.path.isfile(src):
-            os.chmod(src, mode)
+        If path is not exists, throw OSError
+        """
+        if not os.path.exists(path):
+            raise OSError('%s is not exists' % path)
+
+        if os.path.isfile(path):
+            os.chmod(path, mode)
         else:
-            for root, _, files in os.walk(src):
+            for root, _, files in os.walk(path):
+                root_path = os.path.abspath(root)
+                os.chmod(root_path, mode)
                 for file_ in files:
-                    os.chmod(os.path.join(os.path.abspath(root), file_), mode)
+                    os.chmod(os.path.join(root_path, file_), mode)
