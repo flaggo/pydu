@@ -12,7 +12,7 @@ def test_execute():
     p = run('echo hello', wait=False)
     assert p.wait() == 0
 
-    retcode, output = run('{} -c "import time; time.sleep(1)"'.format(sys.executable),
+    retcode, output = run('"{}" -c "import time; time.sleep(1)"'.format(sys.executable),
                           timeout=0.2, timeinterval=0.05)
     assert retcode != 0
     assert 'timeout' in output
