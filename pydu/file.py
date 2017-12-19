@@ -231,3 +231,15 @@ if not WINDOWS:
         except:
             if not ignore_errors:
                 raise OSError('Link {} to {} error'.format(dst, src))
+
+
+    def chmod(src, mode=0o755):
+        if not os.path.exists(src):
+            raise OSError('%s is not exists' % src)
+
+        if os.path.isfile(src):
+            os.chmod(src, mode)
+        else:
+            for root, _, files in os.walk(src):
+                for file_ in files:
+                    os.chmod(os.path.join(os.path.abspath(root), file_), mode)
