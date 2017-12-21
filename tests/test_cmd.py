@@ -4,7 +4,7 @@ from pydu.string import safeunicode
 from pydu.cmd import run, cmdline_argv
 
 
-def test_execute():
+def test_run():
     retcode, output = run('echo hello')
     assert retcode == 0
     assert safeunicode(output).rstrip('\r\n') == 'hello'
