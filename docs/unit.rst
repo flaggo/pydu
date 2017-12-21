@@ -7,8 +7,8 @@ Unit
 
     .. py:method:: convert(self, unit=None, multiple=1024)
 
-        Convert bytes in give ``unit``.
-        If ``unit`` is None, convert bytes in suitable unit.
+        Convert bytes with given ``unit``.
+        If ``unit`` is None, convert bytes with suitable unit.
         Convert ``multiple`` is default to be 1024.
 
         >>> Bytes(1024).convert()
