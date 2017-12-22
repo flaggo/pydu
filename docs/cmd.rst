@@ -30,7 +30,7 @@ Cmd
     ['/Applications/PyCharm.app/Contents/helpers/pydev/pydevconsole.py', '61253', '61254']
 
 
-.. py:function:: pydu.cmd.chcp()
+.. py:function:: pydu.cmd.chcp(code)
 
     Context manager which sets the active code page number.
     It could also be used as function.
