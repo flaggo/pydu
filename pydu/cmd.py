@@ -73,6 +73,7 @@ if WINDOWS:
         """
         def __init__(self, code):
             self.origin_code = windll.kernel32.GetConsoleOutputCP()
+            self.code = code
             windll.kernel32.SetConsoleOutputCP(code)
 
         def __enter__(self):
@@ -80,3 +81,6 @@ if WINDOWS:
 
         def __exit__(self, exc_type, exc_val, exc_tb):
             windll.kernel32.SetConsoleOutputCP(self.origin_code)
+
+        def __repr__(self):
+            return '<active code page number: {}>'.format(self.code)

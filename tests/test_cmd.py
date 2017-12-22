@@ -37,7 +37,8 @@ def test_chcp():
     assert windll.kernel32.GetConsoleOutputCP() == origin_code
 
     try:
-        chcp(437)
+        cp = chcp(437)
         assert windll.kernel32.GetConsoleOutputCP() == 437
+        assert str(cp) == '<active code page number: 437>'
     finally:
         windll.kernel32.SetConsoleOutputCP(origin_code)
