@@ -1,4 +1,6 @@
 import sys
+import pytest
+from pydu.platform import WINDOWS
 from pydu.compat import string_types
 from pydu.string import safeunicode
 from pydu.cmd import run, cmdline_argv
@@ -22,3 +24,20 @@ def test_cmdline_argv():
     argv = cmdline_argv()
     for s in argv[1:]:
         assert isinstance(s, string_types)
+
+
+@pytest.mark.skipif(not WINDOWS, reason='Not support non windows')
+def test_chcp():
+    from pydu.cmd import chcp
+    from ctypes import windll
+
+    origin_code = windll.kernel32.GetConsoleOutputCP()
+    with chcp(437):
+        assert windll.kernel32.GetConsoleOutputCP() == 437
+    assert windll.kernel32.GetConsoleOutputCP() == origin_code
+
+    try:
+        chcp(437)
+        assert windll.kernel32.GetConsoleOutputCP() == 437
+    finally:
+        windll.kernel32.SetConsoleOutputCP(origin_code)
