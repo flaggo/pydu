@@ -127,6 +127,22 @@ System
     >>> which('echo')
     /bin/echo
 
+
+.. py:function:: pydu.cmd.chmod(path, mode, recursive=False)
+
+    Change permissions to the given mode.
+    If ``recursive`` is True perform recursively.
+
+    >>> from pydu.system import chmod
+    >>> chmod('/opt/sometest', 0o744)
+    >>> oct(os.stat('/opt/sometest').st_mode)[-3:]
+    '744'
+
+    .. note:: Although Windows supports ``chmod``, you can only set the file’s
+        read-only flag with it (via the stat.S_IWRITE and stat.S_IREAD constants
+        or a corresponding integer value). All other bits are ignored.
+
+
 .. py:function:: pydu.cmd.chcp(code)
 
     Context manager which sets the active code page number.
