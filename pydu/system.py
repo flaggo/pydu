@@ -192,7 +192,31 @@ if PY2:
 else:
     which = shutil.which
 
-if not WINDOWS:
+
+if WINDOWS:
+    # For Windows system
+    from ctypes import windll
+
+    class chcp(object):
+        """
+        Context manager which sets the active code page number.
+        It could also be used as function.
+        """
+        def __init__(self, code):
+            self.origin_code = windll.kernel32.GetConsoleOutputCP()
+            self.code = code
+            windll.kernel32.SetConsoleOutputCP(code)
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc_val, exc_tb):
+            windll.kernel32.SetConsoleOutputCP(self.origin_code)
+
+        def __repr__(self):
+            return '<active code page number: {}>'.format(self.code)
+else:
+    # For non Windows system
     def symlink(src, dst, overwrite=False, ignore_errors=False):
         """
         Create a symbolic link pointing to source named link_name.

@@ -3,10 +3,10 @@ import stat
 import time
 import pytest
 from pydu.platform import WINDOWS
-from pydu.file import makedirs, remove, removes, open_file, copy, touch, which
+from pydu.system import makedirs, remove, removes, open_file, copy, touch, which
 
 if not WINDOWS:
-    from pydu.file import link, symlink
+    from pydu.system import link, symlink
 
 
 class TestMakeDirs:
@@ -332,3 +332,21 @@ class TestWhich:
         os.environ['PATH'] = path + os.pathsep + \
                              os.environ.get('PATH', os.defpath)
         assert which('mycmd') == mycmd
+
+
+@pytest.mark.skipif(not WINDOWS, reason='Not support non Windows')
+def test_chcp():
+    from pydu.system import chcp
+    from ctypes import windll
+
+    origin_code = windll.kernel32.GetConsoleOutputCP()
+    with chcp(437):
+        assert windll.kernel32.GetConsoleOutputCP() == 437
+    assert windll.kernel32.GetConsoleOutputCP() == origin_code
+
+    try:
+        cp = chcp(437)
+        assert windll.kernel32.GetConsoleOutputCP() == 437
+        assert str(cp) == '<active code page number: 437>'
+    finally:
+        windll.kernel32.SetConsoleOutputCP(origin_code)
