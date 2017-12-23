@@ -355,20 +355,19 @@ def test_chcp():
         windll.kernel32.SetConsoleOutputCP(origin_code)
 
 
-@pytest.mark.skipif(WINDOWS, reason='Not support on windows')
 class TestChmod:
     def test_chmod_file(self):
         _, t_file = tempfile.mkstemp()
-        chmod(t_file, 755)
-        assert oct(os.stat(t_file).st_mode)[-3:] == '755'
+        chmod(t_file, 0o666)
+        assert oct(os.stat(t_file).st_mode)[-3:] == '666'
 
     def test_chmod_dir(self):
         t_dir = tempfile.mkdtemp()
         for _ in range(5):
             tempfile.mkstemp(dir=t_dir)
-        chmod(t_dir, 755)
+        chmod(t_dir, 0o666, True)
         for root, _, files in os.walk(t_dir):
-            assert oct(os.stat(root).st_mode)[-3:] == '755'
+            assert oct(os.stat(root).st_mode)[-3:] == '666'
             for file_ in files:
-                assert oct(os.stat(os.path.join(root, file_)).st_mode)[-3:] == '755'
+                assert oct(os.stat(os.path.join(root, file_)).st_mode)[-3:] == '666'
 
