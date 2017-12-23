@@ -141,7 +141,7 @@ if WINDOWS:
             windll.kernel32.SetConsoleOutputCP(code)
 
         def __enter__(self):
-            pass
+            return self
 
         def __exit__(self, exc_type, exc_val, exc_tb):
             windll.kernel32.SetConsoleOutputCP(self.origin_code)
