@@ -134,7 +134,7 @@ System
 
     >>> from pydu.cmd import chcp
     >>> chcp(437)
-    <ctive code page number: 437>
+    <active code page number: 437>
     >>> with chcp(437):
     ...     pass
     >>>
