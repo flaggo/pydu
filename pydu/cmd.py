@@ -6,7 +6,14 @@ from .platform import WINDOWS
 from .compat import PY2
 
 
-def run(cmd, wait=True, shell=True, timeout=0, timeinterval=1):
+def run(cmd, wait=True, shell=False, timeout=0, timeinterval=1):
+    """
+    Run cmd.
+    If `wait` is True, run cmd util finish. Default to be True.
+    If `shell` is True, run cmd in shell. Default to be False.
+    if `timeout` is bigger than 0, run cmd with timeout. Default to be 0, means not timeout.
+    `timeinterval` comes with `timeout`, it means process status checking interval.
+    """
     p = Popen(cmd, shell=shell, stdout=PIPE, stderr=STDOUT)
     if not wait:
         return p
@@ -23,7 +30,7 @@ def run(cmd, wait=True, shell=True, timeout=0, timeinterval=1):
     return p.poll(), stdout
 
 
-def run_with_en_env(cmd, wait=True, shell=True, timeout=0, timeinterval=1):
+def run_with_en_env(cmd, wait=True, shell=False, timeout=0, timeinterval=1):
     """
     Run cmd with English character sets environment, so that the output will
     be in English.

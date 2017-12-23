@@ -7,25 +7,25 @@ from pydu.cmd import run, run_with_en_env, cmdline_argv
 
 
 def test_run():
-    retcode, output = run('echo hello')
+    retcode, output = run('echo hello', shell=True)
     assert retcode == 0
     assert safeunicode(output).rstrip('\r\n') == 'hello'
 
-    p = run('echo hello', wait=False)
+    p = run('echo hello', wait=False, shell=True)
     assert p.wait() == 0
 
     retcode, output = run('{} -c "import time; time.sleep(1)"'.format(sys.executable),
-                          timeout=0.2, timeinterval=0.05)
+                          shell=True, timeout=0.2, timeinterval=0.05)
     assert retcode != 0
     assert 'timeout' in output
 
 
 def test_run_with_en_env():
-    _, output = run_with_en_env('nocmd')
-    assert output.decode('ascii')
+    _, output = run_with_en_env('nocmd', shell=True)
+    output.decode('ascii')
 
-    _, output = run_with_en_env(['nocmd'])
-    assert output.decode('ascii')
+    _, output = run_with_en_env(['nocmd'], shell=True)
+    output.decode('ascii')
 
 
 def test_cmdline_argv():
