@@ -6,10 +6,12 @@ import tempfile
 import pytest
 
 from pydu.platform import WINDOWS
-from pydu.system import makedirs, remove, removes, open_file, copy, touch, which
+from pydu.system import (makedirs, remove, removes,
+                         open_file, copy, touch,
+                         which, chmod)
 
 if not WINDOWS:
-    from pydu.system import link, symlink, chmod
+    from pydu.system import link, symlink
 
 
 class TestMakeDirs:
@@ -355,19 +357,20 @@ def test_chcp():
         windll.kernel32.SetConsoleOutputCP(origin_code)
 
 
+@pytest.mark.skipif(WINDOWS, reason='Not support on windows')
 class TestChmod:
     def test_chmod_file(self):
         _, t_file = tempfile.mkstemp()
-        chmod(t_file, 0o666)
-        assert oct(os.stat(t_file).st_mode)[-3:] == '666'
+        chmod(t_file, 0o755)
+        assert oct(os.stat(t_file).st_mode)[-3:] == '755'
 
     def test_chmod_dir(self):
         t_dir = tempfile.mkdtemp()
         for _ in range(5):
             tempfile.mkstemp(dir=t_dir)
-        chmod(t_dir, 0o666, True)
+        chmod(t_dir, 0o755, True)
         for root, _, files in os.walk(t_dir):
-            assert oct(os.stat(root).st_mode)[-3:] == '666'
+            assert oct(os.stat(root).st_mode)[-3:] == '755'
             for file_ in files:
-                assert oct(os.stat(os.path.join(root, file_)).st_mode)[-3:] == '666'
+                assert oct(os.stat(os.path.join(root, file_)).st_mode)[-3:] == '755'
 
