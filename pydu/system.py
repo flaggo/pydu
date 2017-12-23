@@ -261,20 +261,14 @@ else:
         """
         Change the access permissions of a file or directory
 
-        If path is not exists, throw OSError
-            >>> chmod('/opt/sometest', 755)
+            >>> chmod('/opt/sometest', 0o755)
             >>> oct(os.stat('/opt/sometest').st_mode)[-3:]
             755
         """
-        mode = int('0o%d' % mode, 8)
-        if not os.path.exists(path):
-            raise OSError('%s is not exists' % path)
-
-        if os.path.isfile(path):
-            os.chmod(path, mode)
-        else:
+        if os.path.isdir(path):
             for root, _, files in os.walk(path):
-                root_path = os.path.abspath(root)
-                os.chmod(root_path, mode)
+                os.chmod(root, mode)
                 for file_ in files:
-                    os.chmod(os.path.join(root_path, file_), mode)
+                    os.chmod(os.path.join(root, file_), mode)
+        else:
+            os.chmod(path, mode)
