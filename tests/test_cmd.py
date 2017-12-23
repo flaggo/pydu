@@ -3,7 +3,7 @@ import pytest
 from pydu.platform import WINDOWS
 from pydu.compat import string_types
 from pydu.string import safeunicode
-from pydu.cmd import run, cmdline_argv
+from pydu.cmd import run, run_with_en_env, cmdline_argv
 
 
 def test_run():
@@ -18,6 +18,14 @@ def test_run():
                           timeout=0.2, timeinterval=0.05)
     assert retcode != 0
     assert 'timeout' in output
+
+
+def test_run_with_en_env():
+    _, output = run_with_en_env('nocmd')
+    assert output.decode('ascii')
+
+    _, output = run_with_en_env(['nocmd'])
+    assert output.decode('ascii')
 
 
 def test_cmdline_argv():

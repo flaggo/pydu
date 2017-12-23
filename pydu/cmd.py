@@ -23,6 +23,26 @@ def run(cmd, wait=True, shell=True, timeout=0, timeinterval=1):
     return p.poll(), stdout
 
 
+def run_with_en_env(cmd, wait=True, shell=True, timeout=0, timeinterval=1):
+    """
+    Run cmd with English character sets environment, so that the output will
+    be in English.
+    Parameters are same with `run`.
+    """
+    if WINDOWS:
+        with chcp(437):
+            return run(cmd, wait=wait, shell=shell,
+                       timeout=timeout, timeinterval=timeinterval)
+    else:
+        export_lang = 'export LANG=en_US.UTF-8'
+        if isinstance(cmd, list):
+            pre_cmd = [export_lang, ';']
+        else:
+            pre_cmd = export_lang + '; '
+        return run(pre_cmd + cmd, wait=wait, shell=shell,
+                   timeout=timeout, timeinterval=timeinterval)
+
+
 if PY2 and WINDOWS:
     # enable passing unicode arguments from command line in Python 2.x
     # https://stackoverflow.com/questions/846850/read-unicode-characters
