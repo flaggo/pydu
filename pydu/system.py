@@ -257,12 +257,16 @@ else:
                 raise OSError('Link {} to {} error'.format(dst, src))
 
 
-    def chmod(path, mode=0o755):
+    def chmod(path, mode):
         """
         Change the access permissions of a file or directory
 
         If path is not exists, throw OSError
+            >>> chmod('/opt/sometest', 755)
+            >>> oct(os.stat('/opt/sometest').st_mode)[-3:]
+            755
         """
+        mode = int('0o%d' % mode, 8)
         if not os.path.exists(path):
             raise OSError('%s is not exists' % path)
 
