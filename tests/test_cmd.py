@@ -26,10 +26,10 @@ def test_run():
 
 def test_run_with_en_env():
     _, output = run_with_en_env('nocmd', shell=True)
-    output.decode('ascii')
+    assert output.decode('ascii')
 
     _, output = run_with_en_env(['nocmd'], shell=True)
-    output.decode('ascii')
+    assert output.decode('ascii')
 
 
 def test_cmdline_argv():
