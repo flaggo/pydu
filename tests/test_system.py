@@ -368,8 +368,7 @@ class TestChmod:
             tempfile.mkstemp(dir=t_dir)
         chmod(t_dir, 755)
         for root, _, files in os.walk(t_dir):
-            root_path = os.path.abspath(root)
-            assert oct(os.stat(root_path).st_mode)[-3:0] == '755'
+            assert oct(os.stat(root).st_mode)[-3:] == '755'
             for file_ in files:
-                assert oct(os.stat(os.path.join(root_path, file_)).st_mode)[-3:0] == '755'
+                assert oct(os.stat(os.path.join(root, file_)).st_mode)[-3:] == '755'
 
