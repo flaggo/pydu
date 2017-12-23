@@ -3,7 +3,7 @@ import pytest
 from pydu.platform import WINDOWS
 from pydu.compat import string_types
 from pydu.string import safeunicode
-from pydu.cmd import run, run_with_en_env, cmdline_argv
+from pydu.cmd import TimeoutExpired, run, run_with_en_env, cmdline_argv
 
 
 def test_run():
@@ -14,10 +14,14 @@ def test_run():
     p = run('echo hello', wait=False, shell=True)
     assert p.wait() == 0
 
-    retcode, output = run('{} -c "import time; time.sleep(1)"'.format(sys.executable),
-                          shell=True, timeout=0.2, timeinterval=0.05)
-    assert retcode != 0
-    assert 'timeout' in output
+    with pytest.raises(TimeoutExpired) as e:
+        cmd = '{} -c "import time; time.sleep(1)"'.format(sys.executable)
+        timeout = 0.2
+        run(cmd, shell=True, timeout=timeout, timeinterval=0.05)
+        assert e.cmd == cmd
+        assert e.timeout == timeout
+        assert hasattr(e, 'output')
+        assert hasattr(e, 'stderr')
 
 
 def test_run_with_en_env():
