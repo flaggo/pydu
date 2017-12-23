@@ -75,6 +75,7 @@ def run_with_en_env(cmd, wait=True, env=None, shell=False, timeout=None, timeint
     Parameters are same with `run`.
     """
     if WINDOWS:
+        from .system import chcp
         with chcp(437):
             return run(cmd, wait=wait, shell=shell,
                        timeout=timeout, timeinterval=timeinterval)
@@ -123,26 +124,3 @@ if PY2 and WINDOWS:
 else:
     def cmdline_argv():
         return sys.argv
-
-
-if WINDOWS:
-    from ctypes import windll
-
-    class chcp(object):
-        """
-        Context manager which sets the active code page number.
-        It could also be used as function.
-        """
-        def __init__(self, code):
-            self.origin_code = windll.kernel32.GetConsoleOutputCP()
-            self.code = code
-            windll.kernel32.SetConsoleOutputCP(code)
-
-        def __enter__(self):
-            return self
-
-        def __exit__(self, exc_type, exc_val, exc_tb):
-            windll.kernel32.SetConsoleOutputCP(self.origin_code)
-
-        def __repr__(self):
-            return '<active code page number: {}>'.format(self.code)

@@ -38,19 +38,3 @@ def test_cmdline_argv():
         assert isinstance(s, string_types)
 
 
-@pytest.mark.skipif(not WINDOWS, reason='Not support non windows')
-def test_chcp():
-    from pydu.cmd import chcp
-    from ctypes import windll
-
-    origin_code = windll.kernel32.GetConsoleOutputCP()
-    with chcp(437):
-        assert windll.kernel32.GetConsoleOutputCP() == 437
-    assert windll.kernel32.GetConsoleOutputCP() == origin_code
-
-    try:
-        cp = chcp(437)
-        assert windll.kernel32.GetConsoleOutputCP() == 437
-        assert str(cp) == '<active code page number: 437>'
-    finally:
-        windll.kernel32.SetConsoleOutputCP(origin_code)

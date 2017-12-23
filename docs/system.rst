@@ -126,3 +126,17 @@ System
     >>> from pydu.system import which
     >>> which('echo')
     /bin/echo
+
+.. py:function:: pydu.cmd.chcp(code)
+
+    Context manager which sets the active code page number.
+    It could also be used as function.
+
+    >>> from pydu.cmd import chcp
+    >>> chcp(437)
+    <ctive code page number: 437>
+    >>> with chcp(437):
+    ...     pass
+    >>>
+
+    .. note:: ``chcp`` can only be used on ``Windows`` system.
