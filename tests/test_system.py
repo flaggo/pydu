@@ -3,10 +3,10 @@ import stat
 import time
 import pytest
 from pydu.platform import WINDOWS
-from pydu.file import makedirs, remove, removes, open_file, copy, touch, which
+from pydu.system import makedirs, remove, removes, open_file, copy, touch, which
 
 if not WINDOWS:
-    from pydu.file import link, symlink
+    from pydu.system import link, symlink
 
 
 class TestMakeDirs:
