@@ -255,3 +255,20 @@ else:
         except:
             if not ignore_errors:
                 raise OSError('Link {} to {} error'.format(dst, src))
+
+
+    def chmod(path, mode):
+        """
+        Change the access permissions of a file or directory
+
+            >>> chmod('/opt/sometest', 0o755)
+            >>> oct(os.stat('/opt/sometest').st_mode)[-3:]
+            755
+        """
+        if os.path.isdir(path):
+            for root, _, files in os.walk(path):
+                os.chmod(root, mode)
+                for file_ in files:
+                    os.chmod(os.path.join(root, file_), mode)
+        else:
+            os.chmod(path, mode)
