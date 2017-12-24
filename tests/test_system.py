@@ -1,8 +1,6 @@
 import os
 import stat
 import time
-import tempfile
-
 import pytest
 
 from pydu.platform import WINDOWS
