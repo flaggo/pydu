@@ -31,5 +31,8 @@ class OrderedSet:
     def __bool__(self):
         return bool(self.dict)
 
+    def __nonzero__(self):
+        return bool(self.dict)
+
     def __len__(self):
         return len(self.dict)
