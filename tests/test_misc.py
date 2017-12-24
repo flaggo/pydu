@@ -1,7 +1,6 @@
 import sys
 import time
 import pytest
-from pydu.platform import WINDOWS
 from pydu.misc import (trace, TimeoutError, timeout,
                        memoize, memoize_when_activated,
                        super_len)
@@ -26,29 +25,6 @@ def test_timeout():
     assert f1() == 1
     with pytest.raises(TimeoutError):
         f2()
-
-
-def test_trace():
-    @trace
-    def f():
-        print(1)
-        a = 1 + 5
-        b = [a]
-        print(2)
-
-    old_stdout = sys.stdout
-    try:
-        sys.stdout = StringIO()
-        f()
-        sys.stdout.seek(0)
-        stdout = sys.stdout.read()
-        for statement in ('print(1)',
-                          'a = 1 + 5',
-                          'b = [a]',
-                          'print(2)'):
-            assert statement in stdout
-    finally:
-        sys.stdout = old_stdout
 
 
 def test_memoize():
