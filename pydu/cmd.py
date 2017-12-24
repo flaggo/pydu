@@ -1,6 +1,7 @@
 import os
 import sys
 import time
+import signal
 import subprocess
 from subprocess import Popen, PIPE, STDOUT
 
@@ -84,6 +85,23 @@ def run_with_en_env(cmd, wait=True, env=None, shell=False, timeout=None, timeint
         env.update({'LANG': 'en_US.UTF-8'})
         return run(cmd, wait=wait, shell=shell, env=env,
                    timeout=timeout, timeinterval=timeinterval)
+
+
+def terminate(pid):
+    """
+    Terminate process by given pid.
+    On Windows, using Kernel32.TerminateProcess to kill.
+    On Other platforms, using os.kill with signal.SIGTERM to kill.
+    """
+    if WINDOWS:
+        # http://code.activestate.com/recipes/347462-terminating-a-subprocess-on-windows/
+        import ctypes
+        PROCESS_TERMINATE = 1
+        handle = ctypes.windll.kernel32.OpenProcess(PROCESS_TERMINATE, False, pid)
+        ctypes.windll.kernel32.TerminateProcess(handle, -1)
+        ctypes.windll.kernel32.CloseHandle(handle)
+    else:
+        os.kill(pid, signal.SIGTERM)
 
 
 if PY2 and WINDOWS:

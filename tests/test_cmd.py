@@ -1,9 +1,9 @@
 import sys
 import pytest
-from pydu.platform import WINDOWS
+import time
 from pydu.compat import string_types
 from pydu.string import safeunicode
-from pydu.cmd import TimeoutExpired, run, run_with_en_env, cmdline_argv
+from pydu.cmd import TimeoutExpired, run, run_with_en_env, terminate, cmdline_argv
 
 
 def test_run():
@@ -30,6 +30,14 @@ def test_run_with_en_env():
 
     _, output = run_with_en_env(['nocmd'], shell=True)
     assert output.decode('ascii')
+
+
+def test_terminate():
+    p = run('{} -c "import time; time.sleep(1)"'.format(sys.executable),
+            wait=False, shell=True)
+    terminate(p.pid)
+    time.sleep(0.1)
+    assert p.poll() is not None
 
 
 def test_cmdline_argv():

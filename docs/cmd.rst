@@ -1,7 +1,16 @@
 Cmd
--------
+---
 
-.. py:function:: pydu.cmd.run(cmd, wait=True, shell=True)
+.. py:class:: pydu.cmd.TimeoutExpired(cmd, timeout, output=None, stderr=None)
+
+    This exception is raised when the timeout expires while waiting for a
+    child process.
+
+    Attributes:
+        cmd, output, stdout, stderr, timeout
+
+
+.. py:function:: pydu.cmd.run(ccmd, wait=True, env=None, shell=False, timeout=None, timeinterval=1)
 
     Run cmd based on ``subprocess.Popen``.
 
@@ -23,13 +32,28 @@ Cmd
     <subprocess.Popen at 0x22e4010f9e8>
 
 
+.. py:function:: pydu.cmd.run(cmd, wait=True, shell=False, env=None, timeout=None, timeinterval=1)
+
+    Run cmd with English character sets environment, so that the output will
+    be in English.
+    Parameters are same with ``run``.
+
+
+.. py:function:: pydu.cmd.terminate(pid)
+
+    Terminate process by given ``pid``.
+
+    On Windows, using `kernel32.TerminateProcess` to kill.
+    On other platforms, using `os.kill` with `signal.SIGTERM` to kill.
+
+
 .. py:function:: pydu.cmd.cmdline_argv()
 
     Get command line argv of self python process. On Windows when using Python 2,
     ``cmdline_argv`` is implemented by using ``shell32.GetCommandLineArgvW`` to get
     sys.argv as a list of Unicode strings.
 
-    On other system or using Python 3, ``cmdline_argv`` is same to ``sys.argv``.
+    On other platforms or using Python 3, ``cmdline_argv`` is same to ``sys.argv``.
 
     >>> from pydu.cmd import cmdline_argv
     >>> cmdline_argv()
