@@ -29,7 +29,7 @@ Request
     download to current directory.
 
 
-.. py:function:: pydu.request.check_connect(p, port, retry=1, timeout=0.5)
+.. py:function:: pydu.request.check_connect(ip, port, retry=1, timeout=0.5)
 
     Check whether given ``ip`` and ``port`` could connect or not.
     It will ``retry`` and ``timeout`` on given.

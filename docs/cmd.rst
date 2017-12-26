@@ -10,7 +10,7 @@ Cmd
         cmd, output, stdout, stderr, timeout
 
 
-.. py:function:: pydu.cmd.run(ccmd, wait=True, env=None, shell=False, timeout=None, timeinterval=1)
+.. py:function:: pydu.cmd.run(cmd, wait=True, env=None, shell=False, timeout=None, timeinterval=1)
 
     Run cmd based on ``subprocess.Popen``.
 
@@ -32,7 +32,7 @@ Cmd
     <subprocess.Popen at 0x22e4010f9e8>
 
 
-.. py:function:: pydu.cmd.run(cmd, wait=True, shell=False, env=None, timeout=None, timeinterval=1)
+.. py:function:: pydu.cmd.run_with_en_env(cmd, wait=True, shell=False, env=None, timeout=None, timeinterval=1)
 
     Run cmd with English character sets environment, so that the output will
     be in English.
