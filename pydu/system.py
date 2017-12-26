@@ -2,8 +2,64 @@ import os
 import sys
 import shutil
 
+from . import logger
 from .platform import WINDOWS
-from .compat import PY2
+from .compat import PY2, builtins
+
+
+_openfiles = set()
+_origin_open = builtins.open
+if PY2:
+    _origin_file = builtins.file
+
+    class _trackfile(builtins.file):
+        def __init__(self, *args):
+            self.path = args[0]
+            logger.debug('Opening "%s"', self.path)
+            super(_trackfile, self).__init__(*args)
+            _openfiles.add(self)
+
+        def close(self):
+            logger.debug('Closing "%s"', self.path)
+            super(_trackfile, self).close()
+            _openfiles.remove(self)
+
+
+    def _trackopen(*args):
+        return _trackfile(*args)
+else:
+    def _trackopen(*args, **kwargs):
+        f = _origin_open(*args, **kwargs)
+        path = args[0]
+        logger.debug('Opening "%s"', path)
+        _openfiles.add(f)
+
+        origin_close = f.close
+
+        def close():
+            logger.debug('Closing "%s"', path)
+            origin_close()
+            _openfiles.remove(f)
+        f.close = close
+        return f
+
+
+class FileTracker(object):
+    @classmethod
+    def track(cls):
+        builtins.open = _trackopen
+        if PY2:
+            builtins.file = _trackfile
+
+    @classmethod
+    def untrack(cls):
+        builtins.open = _origin_open
+        if PY2:
+            builtins.file = _origin_file
+
+    @classmethod
+    def get_openfiles(cls):
+        return _openfiles
 
 
 def makedirs(path, mode=0o755, ignore_errors=False, exist_ok=False):

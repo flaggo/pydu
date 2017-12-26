@@ -4,11 +4,36 @@ import time
 import pytest
 
 from pydu.platform import WINDOWS
-from pydu.system import (makedirs, remove, removes, open_file, copy, touch,
+from pydu.system import (FileTracker,
+                         makedirs, remove, removes, open_file, copy, touch,
                          chmod, which)
 
 if not WINDOWS:
     from pydu.system import link, symlink
+
+
+class TestFileTracker:
+    def test_track_open(self, tmpdir):
+        FileTracker.track()
+        path = tmpdir.join('test').strpath
+        f = open(path, 'w')
+        assert f in FileTracker.get_openfiles()
+        f.close()
+        assert f not in FileTracker.get_openfiles()
+
+    def test_track_context_open(self, tmpdir):
+        FileTracker.track()
+        path = tmpdir.join('test').strpath
+        with open(path, 'w') as f:
+            assert f in FileTracker.get_openfiles()
+        assert f not in FileTracker.get_openfiles()
+
+    def test_untrack(self, tmpdir):
+        FileTracker.track()
+        FileTracker.untrack()
+        path = tmpdir.join('test').strpath
+        f = open(path, 'w')
+        assert f not in FileTracker.get_openfiles()
 
 
 class TestMakeDirs:
