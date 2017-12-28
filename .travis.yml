@@ -11,6 +11,5 @@ notifications:
   email:
     recipients:
       - wangbinxin001@126.com
-      - xzg.nju@gmail.com
     on_success: always
     on_failure: always
