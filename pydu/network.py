@@ -73,28 +73,38 @@ def get_free_port():
     return port
 
 
-def _int_to_bin(x,n=8):
-    f = lambda x :format(int(x),'b').zfill(n)
+def _int_to_bin(x, n=8):
+    f = lambda x: format(int(x), 'b').zfill(n)
     return f(x)
 
 
 def _bin_to_int(x):
     if not x.startswith('0b'):
         x = '0b{}'.format(x)
-    f = lambda x : format(eval(x),'d')
+    f = lambda x : format(eval(x), 'd')
     return f(x)
 
 
-def _ip_to_word(ip,sep='.'):
+def _ip_to_word(ip, sep='.'):
     return ip.split(sep)
 
 
-def ip_to_bin(ip,sep='.'):
+def ip_to_bin(ip, sep='.'):
+    """
+    Converts ip from xxx.xxx.xxx.xxx  format  to binary
+    Example: if ip  is 10.1.100.22 function returns
+    00001010.00000001.01100100.00010110
+    """
     bin_list = [_int_to_bin(x) for x in ip.split(sep)]
     return '.'.join(bin_list)
 
 
 def bin_to_ip(bin_str,sep='.'):
+    """
+    Converts ip from binary  format  to xxx.xxx.xxx.xxx
+    Example: if binary is 00001010.00000001.01100100.00010110
+    function returns 10.1.100.22
+    """
     ip_list = [_bin_to_int(x) for x in bin_str.split(sep)]
     return '.'.join(ip_list)
 
@@ -105,12 +115,20 @@ def random_ip(ip):
     CIDR(Classless Inter-Domain Routing) method.
     """
     range_list = []
-    ip,net_num = ip.split('/')  
+    if len(ip.split('/'))< 2:
+        raise Exception(
+            'ip is not the xxx.xxx.xxx.xxx/xx format,please reinput'
+        )
+    ip, net_num = ip.split('/')
+    if len(ip.split('.')) != 4:
+        raise Exception(
+            'ip is not the xxx.xxx.xxx.xxx format,please reinput'
+        )
     ip_bin = ip_to_bin(ip)
-    min_bin = ''.join(ip_bin.split('.'))[0:int(net_num)+1].ljust(32,'0')
-    max_bin = ''.join(ip_bin.split('.'))[0:int(net_num)+1].ljust(32,'1')
-    min_bin = '.'.join(re.findall(r'.{8}',min_bin))
-    max_bin = '.'.join(re.findall(r'.{8}',max_bin))
+    min_bin = ''.join(ip_bin.split('.'))[0:int(net_num)+1].ljust(32, '0')
+    max_bin = ''.join(ip_bin.split('.'))[0:int(net_num)+1].ljust(32, '1')
+    min_bin = '.'.join(re.findall(r'.{8}', min_bin))
+    max_bin = '.'.join(re.findall(r'.{8}', max_bin))
     min_ip = bin_to_ip(min_bin)
     max_ip = bin_to_ip(max_bin)
     min_word = _ip_to_word(min_ip)
