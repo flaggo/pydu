@@ -2,11 +2,38 @@ import os
 import stat
 import time
 import pytest
+
 from pydu.platform import WINDOWS
-from pydu.file import makedirs, remove, removes, open_file, copy, touch, which
+from pydu.system import (FileTracker,
+                         makedirs, remove, removes, open_file, copy, touch,
+                         chmod, which)
 
 if not WINDOWS:
-    from pydu.file import link, symlink
+    from pydu.system import link, symlink
+
+
+class TestFileTracker:
+    def test_track_open(self, tmpdir):
+        FileTracker.track()
+        path = tmpdir.join('test').strpath
+        f = open(path, 'w')
+        assert f in FileTracker.get_openfiles()
+        f.close()
+        assert f not in FileTracker.get_openfiles()
+
+    def test_track_context_open(self, tmpdir):
+        FileTracker.track()
+        path = tmpdir.join('test').strpath
+        with open(path, 'w') as f:
+            assert f in FileTracker.get_openfiles()
+        assert f not in FileTracker.get_openfiles()
+
+    def test_untrack(self, tmpdir):
+        FileTracker.track()
+        FileTracker.untrack()
+        path = tmpdir.join('test').strpath
+        f = open(path, 'w')
+        assert f not in FileTracker.get_openfiles()
 
 
 class TestMakeDirs:
@@ -332,3 +359,65 @@ class TestWhich:
         os.environ['PATH'] = path + os.pathsep + \
                              os.environ.get('PATH', os.defpath)
         assert which('mycmd') == mycmd
+
+
+@pytest.mark.skipif(not WINDOWS, reason='Not support non Windows')
+def test_chcp():
+    from pydu.system import chcp
+    from ctypes import windll
+
+    origin_code = windll.kernel32.GetConsoleOutputCP()
+    with chcp(437):
+        assert windll.kernel32.GetConsoleOutputCP() == 437
+    assert windll.kernel32.GetConsoleOutputCP() == origin_code
+
+    try:
+        cp = chcp(437)
+        assert windll.kernel32.GetConsoleOutputCP() == 437
+        assert str(cp) == '<active code page number: 437>'
+    finally:
+        windll.kernel32.SetConsoleOutputCP(origin_code)
+
+
+class TestChmod:
+    def test_chmod_file(self, tmpdir):
+        test_file = tmpdir.join('test_file')
+        touch(test_file.strpath)
+        chmod(test_file.strpath, 0o755)
+
+        mode = oct(test_file.stat().mode)[-3:]
+        if WINDOWS:
+            assert mode == '666'
+        else:
+            assert mode == '755'
+
+        chmod(test_file.strpath, 0o444)
+        mode = oct(test_file.stat().mode)[-3:]
+        assert mode == '444'
+
+    def test_chmod_dir(self, tmpdir):
+        test_dir = tmpdir.mkdir('test_dir')
+        test_sub_dir = test_dir.mkdir('test_dir')
+        test_sub_file = test_dir.join('test_file')
+        touch(test_sub_file.strpath)
+
+        if WINDOWS:
+            chmod(test_dir.strpath, 0o444, recursive=False)
+            assert oct(test_dir.stat().mode)[-3:] == '555'
+            assert oct(test_sub_dir.stat().mode)[-3:] != '444'
+            assert oct(test_sub_file.stat().mode)[-3:] != '444'
+
+            chmod(test_dir.strpath, 0o444, recursive=True)
+            assert oct(test_dir.stat().mode)[-3:] == '555'
+            assert oct(test_sub_dir.stat().mode)[-3:] == '555'
+            assert oct(test_sub_file.stat().mode)[-3:] == '444'
+        else:
+            chmod(test_dir.strpath, 0o744, recursive=False)
+            assert oct(test_dir.stat().mode)[-3:] == '744'
+            assert oct(test_sub_dir.stat().mode)[-3:] != '744'
+            assert oct(test_sub_file.stat().mode)[-3:] != '744'
+
+            chmod(test_dir.strpath, 0o744, recursive=True)
+            assert oct(test_dir.stat().mode)[-3:] == '744'
+            assert oct(test_sub_dir.stat().mode)[-3:] == '744'
+            assert oct(test_sub_file.stat().mode)[-3:] == '744'

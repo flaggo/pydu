@@ -2,8 +2,64 @@ import os
 import sys
 import shutil
 
+from . import logger
 from .platform import WINDOWS
-from .compat import PY2
+from .compat import PY2, builtins
+
+
+_openfiles = set()
+_origin_open = builtins.open
+if PY2:
+    _origin_file = builtins.file
+
+    class _trackfile(builtins.file):
+        def __init__(self, *args):
+            self.path = args[0]
+            logger.debug('Opening "%s"', self.path)
+            super(_trackfile, self).__init__(*args)
+            _openfiles.add(self)
+
+        def close(self):
+            logger.debug('Closing "%s"', self.path)
+            super(_trackfile, self).close()
+            _openfiles.remove(self)
+
+
+    def _trackopen(*args):
+        return _trackfile(*args)
+else:
+    def _trackopen(*args, **kwargs):
+        f = _origin_open(*args, **kwargs)
+        path = args[0]
+        logger.debug('Opening "%s"', path)
+        _openfiles.add(f)
+
+        origin_close = f.close
+
+        def close():
+            logger.debug('Closing "%s"', path)
+            origin_close()
+            _openfiles.remove(f)
+        f.close = close
+        return f
+
+
+class FileTracker(object):
+    @staticmethod
+    def track():
+        builtins.open = _trackopen
+        if PY2:
+            builtins.file = _trackfile
+
+    @staticmethod
+    def untrack():
+        builtins.open = _origin_open
+        if PY2:
+            builtins.file = _origin_file
+
+    @staticmethod
+    def get_openfiles():
+        return _openfiles
 
 
 def makedirs(path, mode=0o755, ignore_errors=False, exist_ok=False):
@@ -120,10 +176,29 @@ def copy(src, dst, ignore_errors=False, follow_symlinks=True):
 
 def touch(path):
     """
-    open a file as write,and then close it.
+    Open a file as write,and then close it.
     """
     with open(path, 'w'):
         pass
+
+
+def chmod(path, mode, recursive=False):
+    """
+    Change permissions to the given mode.
+    If `recursive` is True perform recursively.
+
+        >>> chmod('/opt/sometest', 0o755)
+        >>> oct(os.stat('/opt/sometest').st_mode)[-3:]
+        755
+    """
+    chmod_ = os.chmod
+    if recursive and os.path.isdir(path):
+        for dirpath, _, filenames in os.walk(path):
+            chmod_(dirpath, mode)
+            for filename in filenames:
+                chmod_(os.path.join(dirpath, filename), mode)
+    else:
+        os.chmod(path, mode)
 
 
 if PY2:
@@ -192,7 +267,31 @@ if PY2:
 else:
     which = shutil.which
 
-if not WINDOWS:
+
+if WINDOWS:
+    # For Windows system
+    from ctypes import windll
+
+    class chcp(object):
+        """
+        Context manager which sets the active code page number.
+        It could also be used as function.
+        """
+        def __init__(self, code):
+            self.origin_code = windll.kernel32.GetConsoleOutputCP()
+            self.code = code
+            windll.kernel32.SetConsoleOutputCP(code)
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc_val, exc_tb):
+            windll.kernel32.SetConsoleOutputCP(self.origin_code)
+
+        def __repr__(self):
+            return '<active code page number: {}>'.format(self.code)
+else:
+    # For non Windows system
     def symlink(src, dst, overwrite=False, ignore_errors=False):
         """
         Create a symbolic link pointing to source named link_name.

@@ -1,5 +1,9 @@
 # coding: utf-8
+import locale
 from .compat import text_type
+
+
+preferredencoding = locale.getpreferredencoding()
 
 
 def safeunicode(obj, encoding='utf-8'):

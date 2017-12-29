@@ -29,12 +29,10 @@ Network
     Judge whether the given ``ip`` is IPV6 address.
 
     >>> from pydu.network import is_ipv6
-    >>> is_ipv4('fe80::9e5b:b149:e187:1a18')
+    >>> is_ipv6('fe80::9e5b:b149:e187:1a18')
     True
-    >>> is_ipv4('localhost.localdomain')
+    >>> is_ipv6('localhost.localdomain')
     False
-
-    .. note:: ``is_ipv6`` can only be used on ``unix-like`` system.
 
 
 .. py:function:: pydu.network.get_free_port()

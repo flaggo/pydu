@@ -1,4 +1,6 @@
+import socket
 from .testing import mockserver
+import pydu.request
 from pydu.network import get_free_port
 from pydu.request import FileName, check_connect
 
@@ -44,3 +46,9 @@ def test_filename_from_headers():
 def test_check_connect(port=None):
     assert check_connect('127.0.0.1', port=port, timeout=0.01)
     assert not check_connect('127.0.0.1', port=get_free_port(), timeout=0.01)
+
+    def mock_socket(*args):
+        raise socket.error
+
+    pydu.request.socket.socket = mock_socket
+    assert not check_connect('127.0.0.1', port=port, timeout=0.01)

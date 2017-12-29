@@ -43,7 +43,7 @@ def timeout(seconds, error_message='Time out'):
     return decorated
 
 
-def trace(f):
+def trace(f):  # pragma: no cover
     def globaltrace(frame, why, arg):
         if why == 'call':
             return localtrace

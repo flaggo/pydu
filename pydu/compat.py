@@ -5,6 +5,13 @@ import types
 
 PY2 = sys.version_info[0] == 2
 
+
+# builtins
+if PY2:
+    import __builtin__ as builtins
+else:
+    import builtins
+
 # url*
 if PY2:
     import urllib as urlib

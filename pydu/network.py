@@ -2,6 +2,7 @@ import socket
 import struct
 import ctypes
 from pydu.platform import WINDOWS
+from pydu.string import safeencode
 
 
 # https://github.com/hickeroar/win_inet_pton/blob/master/win_inet_pton.py
@@ -41,6 +42,7 @@ def is_ipv6(ip):
     Returns True if the IPv6 address ia valid, otherwise returns False.
     """
     if WINDOWS:
+        ip = safeencode(ip)
         addr = _sockaddr()
         addr_size = ctypes.c_int(ctypes.sizeof(addr))
 
