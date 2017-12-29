@@ -15,7 +15,7 @@ def test_run():
     assert p.wait() == 0
 
     with pytest.raises(TimeoutExpired) as e:
-        cmd = '{} -c "import time; time.sleep(1)"'.format(sys.executable)
+        cmd = '"{}" -c "import time; time.sleep(1)"'.format(sys.executable)
         timeout = 0.2
         run(cmd, shell=True, timeout=timeout, timeinterval=0.05)
         assert e.cmd == cmd
