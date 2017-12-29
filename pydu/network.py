@@ -115,7 +115,7 @@ def random_ip(ip):
     CIDR(Classless Inter-Domain Routing) method.
     """
     range_list = []
-    if len(ip.split('/'))< 2:
+    if len(ip.split('/')) < 2:
         raise Exception(
             'ip is not the xxx.xxx.xxx.xxx/xx format,please reinput'
         )
@@ -134,6 +134,6 @@ def random_ip(ip):
     min_word = _ip_to_word(min_ip)
     max_word = _ip_to_word(max_ip)
     for i in range(len(min_word)):
-        range_list.append(range(int(min_word[i]),int(max_word[i])+1))
+        range_list.append(range(int(min_word[i]), int(max_word[i])+1))
     iter_ip_list = itertools.product(*range_list)
     return iter(['.'.join(str(x) for x in item) for item in iter_ip_list])
