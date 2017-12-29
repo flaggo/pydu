@@ -1,6 +1,39 @@
 System
 ------
 
+
+.. py:class:: pydu.system.FileTracker()
+
+    Track current opening files, started with ``FileTracker.track()``.
+    When opening several files, ``FileTracker`` tracks them and you can locate them by calling
+    ``FileTraker.get_openfiles()``.
+
+    .. py:staticmethod:: track()
+
+        Start tracking opening files.
+
+    .. py:staticmethod:: untrack()
+
+        Stop tracking opening files.
+
+    .. py:staticmethod:: get_openfiles()
+
+        Get current opening files.
+
+    >>> from pydu.system import FileTracker
+    >>> FileTracker.track()
+    >>> f = open('test', 'w')
+    >>> FileTracker.get_openfiles()
+    {<_io.TextIOWrapper name='test' mode='w' encoding='UTF-8'>}
+    >>> f.close()
+    >>> FileTracker.get_openfiles()
+    set()
+    >>> FileTracker.untrack()
+    >>> f = open('test', 'w')
+    >>> FileTracker.get_openfiles()
+    set()
+
+
 ..  py:function:: pydu.system.makedirs(path, mode=0o755, ignore_errors=False, exist_ok=False)
 
     Based on ``os.makedirs``,create a leaf directory and all intermediate ones.

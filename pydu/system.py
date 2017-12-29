@@ -45,20 +45,20 @@ else:
 
 
 class FileTracker(object):
-    @classmethod
-    def track(cls):
+    @staticmethod
+    def track():
         builtins.open = _trackopen
         if PY2:
             builtins.file = _trackfile
 
-    @classmethod
-    def untrack(cls):
+    @staticmethod
+    def untrack():
         builtins.open = _origin_open
         if PY2:
             builtins.file = _origin_file
 
-    @classmethod
-    def get_openfiles(cls):
+    @staticmethod
+    def get_openfiles():
         return _openfiles
 
 
