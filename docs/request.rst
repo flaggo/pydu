@@ -5,16 +5,16 @@ Request
 
     Supply several methods to get filename.
 
-    .. py:staticmethod:: from_url(url):
+    .. py:staticmethod:: from_url(url)
 
         Detected filename as unicode or None.
 
-    .. py:staticmethod:: from_headers(headers):
+    .. py:staticmethod:: from_headers(headers)
 
         Detect filename from Content-Disposition headers if present.
         ``headers`` could be a dict, list or string.
 
-    .. py:staticmethod:: from_any(dst=None, headers=None, url=None):
+    .. py:staticmethod:: from_any(dst=None, headers=None, url=None)
 
         Detect filename from dst or headers or url.
 
