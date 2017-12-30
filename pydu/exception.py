@@ -1,9 +1,13 @@
-from contextlib import contextmanager
+import contextlib
+from .compat import PY2
 
 
-@contextmanager
-def ignore(*exceptions):
-    try:
-        yield
-    except exceptions:
-        pass
+if PY2:
+    @contextlib.contextmanager
+    def ignore(*exceptions):
+        try:
+            yield
+        except exceptions:
+            pass
+else:
+    ignore = contextlib.suppress
