@@ -130,7 +130,7 @@ class LookupDict(dict):
 
 
 def attrify(obj):
-    if isinstance(obj, (list, tuple)):
+    if isinstance(obj, list):
         for i, v in enumerate(obj):
             obj[i] = attrify(v)
         return obj

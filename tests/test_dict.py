@@ -70,3 +70,13 @@ def test_attrify():
     assert attrd.a == [1, 2, {'b': 'b'}]
     assert attrd.a[2].b == 'b'
     assert attrd.c == 'c'
+
+    attrd = attrify((1, 2))
+    assert attrd == (1, 2)
+
+    attrd = attrify({
+        'a': 1,
+        'b': (1, 2)
+    })
+    assert attrd.a == 1
+    assert attrd.b == (1, 2)
