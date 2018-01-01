@@ -1,10 +1,10 @@
 import pytest
 import unittest
 
-from pydu.dict import AttrDict, LookupDict, CaseInsensitiveDict, attrify
+from pydu.dict import AttrDict, LookupDict, CaseInsensitiveDict, OrderedDefaultDict, attrify
 
 
-class TestAttrDict(object):
+class TestAttrDict:
 
     def test_attr_access_with_init(self):
         d = AttrDict(key=1)
@@ -32,7 +32,7 @@ class TestAttrDict(object):
         assert repr(d) == '<AttrDict {}>'
 
 
-class TestLooUpDict(object):
+class TestLooUpDict:
 
     def test_key_exist(self):
         d = LookupDict()
@@ -61,6 +61,46 @@ class TestCaseInsensitiveDict(unittest.TestCase):
         d = self.d.copy()
         assert d == self.d
 
+
+class TestOrderedDefaultDict:
+    def test_default_normal(self):
+        d = OrderedDefaultDict(int)
+        assert d[1] == 0
+        assert d['a'] == 0
+        d[2] = 2
+        assert d[2] == 2
+        assert list(d.keys()) == [1, 'a', 2]
+
+        d = OrderedDefaultDict(int, a=1)
+        assert d['a'] == 1
+
+    def test_default_factory_not_callable(self):
+        with pytest.raises(TypeError):
+            OrderedDefaultDict('notcallable')
+
+    def test_default_factory_none(self):
+        d = OrderedDefaultDict()
+        with pytest.raises(KeyError):
+            d[1]
+
+    def test_copy(self):
+        d1 = OrderedDefaultDict(int, a=[])
+        d2 = d1.copy()
+        assert d2['a'] == []
+        d1['a'].append(1)
+        assert d2['a'] == [1]
+
+    def test_deepcopy(self):
+        import copy
+        d1 = OrderedDefaultDict(int, a=[])
+        d2 = copy.deepcopy(d1)
+        assert d2['a'] == []
+        d1['a'].append(1)
+        assert d2['a'] == []
+
+    def test_repr(self):
+        d = OrderedDefaultDict(int, a=1)
+        assert repr(d).startswith('OrderedDefaultDict')
 
 def test_attrify():
     attrd = attrify({
