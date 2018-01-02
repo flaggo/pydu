@@ -6,19 +6,19 @@ Dict
     A AttrDict object is like a dictionary except ``obj.foo`` can be used
     in addition to ``obj['foo']``.
 
-        >>> from pydu.dict import AttrDict
-        >>> o = AttrDict(a=1)
-        o.a
-        1
-        >>> o['a']
-        1
-        >>> o.a = 2
-        >>> o['a']
-        2
-        >>> del o.a
-        >>> o.a
-        Traceback (most recent call last):
-         ...    AttributeError: 'a'
+    >>> from pydu.dict import AttrDict
+    >>> o = AttrDict(a=1)
+    o.a
+    1
+    >>> o['a']
+    1
+    >>> o.a = 2
+    >>> o['a']
+    2
+    >>> del o.a
+    >>> o.a
+    Traceback (most recent call last):
+     ...    AttributeError: 'a'
 
 
 .. py:class:: pydu.dict.CaseInsensitiveDict(data=None, **kwargs)
@@ -31,26 +31,47 @@ Dict
     ``items()``, ``iterkeys()``, and ``iteritems()`` will contain
     case-sensitive keys.
 
-        >>> from pydu.dict import CaseInsensitiveDict
-        >>> cid = CaseInsensitiveDict()
-        >>> cid['Accept'] = 'application/json'
-        >>> cid['aCCEPT'] == 'application/json'
-        True
-        >>> list(cid) == ['Accept']
-        True
+    >>> from pydu.dict import CaseInsensitiveDict
+    >>> cid = CaseInsensitiveDict()
+    >>> cid['Accept'] = 'application/json'
+    >>> cid['aCCEPT'] == 'application/json'
+    True
+    >>> list(cid) == ['Accept']
+    True
 
 
 .. py:class:: pydu.dict.LookupDict(name=None)
 
     Dictionary lookup object.
 
-        >>> from pydu.dict import LookupDict
-        >>> d = LookupDict()
-        >>> d['key']
-        None
-        >>> d['key'] = 1
-        >>> d['key']
-        1
+    >>> from pydu.dict import LookupDict
+    >>> d = LookupDict()
+    >>> d['key']
+    None
+    >>> d['key'] = 1
+    >>> d['key']
+    1
+
+.. py:class:: pydu.dict.OrderedDefaultDict(default_factory=None, *args, **kwds)
+
+    Dictionary that remembers insertion order and has default value
+    with default factory.
+
+    The default factory is called without arguments to produce
+    a new value when a key is not present, in ``__getitem__`` only.
+    An ``OrderedDefaultDict`` compares equal to a ``collections.defaultdict``
+    with the same items. All remaining arguments are treated the same
+    as if they were passed to the ``defaultdict`` constructor,
+    including keyword arguments.
+
+    >>> from pydu.dict import OrderedDefaultDict
+    >>> d = OrderedDefaultDict(int)
+    >>> d['b']
+    0
+    >>> d['a']
+    0
+    >>> d.keys()
+    odict_keys(['b', 'a'])
 
 
 .. py:function:: pydu.dict.attrify(obj)

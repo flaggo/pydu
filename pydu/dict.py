@@ -133,6 +133,17 @@ class LookupDict(dict):
 
 # https://stackoverflow.com/questions/6190331/can-i-do-an-ordered-default-dict-in-python
 class OrderedDefaultDict(collections.OrderedDict):
+    """
+    Dictionary that remembers insertion order and has default value
+    with default factory.
+
+    The default factory is called without arguments to produce
+    a new value when a key is not present, in `__getitem__` only.
+    An `OrderedDefaultDict` compares equal to a `collections.defaultdict`
+    with the same items. All remaining arguments are treated the same
+    as if they were passed to the `defaultdict` constructor,
+    including keyword arguments.
+    """
     def __init__(self, default_factory=None, *args, **kwds):
         if (default_factory is not None and
            not isinstance(default_factory, collections.Callable)):
