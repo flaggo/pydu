@@ -139,7 +139,6 @@ class OrderedDefaultDict(collections.OrderedDict):
             raise TypeError('First argument must be callable')
         super(OrderedDefaultDict, self).__init__(*args, **kwds)
         self.default_factory = default_factory
-        self.__deepcopy__ = self.__deepcopy2__ if PY2 else self.__deepcopy3__
 
     def __getitem__(self, key):
         try:
@@ -166,13 +165,14 @@ class OrderedDefaultDict(collections.OrderedDict):
     def __copy__(self):
         return self.__class__(self.default_factory, self)
 
-    def __deepcopy2__(self, memo):
-        import copy
-        return self.__class__(self.default_factory, copy.deepcopy(self.items()))
-
-    def __deepcopy3__(self, memo):
-        import copy
-        return self.__class__(self.default_factory, copy.deepcopy(iter(self.items())))
+    if PY2:
+        def __deepcopy__(self, memo):
+            import copy
+            return self.__class__(self.default_factory, copy.deepcopy(self.items()))
+    else:
+        def __deepcopy__(self, memo):
+            import copy
+            return self.__class__(self.default_factory, copy.deepcopy(iter(self.items())))
 
     def __repr__(self):
         return 'OrderedDefaultDict({default_factory}, {repr})'.format(
