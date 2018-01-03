@@ -10,8 +10,8 @@ pydu
 .. image:: https://img.shields.io/pypi/pyversions/pydu.svg
     :target: https://pypi.python.org/pypi/pydu
 
-.. image:: https://travis-ci.org/Prodesire/pydu.svg?branch=master
-    :target: https://travis-ci.org/Prodesire/pydu
+.. image:: https://travis-ci.org/flaggo/pydu.svg?branch=master
+    :target: https://travis-ci.org/flaggo/pydu
 
 .. image:: https://coveralls.io/repos/github/flaggo/pydu/badge.svg?branch=master
     :target: https://coveralls.io/github/flaggo/pydu?branch=master
