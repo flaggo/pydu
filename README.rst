@@ -11,10 +11,11 @@ pydu
     :target: https://pypi.python.org/pypi/pydu
 
 .. image:: https://travis-ci.org/Prodesire/pydu.svg?branch=master
-  :target: https://travis-ci.org/Prodesire/pydu
+    :target: https://travis-ci.org/Prodesire/pydu
 
-.. image:: https://coveralls.io/repos/github/Prodesire/pydu/badge.svg?branch=master
-  :target: https://coveralls.io/github/Prodesire/pydu?branch=master
+.. image:: https://coveralls.io/repos/github/flaggo/pydu/badge.svg?branch=master
+    :target: https://coveralls.io/github/flaggo/pydu?branch=master
+
 
 .. image:: https://img.shields.io/github/contributors/prodesire/pydu.svg
     :target: https://github.com/prodesire/pydu/graphs/contributors
