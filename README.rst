@@ -17,8 +17,8 @@ pydu
     :target: https://coveralls.io/github/flaggo/pydu?branch=master
 
 
-.. image:: https://img.shields.io/github/contributors/prodesire/pydu.svg
-    :target: https://github.com/prodesire/pydu/graphs/contributors
+.. image:: https://img.shields.io/github/contributors/flaggo/pydu.svg
+    :target: https://github.com/flaggo/pydu/graphs/contributors
 
 **pydu** (python data structures and utils) is a library of useful data structures and utils
 for Python 2 and 3, which collected from open source projects and created by contributors.
