@@ -21,16 +21,14 @@ environment:
       PYTHON_VERSION: "3.6.x"
       PYTHON_ARCH: "64"
       TOXENV: "py36"
-  COVERALLS_REPO_TOKEN:
-    secure: dKqk1ANtaVDw/njiGRw+qYq3tWywjoZDs3duK2VaNRF0AAAnSBK5RGbvKSTpl/Xk
 
 install:
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
-  - "python --version"
-  - "python -c \"import struct; print(struct.calcsize('P') * 8)\""
   - "pip install --disable-pip-version-check --user --upgrade pip"
-  - "%CMD_IN_ENV% pip install tox coverage coveralls"
+  - "%CMD_IN_ENV% pip install tox"
 
 test_script:
-  # Run the project tests
   - "%CMD_IN_ENV% tox"
+
+on_success:
+  - "%CMD_IN_ENV% codecov"

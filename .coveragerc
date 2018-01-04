@@ -1,0 +1,8 @@
+[run]
+branch = True
+source = pydu
+
+[paths]
+source =
+   pydu
+   .tox/*/lib/python*/site-packages/pydu
