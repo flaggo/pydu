@@ -10,7 +10,7 @@ sudo: false
 cache: pip
 
 install:
-  - pip install tox
+  - pip install tox codecov
 
 script:
   - tox -e $(echo py$TRAVIS_PYTHON_VERSION | tr -d .)

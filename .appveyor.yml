@@ -23,7 +23,7 @@ install:
   - "%CMD_IN_ENV% pip install tox"
 
 test_script:
-  - "%CMD_IN_ENV% tox"
+  - "%CMD_IN_ENV% tox codecov"
 
 on_success:
   - "%CMD_IN_ENV% codecov"
