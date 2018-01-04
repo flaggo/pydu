@@ -13,6 +13,9 @@ pydu
 .. image:: https://travis-ci.org/flaggo/pydu.svg?branch=master
     :target: https://travis-ci.org/flaggo/pydu
 
+.. image:: https://ci.appveyor.com/api/projects/status/github/flaggo/pydu?branch=master&svg=true
+    :target: https://ci.appveyor.com/project/flaggo/pydu
+
 .. image:: https://coveralls.io/repos/github/flaggo/pydu/badge.svg?branch=master
     :target: https://coveralls.io/github/flaggo/pydu?branch=master
 
