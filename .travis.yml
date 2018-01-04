@@ -13,7 +13,7 @@ install:
   - pip install tox
 
 script:
-  - tox
+  - tox -e $(echo py$TRAVIS_PYTHON_VERSION | tr -d .)
 
 after_success:
   - codecov

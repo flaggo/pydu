@@ -1,4 +1,3 @@
 pytest>=2.8.0
 pytest-xdist
 codecov
-HTTPretty==0.8.14
