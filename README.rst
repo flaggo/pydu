@@ -16,9 +16,9 @@ pydu
 .. image:: https://ci.appveyor.com/api/projects/status/github/flaggo/pydu?branch=master&svg=true
     :target: https://ci.appveyor.com/project/flaggo/pydu
 
-.. image:: https://coveralls.io/repos/github/flaggo/pydu/badge.svg?branch=master
-    :target: https://coveralls.io/github/flaggo/pydu?branch=master
-
+.. image:: https://codecov.io/github/flaggo/pydu/coverage.svg?branch=master
+    :target: https://codecov.io/github/flaggo/pydu
+    :alt: codecov.io
 
 .. image:: https://img.shields.io/github/contributors/flaggo/pydu.svg
     :target: https://github.com/flaggo/pydu/graphs/contributors
