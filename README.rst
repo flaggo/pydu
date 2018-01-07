@@ -10,10 +10,10 @@ pydu
 .. image:: https://img.shields.io/pypi/pyversions/pydu.svg
     :target: https://pypi.python.org/pypi/pydu
 
-.. image:: https://travis-ci.org/flaggo/pydu.svg?branch=master
+.. image:: https://img.shields.io/travis/flaggo/pydu/master.svg?label=Linux
     :target: https://travis-ci.org/flaggo/pydu
 
-.. image:: https://ci.appveyor.com/api/projects/status/github/flaggo/pydu?branch=master&svg=true
+.. image:: https://img.shields.io/appveyor/ci/flaggo/pydu/master.svg?label=Windows
     :target: https://ci.appveyor.com/project/flaggo/pydu
 
 .. image:: https://codecov.io/github/flaggo/pydu/coverage.svg?branch=master
