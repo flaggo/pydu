@@ -24,6 +24,7 @@ Content
    cmd
    compat
    console
+   convert
    dict
    exception
    inspect
