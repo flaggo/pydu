@@ -100,7 +100,7 @@ def dec2oct(x):
 def dec2hex(x):
     """
     Convert decimal number to hexadecimal string.
-    For instance: 2 -> '10'
+    For instance: 26 -> '1a'
     """
     return hex(x)[2:]
 
