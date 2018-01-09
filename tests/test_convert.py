@@ -1,5 +1,9 @@
 import pytest
-from pydu.convert import boolean
+from pydu.convert import (boolean,
+                          bin2oct, bin2dec, bin2hex,
+                          oct2bin, oct2dec, oct2hex,
+                          dec2bin, dec2oct, dec2hex,
+                          hex2bin, hex2oct, hex2dec)
 
 
 class TestBoolean:
@@ -23,3 +27,51 @@ class TestBoolean:
 
         for obj in (0, [], {}):
             assert not boolean(obj)
+
+
+def test_bin2oct():
+    assert bin2oct('1001') == '11'
+
+
+def test_bin2dec():
+    assert bin2dec('11') == 3
+
+
+def test_bin2hex():
+    assert bin2hex('11010') == '1a'
+
+
+def test_oct2bin():
+    assert oct2bin('11') == '1001'
+
+
+def test_oct2dec():
+    assert oct2dec('11') == 9
+
+
+def test_oct2hex():
+    assert oct2hex('32') == '1a'
+
+
+def test_dec2bin():
+    assert dec2bin(3) == '11'
+
+
+def test_dec2oct():
+    assert dec2oct(9) == '11'
+
+
+def test_dec2hex():
+    assert dec2hex(26) == '1a'
+
+
+def test_hex2bin():
+    assert hex2bin('1a') == '11010'
+
+
+def test_hex2oct():
+    assert hex2oct('1a') == '32'
+
+
+def test_hex2dec():
+    assert hex2dec('1a') == 26
