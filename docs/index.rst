@@ -26,6 +26,7 @@ Content
    console
    convert
    dict
+   environ
    exception
    inspect
    list
