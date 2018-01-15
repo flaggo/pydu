@@ -15,3 +15,9 @@ def uniq(seq, key=None):
         seen.add(uniq_value)
         uniq_list.append(value)
     return uniq_list
+
+
+def tolist(obj):
+    if not isinstance(obj, list):
+        return [obj]
+    return obj
