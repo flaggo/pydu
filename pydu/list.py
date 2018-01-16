@@ -21,7 +21,7 @@ def tolist(obj):
     """
     Convert given `obj` to list.
 
-    If `obj` is not a list, return [`obj`], else return `obj` itself.
+    If `obj` is not a list, return `[obj]`, else return `obj` itself.
     """
     if not isinstance(obj, list):
         return [obj]

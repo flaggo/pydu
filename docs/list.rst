@@ -17,7 +17,7 @@ List
 
     Convert given ``obj`` to list.
 
-    If ``obj`` is not a list, return [``obj``], else return ``obj`` itself.
+    If ``obj`` is not a list, return ``[obj]``, else return ``obj`` itself.
 
     >>> from pydu.list import tolist
     >>> tolist('foo')
