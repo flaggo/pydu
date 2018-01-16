@@ -11,3 +11,14 @@ List
     >>> from pydu.list import uniq
     >>> uniq([1, 4, 0, 2, 0, 3])
     [1, 4, 0, 2, 3]
+
+
+.. py:function:: pydu.list.tolist(obj)
+
+    Convert given ``obj`` to list.
+
+    If ``obj`` is not a list, return [``obj``], else return ``obj`` itself.
+
+    >>> from pydu.list import tolist
+    >>> tolist('foo')
+    ['foo']
