@@ -45,6 +45,10 @@ Compat
 
     The string types are ``(str, unicode)`` on PY2 or ``(str,)`` on PY3.
 
+.. py:data:: pydu.compat.strbytes_types
+
+    The string types are ``(str, unicode, bytes)`` on PY2 or ``(str, bytes)`` on PY3.
+
 
 .. py:data:: pydu.compat.numeric_types
 

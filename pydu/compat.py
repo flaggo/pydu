@@ -36,10 +36,12 @@ else:
 if PY2:
     text_type = unicode
     string_types = (str, unicode)
+    strbytes_types = (str, unicode, bytes)
     numeric_types = (int, long)
 else:
     text_type = str
     string_types = (str,)
+    strbytes_types = (str, bytes)
     numeric_types = (int,)
 
 # imap
