@@ -22,3 +22,13 @@ List
     >>> from pydu.list import tolist
     >>> tolist('foo')
     ['foo']
+
+
+.. py:function:: pydu.list.flatten(seq)
+
+    Generate each element of the given ``seq``. If the element is iterable and
+    is not string, it yields each sub-element of the element recursively.
+
+    >>> from pydu.list import flatten
+    >>> flatten([1, [2, [3, 4]]])
+    [1, 2, 3, 4]
