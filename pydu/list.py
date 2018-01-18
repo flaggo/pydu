@@ -1,3 +1,7 @@
+from collections import Iterable
+from pydu.compat import PY2, strbytes_types
+
+
 def uniq(seq, key=None):
     """
     Removes duplicate elements from a list while preserving the order of the rest.
@@ -26,3 +30,18 @@ def tolist(obj):
     if not isinstance(obj, list):
         return [obj]
     return obj
+
+
+# https://stackoverflow.com/questions/2158395/flatten-an-irregular-list-of-lists
+def flatten(seq):
+    """
+    Generate each element of the given `seq`. If the element is iterable and
+    is not string, it yields each sub-element of the element recursively.
+    """
+    for element in seq:
+        if isinstance(element, Iterable) and \
+                not isinstance(element, strbytes_types):
+            for sub in flatten(element):
+                yield sub
+        else:
+            yield element

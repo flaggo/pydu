@@ -1,5 +1,5 @@
 import pytest
-from pydu.list import uniq, tolist
+from pydu.list import uniq, tolist, flatten
 
 
 def test_uniq():
@@ -9,3 +9,9 @@ def test_uniq():
 @pytest.mark.parametrize('obj', ('foo', ['foo']))
 def test_tolist(obj):
     assert tolist(obj) == ['foo']
+
+
+def test_flatten():
+    assert list(flatten([1, 2])) == [1, 2]
+    assert list(flatten([1, [2, 3]])) == [1, 2, 3]
+    assert list(flatten([1, [2, [3, 4]]])) == [1, 2, 3, 4]
