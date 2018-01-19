@@ -47,7 +47,7 @@ Compat
 
 .. py:data:: pydu.compat.strbytes_types
 
-    The string types are ``(str, unicode, bytes)`` on PY2 or ``(str, bytes)`` on PY3.
+    The strbytes(string bytes) types are ``(str, unicode, bytes)`` on PY2 or ``(str, bytes)`` on PY3.
 
 
 .. py:data:: pydu.compat.numeric_types
