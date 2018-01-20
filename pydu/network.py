@@ -64,8 +64,29 @@ def is_ipv6(ip):
 
 
 def get_free_port():
+    """
+    Return a port with not be Occupied
+    """
     s = socket.socket(socket.AF_INET, type=socket.SOCK_STREAM)
     s.bind(('127.0.0.1', 0))
     _, port = s.getsockname()
     s.close()
     return port
+
+
+def random_ip(str_ip):
+    """
+    Return a iter of ip_list with input ip xxx.xxx.xxx.xxx/xx,with
+    CIDR(Classless Inter-Domain Routing) method
+    """
+    str_ip_addr = str_ip.split('/')[0]
+    str_ip_mask = str_ip.split('/')[1]
+    ip_addr = struct.unpack('>I', socket.inet_aton(str_ip_addr))[0]
+    mask = 0x0
+    for i in range(31, 31 - int(str_ip_mask), -1):
+        mask = mask | ( 1 << i)
+    ip_addr_min = ip_addr & (mask & 0xffffffff)
+    ip_addr_max = ip_addr | (~mask & 0xffffffff)
+    ip_list = iter([socket.inet_ntoa(struct.pack('>I', i))
+                    for i in range(ip_addr_min, ip_addr_max+1)])
+    return ip_list
