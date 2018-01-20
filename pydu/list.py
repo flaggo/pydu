@@ -1,5 +1,5 @@
 from collections import Iterable
-from pydu.compat import PY2, strbytes_types
+from pydu.compat import strbytes_types
 
 
 def uniq(seq, key=None):
