@@ -1,3 +1,4 @@
+import functools
 from pydu.compat import PY2
 
 
@@ -30,7 +31,17 @@ def boolean(obj):
 _oct_index = 1 if PY2 else 2
 
 
+def _rstrip_L(func):
+    if PY2:
+        @functools.wraps(func)
+        def wrapper(x):
+            return func(x).rstrip('L')
+        return wrapper
+    return func
+
+
 # binary to octal, decimal and hexadecimal
+@_rstrip_L
 def bin2oct(x):
     """
     Convert binary string to octal string.
@@ -47,6 +58,7 @@ def bin2dec(x):
     return int(x, 2)
 
 
+@_rstrip_L
 def bin2hex(x):
     """
     Convert binary string to hexadecimal string.
@@ -56,6 +68,7 @@ def bin2hex(x):
 
 
 # octal to binary, decimal and hexadecimal
+@_rstrip_L
 def oct2bin(x):
     """
     Convert octal string to binary string.
@@ -72,6 +85,7 @@ def oct2dec(x):
     return int(x, 8)
 
 
+@_rstrip_L
 def oct2hex(x):
     """
     Convert octal string to hexadecimal string.
@@ -81,6 +95,7 @@ def oct2hex(x):
 
 
 # decimal to binary, octal and hexadecimal
+@_rstrip_L
 def dec2bin(x):
     """
     Convert decimal number to binary string.
@@ -89,6 +104,7 @@ def dec2bin(x):
     return bin(x)[2:]
 
 
+@_rstrip_L
 def dec2oct(x):
     """
     Convert decimal number to octal string.
@@ -97,6 +113,7 @@ def dec2oct(x):
     return oct(x)[_oct_index:]
 
 
+@_rstrip_L
 def dec2hex(x):
     """
     Convert decimal number to hexadecimal string.
@@ -106,6 +123,7 @@ def dec2hex(x):
 
 
 # hexadecimal to binary, octal and decimal
+@_rstrip_L
 def hex2bin(x):
     """
     Convert hexadecimal string to binary string.
@@ -114,6 +132,7 @@ def hex2bin(x):
     return bin(int(x, 16))[2:]
 
 
+@_rstrip_L
 def hex2oct(x):
     """
     Convert hexadecimal string to octal string.
