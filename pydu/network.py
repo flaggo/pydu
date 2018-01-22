@@ -6,12 +6,74 @@ from pydu.string import safeencode
 
 
 # https://github.com/hickeroar/win_inet_pton/blob/master/win_inet_pton.py
-class _sockaddr(ctypes.Structure):
-    _fields_ = [("sa_family", ctypes.c_short),
-                ("__pad1", ctypes.c_ushort),
-                ("ipv4_addr", ctypes.c_byte * 4),
-                ("ipv6_addr", ctypes.c_byte * 16),
-                ("__pad2", ctypes.c_ulong)]
+if WINDOWS:
+    class _sockaddr(ctypes.Structure):
+        _fields_ = [("sa_family", ctypes.c_short),
+                    ("__pad1", ctypes.c_ushort),
+                    ("ipv4_addr", ctypes.c_byte * 4),
+                    ("ipv6_addr", ctypes.c_byte * 16),
+                    ("__pad2", ctypes.c_ulong)]
+
+
+    WSAStringToAddressA = ctypes.windll.ws2_32.WSAStringToAddressA
+    WSAAddressToStringA = ctypes.windll.ws2_32.WSAAddressToStringA
+
+
+    def _win_inet_pton(address_family, ip_str):
+        ip_str = safeencode(ip_str)
+        addr = _sockaddr()
+        addr.sa_family = address_family
+        addr_size = ctypes.c_int(ctypes.sizeof(addr))
+
+        if WSAStringToAddressA(
+                ip_str,
+                address_family,
+                None,
+                ctypes.byref(addr),
+                ctypes.byref(addr_size)
+        ) != 0:
+            raise socket.error(ctypes.FormatError())
+
+        if address_family == socket.AF_INET:
+            return ctypes.string_at(addr.ipv4_addr, 4)
+        if address_family == socket.AF_INET6:
+            return ctypes.string_at(addr.ipv6_addr, 16)
+
+        raise socket.error('unknown address family')
+
+
+    def _win_inet_ntop(address_family, packed_ip):
+        addr = _sockaddr()
+        addr.sa_family = address_family
+        addr_size = ctypes.c_int(ctypes.sizeof(addr))
+        ip_string = ctypes.create_string_buffer(128)
+        ip_string_size = ctypes.c_int(ctypes.sizeof(ip_string))
+
+        if address_family == socket.AF_INET:
+            if len(packed_ip) != ctypes.sizeof(addr.ipv4_addr):
+                raise socket.error('packed IP wrong length for inet_ntoa')
+            ctypes.memmove(addr.ipv4_addr, packed_ip, 4)
+        elif address_family == socket.AF_INET6:
+            if len(packed_ip) != ctypes.sizeof(addr.ipv6_addr):
+                raise socket.error('packed IP wrong length for inet_ntoa')
+            ctypes.memmove(addr.ipv6_addr, packed_ip, 16)
+        else:
+            raise socket.error('unknown address family')
+
+        if WSAAddressToStringA(
+                ctypes.byref(addr),
+                addr_size,
+                None,
+                ip_string,
+                ctypes.byref(ip_string_size)
+        ) != 0:
+            raise socket.error(ctypes.FormatError())
+
+        return ip_string[:ip_string_size.value - 1]
+
+
+    socket.inet_pton = _win_inet_pton
+    socket.inet_ntop = _win_inet_ntop
 
 
 # https://github.com/kennethreitz/requests/blob/master/requests/utils.py
@@ -41,26 +103,11 @@ def is_ipv6(ip):
     """
     Returns True if the IPv6 address ia valid, otherwise returns False.
     """
-    if WINDOWS:
-        ip = safeencode(ip)
-        addr = _sockaddr()
-        addr_size = ctypes.c_int(ctypes.sizeof(addr))
-
-        if ctypes.windll.ws2_32.WSAStringToAddressA(
-            ip,
-            socket.AF_INET6,
-            None,
-            ctypes.byref(addr),
-            ctypes.byref(addr_size)
-        ) != 0:
-            return False
-        return True
-    else:
-        try:
-            socket.inet_pton(socket.AF_INET6, ip)
-        except socket.error:
-            return False
-        return True
+    try:
+        socket.inet_pton(socket.AF_INET6, ip)
+    except socket.error:
+        return False
+    return True
 
 
 def get_free_port():
