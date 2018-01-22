@@ -3,7 +3,7 @@ import struct
 import ctypes
 import binascii
 from .platform import WINDOWS
-from .string import safeencode
+from .string import safeencode, safeunicode
 from .convert import hex2dec, dec2hex
 
 
@@ -144,8 +144,8 @@ def int2ip(ip_int):
         pass
 
     try:
-        s = binascii.unhexlify(dec2hex(ip_int))
-        return socket.inet_ntop(socket.AF_INET6, safeencode(s))
+        ip_str = socket.inet_ntop(socket.AF_INET6, binascii.unhexlify(dec2hex(ip_int)))
+        return safeunicode(ip_str, encoding='ascii')
     except (socket.error, struct.error):
         pass
 
