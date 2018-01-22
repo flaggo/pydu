@@ -1,8 +1,10 @@
 import socket
 import struct
 import ctypes
-from pydu.platform import WINDOWS
-from pydu.string import safeencode
+import binascii
+from .platform import WINDOWS
+from .string import safeencode
+from .convert import hex2dec, dec2hex
 
 
 # https://github.com/hickeroar/win_inet_pton/blob/master/win_inet_pton.py
@@ -116,3 +118,35 @@ def get_free_port():
     _, port = s.getsockname()
     s.close()
     return port
+
+
+# https://stackoverflow.com/questions/5619685/conversion-from-ip-string-to-integer-and-backward-in-python
+# https://stackoverflow.com/questions/11894717/python-convert-ipv6-to-an-integer
+def ip2int(ip_str):
+    try:
+        return struct.unpack("!I", socket.inet_aton(ip_str))[0]
+    except socket.error:
+        pass
+
+    try:
+        return hex2dec(binascii.hexlify(socket.inet_pton(socket.AF_INET6, ip_str)))
+    except socket.error:
+        pass
+
+    raise ValueError('{!r} does not appear to be an IPv4 or IPv6 address'.format(ip_str))
+
+
+# https://stackoverflow.com/questions/5619685/conversion-from-ip-string-to-integer-and-backward-in-python
+def int2ip(ip_int):
+    try:
+        return socket.inet_ntoa(struct.pack("!I", ip_int))
+    except (socket.error, struct.error):
+        pass
+
+    try:
+        s = binascii.unhexlify(dec2hex(ip_int))
+        return socket.inet_ntop(socket.AF_INET6, safeencode(s))
+    except (socket.error, struct.error):
+        pass
+
+    raise ValueError('{!r} does not appear to be an IPv4 or IPv6 address'.format(ip_int))
