@@ -123,6 +123,10 @@ def get_free_port():
 # https://stackoverflow.com/questions/5619685/conversion-from-ip-string-to-integer-and-backward-in-python
 # https://stackoverflow.com/questions/11894717/python-convert-ipv6-to-an-integer
 def ip2int(ip_str):
+    """
+    Convert ip to integer. Support IPV4 and IPV6.
+    Raise `ValueError` if convert failed.
+    """
     try:
         return struct.unpack("!I", socket.inet_aton(ip_str))[0]
     except socket.error:
@@ -138,6 +142,10 @@ def ip2int(ip_str):
 
 # https://stackoverflow.com/questions/5619685/conversion-from-ip-string-to-integer-and-backward-in-python
 def int2ip(ip_int):
+    """
+    Convert integer to ip. Support IPV4 and IPV6.
+    Raise `ValueError` if convert failed.
+    """
     try:
         return socket.inet_ntoa(struct.pack("!I", ip_int))
     except (socket.error, struct.error):

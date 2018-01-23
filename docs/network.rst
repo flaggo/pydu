@@ -42,3 +42,23 @@ Network
     >>> from pydu.network import get_free_port
     >>> get_free_port()
     57118
+
+
+.. py:function:: pydu.network.ip2int(ip_str)
+
+    Convert ip to integer. Support IPV4 and IPV6.
+    Raise ``ValueError`` if convert failed.
+
+    >>> from pydu.network import ip2int
+    >>> ip2int('10.1.1.1')
+    167837953
+
+
+.. py:function:: pydu.network.int2ip(ip_int)
+
+    Convert integer to ip. Support IPV4 and IPV6.
+    Raise ``ValueError`` if convert failed.
+
+    >>> from pydu.network import int2ip
+    >>> int2ip(167837953)
+    '10.1.1.1'
