@@ -5,6 +5,9 @@ except ImportError:
 
 
 def get_processes_by_path(path):
+    """
+    Get processes which are running on given path or sub path of given path.
+    """
     pinfos = []
     for proc in psutil.process_iter():
         pinfo = proc.as_dict(attrs=['pid', 'name', 'exe', 'cwd', 'open_files'])
