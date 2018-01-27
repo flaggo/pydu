@@ -3,6 +3,8 @@ try:
 except ImportError:
     raise ImportError('Need to pip install psutil if you use pydu.process')
 
+from .path import is_super_path
+
 
 def get_processes_by_path(path):
     """
@@ -21,7 +23,7 @@ def get_processes_by_path(path):
             using_paths.extend(pinfo['open_files'])
 
         for using_path in using_paths:
-            if path not in using_path:
+            if is_super_path(path, using_path):
                 continue
             pinfos.append({
                 'pid': pinfo['pid'],
