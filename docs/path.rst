@@ -16,8 +16,8 @@ Path
     Note that if ``path1`` is same as ``path2``, it's also regarded as
     the super path os ``path2``.
 
-    For instance "/opt" is the super path of "/opt/test",
-    While "/opt/t" is the super path of "/opt/test"
+    For instance "/", "/opt" and "/opt/test" are all the super paths of "/opt/test",
+    while "/opt/t" is the super path of "/opt/test".
 
     >>> from pydu.path import is_super_path
     >>> is_super_path('/aa/bb/cc', '/aa/bb/cc')

@@ -18,8 +18,8 @@ def is_super_path(path1, path2):
     Whether `path1` is the super path of `path2`.
     Note that if `path1` is same as `path2`, it's also regarded as
     the super path os `path2`.
-    For instance "/opt" is the super path of "/opt/test",
-    While "/opt/t" is the super path of "/opt/test"
+    For instance "/", "/opt" and "/opt/test" are all the super paths of "/opt/test",
+    while "/opt/t" is the super path of "/opt/test".
     """
     path1 = os.path.normpath(path1)
     current_path2 = os.path.normpath(path2)
