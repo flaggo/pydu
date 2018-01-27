@@ -1,6 +1,9 @@
 Process
 -------
 
+.. note:: ``pydu.process`` is based on ``psutil``. Need to ``pip install psutil`` first.
+
+
 .. py:function:: pydu.process.get_processes_by_path(path)
 
     Get processes which are running on given path or sub path of given path.
