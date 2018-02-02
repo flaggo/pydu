@@ -1,12 +1,12 @@
 """iteration tools"""
-from compat import builtins
+from .compat import builtins, imap
 
 
 def first(iterable):
     """
     Get the first item in the iterable.
     """
-    return iter(iterable).next()
+    return next(iter(iterable))
 
 
 def last(iterable):
@@ -40,4 +40,4 @@ def join(iterable, separator=''):
     """
     Join each item of iterable to string.
     """
-    return separator.join(map(str, iterable))
+    return separator.join(imap(str, iterable))
