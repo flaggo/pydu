@@ -2,6 +2,8 @@ import socket
 import struct
 import ctypes
 import binascii
+from contextlib import closing
+
 from .platform import WINDOWS
 from .string import safeencode, safeunicode
 from .convert import hex2dec, dec2hex
@@ -113,10 +115,9 @@ def is_ipv6(ip):
 
 
 def get_free_port():
-    s = socket.socket(socket.AF_INET, type=socket.SOCK_STREAM)
-    s.bind(('127.0.0.1', 0))
-    _, port = s.getsockname()
-    s.close()
+    with closing(socket.socket(socket.AF_INET, type=socket.SOCK_STREAM)) as s:
+        s.bind(('127.0.0.1', 0))
+        _, port = s.getsockname()
     return port
 
 
