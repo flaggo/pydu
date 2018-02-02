@@ -34,3 +34,10 @@ def any(iterable, predicate):
     given predicate function.
     """
     return builtins.any(predicate(x) for x in iterable)
+
+
+def join(iterable, separator=''):
+    """
+    Join each item of iterable to string.
+    """
+    return separator.join(map(str, iterable))

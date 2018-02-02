@@ -1,5 +1,5 @@
 import pytest
-from pydu.iter import first, last, all, any
+from pydu.iter import first, last, all, any, join
 
 
 @pytest.mark.parametrize(
@@ -23,3 +23,8 @@ def test_all():
 def test_any():
     assert any([-1, -1, 0], lambda x: x+1)
     assert not any([-1, -1, -1], lambda x: x + 1)
+
+
+def test_join():
+    assert join(iter([1, '2', 3])) == '123'
+    assert join(iter([1, '2', 3]), separator=',') == '1,2,3'
