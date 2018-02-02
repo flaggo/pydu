@@ -1,5 +1,5 @@
 import pytest
-from pydu.iter import first, last
+from pydu.iter import first, last, all, any
 
 
 @pytest.mark.parametrize(
@@ -13,3 +13,13 @@ from pydu.iter import first, last
 def test_first_last(iterable):
     assert first(iterable) == 1
     assert last(iterable) == 2
+
+
+def test_all():
+    assert all([0, 1, 2], lambda x: x+1)
+    assert not all([0, 1, 2], lambda x: x)
+
+
+def test_any():
+    assert any([-1, -1, 0], lambda x: x+1)
+    assert not any([-1, -1, -1], lambda x: x + 1)

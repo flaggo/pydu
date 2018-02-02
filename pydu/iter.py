@@ -1,4 +1,5 @@
 """iteration tools"""
+from compat import builtins
 
 
 def first(iterable):
@@ -17,3 +18,19 @@ def last(iterable):
     for item in iterable:
         pass
     return item
+
+
+def all(iterable, predicate):
+    """
+    Returns True if all elements in the given iterable are True for the
+    given predicate function.
+    """
+    return builtins.all(predicate(x) for x in iterable)
+
+
+def any(iterable, predicate):
+    """
+    Returns True if any element in the given iterable is True for the
+    given predicate function.
+    """
+    return builtins.any(predicate(x) for x in iterable)
