@@ -12,7 +12,7 @@ def first(iterable):
 def last(iterable):
     """
     Get the last item in the iterable.
-    Warnning, this can be slow.
+    Warning, this can be slow due to iter step by step to last one.
     """
     item = None
     for item in iterable:
