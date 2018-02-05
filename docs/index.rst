@@ -29,6 +29,7 @@ Content
    environ
    exception
    inspect
+   iter
    list
    misc
    network
