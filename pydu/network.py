@@ -91,6 +91,14 @@ def dotted_netmask(mask):
     return socket.inet_ntoa(struct.pack('>I', bits))
 
 
+# http://en.wikipedia.org/wiki/Private_network
+private_ipv4s = [
+    ('10.0.0.0', 8),  # 10.0.0.0 - 10.255.255.255
+    ('172.16.0.0', 12),  # 172.16.0.0 - 172.31.255.255
+    ('192.168.0.0', 16),  # 192.168.0.0 - 192.168.255.255
+]
+
+
 # https://github.com/kennethreitz/requests/blob/master/requests/utils.py
 def is_ipv4(ip):
     """
