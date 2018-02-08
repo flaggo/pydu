@@ -13,6 +13,11 @@ Network
     '255.255.255.0'
 
 
+.. py:data:: pydu.network.private_ipv4s
+
+    A list of private ipv4 addresses. Each item is a tuple of
+    (ipv4 address, mask).
+
 .. py:function:: pydu.network.is_ipv4(ip)
 
     Judge whether the given ``ip`` is IPV4 address.
