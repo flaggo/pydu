@@ -1,3 +1,6 @@
+from .compat import reduce
+
+
 def compose(*funcs):
     """
     Compose all functions. The previous function must accept one argument,

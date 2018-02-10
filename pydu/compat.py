@@ -50,6 +50,11 @@ if PY2:
 else:
     imap = map
 
+if PY2:
+    reduce = reduce
+else:
+    from functools import reduce
+
 # next
 if PY2:
     has_next_attr = lambda x: x and hasattr(x, 'next')
