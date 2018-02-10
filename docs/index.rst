@@ -28,6 +28,7 @@ Content
    dict
    environ
    exception
+   functional
    inspect
    iter
    list
