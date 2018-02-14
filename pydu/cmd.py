@@ -40,19 +40,15 @@ else:
     TimeoutExpired = subprocess.TimeoutExpired
 
 
-def run(cmd, wait=True, shell=False, env=None, timeout=None, timeinterval=1):
+def run(cmd, shell=False, env=None, timeout=None, timeinterval=1):
     """
-    Run cmd based on `subprocess.Popen`.
-    If `wait` is True, `run` will return the tuple of `(returncode, stdout)`.
-    Note, `stderr` is redirected to `stdout`. If `wait` is False, `run`
-    will return object of `Popen`.
-    `shell` is same to parameter of `Popen`.
-    If the process does not terminate after `timeout` seconds, a `TimeoutExpired` exception will be raised.
-    `timeinterval` is workable when timeout is given on Python 2. It means process status checking interval.
+    Run cmd based on `subprocess.Popen` and return the tuple of `(returncode, stdout)`.
+    Note, `stderr` is redirected to `stdout`. `shell` is same to parameter of `Popen`.
+    If the process does not terminate after `timeout` seconds, a `TimeoutExpired`
+    exception will be raised. `timeinterval` is workable when timeout is given
+    on Python 2. It means process status checking interval.
     """
     p = Popen(cmd, shell=shell, stdout=PIPE, stderr=STDOUT, env=env)
-    if not wait:
-        return p
 
     if PY2:
         if timeout:
@@ -69,7 +65,7 @@ def run(cmd, wait=True, shell=False, env=None, timeout=None, timeinterval=1):
         return p.poll(), stdout
 
 
-def run_with_en_env(cmd, wait=True, env=None, shell=False, timeout=None, timeinterval=1):
+def run_with_en_env(cmd, env=None, shell=False, timeout=None, timeinterval=1):
     """
     Run cmd with English character sets environment, so that the output will
     be in English.
@@ -78,12 +74,12 @@ def run_with_en_env(cmd, wait=True, env=None, shell=False, timeout=None, timeint
     if WINDOWS:
         from .system import chcp
         with chcp(437):
-            return run(cmd, wait=wait, shell=shell,
+            return run(cmd, shell=shell,
                        timeout=timeout, timeinterval=timeinterval)
     else:
         env = env if env else os.environ.copy()
         env.update({'LANG': 'en_US.UTF-8'})
-        return run(cmd, wait=wait, shell=shell, env=env,
+        return run(cmd, shell=shell, env=env,
                    timeout=timeout, timeinterval=timeinterval)
 
 
