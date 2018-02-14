@@ -65,7 +65,7 @@ def run(cmd, shell=False, env=None, timeout=None, timeinterval=1):
         return p.poll(), stdout
 
 
-def run_with_en_env(cmd, env=None, shell=False, timeout=None, timeinterval=1):
+def run_with_en_env(cmd, shell=False, env=None, timeout=None, timeinterval=1):
     """
     Run cmd with English character sets environment, so that the output will
     be in English.
