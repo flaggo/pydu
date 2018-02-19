@@ -10,15 +10,11 @@ Cmd
         cmd, output, stdout, stderr, timeout
 
 
-.. py:function:: pydu.cmd.run(cmd, wait=True, env=None, shell=False, timeout=None, timeinterval=1)
+.. py:function:: pydu.cmd.run(cmd, shell=False, env=None, timeout=None, timeinterval=1)
 
-    Run cmd based on ``subprocess.Popen``.
+    Run cmd based on ``subprocess.Popen`` and return the tuple of ``(returncode, stdout)``.
 
-    If ``wait`` is True, ``run`` will return the tuple of ``(returncode, stdout)``.
-    Note, ``stderr`` is redirected to ``stdout``. If ``wait`` is False, ``run``
-    will return object of ``Popen``.
-
-    ``shell`` is same to parameter of ``Popen``.
+    Note, ``stderr`` is redirected to ``stdout``. ``shell`` is same to parameter of ``Popen``.
 
     If the process does not terminate after ``timeout`` seconds, a ``TimeoutExpired`` exception will be raised.
     ``timeinterval`` is workable when timeout is given on Python 2. It means process status checking interval.
@@ -28,11 +24,9 @@ Cmd
     >>> from pydu.cmd import run
     >>> run('echo hello')
     (0, b'hello\r\n')  # Python 3
-    >>> run('echo hello', wait=False)
-    <subprocess.Popen at 0x22e4010f9e8>
 
 
-.. py:function:: pydu.cmd.run_with_en_env(cmd, wait=True, shell=False, env=None, timeout=None, timeinterval=1)
+.. py:function:: pydu.cmd.run_with_en_env(cmd, shell=False, env=None, timeout=None, timeinterval=1)
 
     Run cmd with English character sets environment, so that the output will
     be in English.
