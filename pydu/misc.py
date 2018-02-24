@@ -116,7 +116,7 @@ def memoize_when_activated(func):
 
     >>> class Foo:
     ...     @memoize
-    ...     def foo()
+    ...     def foo(self)
     ...         print(1)
     ...
     >>> f = Foo()
