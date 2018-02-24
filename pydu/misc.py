@@ -43,7 +43,7 @@ def timeout(seconds, error_message='Time out'):
     return decorated
 
 
-def trace(f):  # pragma: no cover
+def trace(func):  # pragma: no cover
     def globaltrace(frame, why, arg):
         if why == 'call':
             return localtrace
@@ -61,19 +61,19 @@ def trace(f):  # pragma: no cover
                 linecache.getline(filename, lineno).strip('\r\n')))
         return localtrace
 
-    def _f(*args, **kwds):
+    def _func(*args, **kwds):
         try:
             sys.settrace(globaltrace)
-            result = f(*args, **kwds)
+            result = func(*args, **kwds)
             return result
         finally:
             sys.settrace(None)
 
-    return _f
+    return _func
 
 
 # https://github.com/giampaolo/psutil/blob/master/psutil/_common.py
-def memoize(fun):
+def memoize(func):
     """
     A simple memoize decorator for functions supporting (hashable)
     positional arguments.
@@ -88,13 +88,13 @@ def memoize(fun):
     >>> foo.cache_clear()
     >>>
     """
-    @functools.wraps(fun)
+    @functools.wraps(func)
     def wrapper(*args, **kwargs):
         key = (args, frozenset(sorted(kwargs.items())))
         try:
             return cache[key]
         except KeyError:
-            ret = cache[key] = fun(*args, **kwargs)
+            ret = cache[key] = func(*args, **kwargs)
             return ret
 
     def cache_clear():
@@ -107,7 +107,7 @@ def memoize(fun):
 
 
 # https://github.com/giampaolo/psutil/blob/master/psutil/_common.py
-def memoize_when_activated(fun):
+def memoize_when_activated(func):
     """
     A memoize decorator which is disabled by default. It can be
     activated and deactivated on request.
@@ -134,15 +134,15 @@ def memoize_when_activated(fun):
     >>> foo()
     >>>
     """
-    @functools.wraps(fun)
+    @functools.wraps(func)
     def wrapper(self):
         if not wrapper.cache_activated:
-            return fun(self)
+            return func(self)
         else:
             try:
-                ret = cache[fun]
+                ret = cache[func]
             except KeyError:
-                ret = cache[fun] = fun(self)
+                ret = cache[func] = func(self)
             return ret
 
     def cache_activate():
