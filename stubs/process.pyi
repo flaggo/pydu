@@ -1,0 +1,3 @@
+from typing import List, Dict, Union
+
+def get_processes_by_path(path: str) -> List[Dict[str, Union[int, str]]]: ...
