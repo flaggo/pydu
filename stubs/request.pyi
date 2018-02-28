@@ -1,0 +1,13 @@
+from typing import Union, Optional
+
+
+Headers = Union[dict, list, str]
+
+
+class FileName(object):
+    def from_url(self, url: str) -> str: None
+    def from_headers(self, headers: Headers) -> Optional[str]: ...
+    def from_any(cls, dst: str=None, headers: Headers=None, url: str=None) -> Optional[str]: ...
+
+def download(url: str, dst: str=None) -> str: ...
+def check_connect(ip: str, port: int, retry: int, timout: float) -> Optional[str]: ...
