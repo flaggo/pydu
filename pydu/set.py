@@ -2,7 +2,7 @@
 import collections
 
 
-class OrderedSet:
+class OrderedSet(object):
     """
     A set which keeps the ordering of the inserted items.
     """
