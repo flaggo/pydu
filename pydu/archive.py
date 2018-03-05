@@ -206,8 +206,8 @@ class TarArchive(BaseArchive):
                     except NameError:
                         pass
 
-    def list(self, *args, **kwargs):
-        self._archive.list(*args, **kwargs)
+    def list(self):
+        self._archive.list()
 
     def filenames(self):
         return self._archive.getnames()
@@ -245,8 +245,8 @@ class ZipArchive(BaseArchive):
                 mode = info.external_attr >> 16
                 self._copy_permissions(mode, filename)
 
-    def list(self, *args, **kwargs):
-        self._archive.printdir(*args, **kwargs)
+    def list(self):
+        self._archive.printdir()
 
     def filenames(self):
         return self._archive.namelist()
