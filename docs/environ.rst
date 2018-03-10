@@ -1,6 +1,8 @@
 Environ
 -------
 
+Utils for handling environment.
+
 
 .. py:function:: pydu.environ.environ(**kwargs)
 

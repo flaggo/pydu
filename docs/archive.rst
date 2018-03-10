@@ -1,6 +1,8 @@
 Archive
 -------
 
+Utils for archiving files.
+
 .. py:function:: pydu.archive.extract(path, to_path='', ext='')
 
   Unpack the tar or zip file at the specified path or file to the directory

@@ -1,6 +1,8 @@
 Network
 -------
 
+Utils for handling network.
+
 .. py:function:: pydu.network.dotted_netmask(mask)
 
     Converts mask from /`xx` format to `xxx.xxx.xxx.xxx`.

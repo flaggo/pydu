@@ -1,6 +1,8 @@
 Functional
 ----------
 
+Utils for functional programming.
+
 .. py:function:: pydu.functional.compose(*funcs)
 
     Compose all functions. The previous function must accept one argument,

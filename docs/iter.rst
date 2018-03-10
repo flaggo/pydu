@@ -1,6 +1,8 @@
 Iter
 ----
 
+Utils for handling iterations.
+
 .. py:function:: pydu.iter.first(iterable)
 
     Get the first item in the iterable.

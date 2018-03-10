@@ -1,6 +1,8 @@
 Inspect
 -------
 
+Utils for inspecting functions.
+
 .. py:function:: pydu.inspect.getargspec(func)
 
     Get the names and default values of a function's arguments.

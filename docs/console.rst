@@ -1,6 +1,8 @@
 Console
 -------
 
+Utils for handling console.
+
 .. py:function:: pydu.console.console_size(fallback=(80, 25))
 
     For Windows, return (width, height) of available window area, fallback

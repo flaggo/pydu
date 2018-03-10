@@ -1,6 +1,8 @@
 Dict
 ----
 
+Additional powerful dictionaries and relative functions.
+
 .. py:class:: pydu.dict.AttrDict(seq=None, **kwargs)
 
     A AttrDict object is like a dictionary except ``obj.foo`` can be used

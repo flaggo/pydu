@@ -1,6 +1,8 @@
 Convert
 -------
 
+Utils for converting one type of data to another.
+
 
 .. py:function:: pydu.convert.boolean(obj)
 

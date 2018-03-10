@@ -1,6 +1,8 @@
 List
 ----
 
+Utils for handling list.
+
 .. py:function:: pydu.list.uniq(seq, key=None)
 
     Removes duplicate elements from a list while preserving the order of the rest.

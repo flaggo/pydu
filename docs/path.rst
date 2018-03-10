@@ -1,6 +1,8 @@
 Path
 ----
 
+Utils for handling path.
+
 .. py:function:: pydu.path.cd(path)
 
     Context manager for cd the given path.

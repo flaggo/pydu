@@ -1,6 +1,8 @@
 Process
 -------
 
+Utils for handling processes.
+
 .. note:: ``pydu.process`` is based on ``psutil``. Need to ``pip install psutil`` first.
 
 

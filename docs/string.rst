@@ -1,6 +1,8 @@
 String
 ------
 
+Utils for handling string.
+
 .. py:function:: pydu.string.safeunicode(obj, encoding='utf-8')
 
     Converts any given object to unicode string.

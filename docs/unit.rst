@@ -1,6 +1,8 @@
 Unit
 ----
 
+Utils for handling unit.
+
 .. py:class:: pydu.unit.Bytes(bytes)
 
     Supply several methods dealing with bytes.

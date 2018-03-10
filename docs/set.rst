@@ -1,5 +1,7 @@
 Set
-----
+---
+
+Additional powerful sets.
 
 .. py:class:: pydu.set.OrderedSet(iterable=None)
 

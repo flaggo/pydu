@@ -1,6 +1,8 @@
 Cmd
 ---
 
+Utils for running command and getting command line.
+
 .. py:class:: pydu.cmd.TimeoutExpired(cmd, timeout, output=None, stderr=None)
 
     This exception is raised when the timeout expires while waiting for a

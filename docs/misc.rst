@@ -1,6 +1,8 @@
 Miscellanea
 -----------
 
+Miscellaneous utils like `timeout`, `trace` and so on.
+
 .. py:function:: pydu.misc.timeout(seconds)
 
     This func decorates any func which may be hang for a while. The param ``seconds``

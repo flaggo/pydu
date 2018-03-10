@@ -1,6 +1,8 @@
 Compat
 ------
 
+compatible data structures, libs, functions for Python 2 and 3.
+
 .. py:data:: pydu.compat.PY2
 
     Specify current Python interpreter is Python 2 or 3.

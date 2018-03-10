@@ -1,6 +1,8 @@
 Request
 -------
 
+Utils for handling request.
+
 .. py:class:: pydu.request.Filename
 
     Supply several methods to get filename.

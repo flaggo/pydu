@@ -1,6 +1,8 @@
 Platform
 --------
 
+Constants which indicates specific platform.
+
 .. py:data:: pydu.platform.WINDOWS
 
     Judge whether current platform is WINDOWS or not.

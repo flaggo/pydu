@@ -1,6 +1,8 @@
 Exception
 ---------
 
+Utils for handling exceptions.
+
 .. py:function:: pydu.exception.ignore(*exceptions)
 
     A context manager which can ignore given exceptions.
