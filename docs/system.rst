@@ -59,19 +59,21 @@ Utils for handling system, like to track file, make directory, link and so on.
     `path` , `exc_info` ) where func is platform and implementation dependent;
     `path` is the argument to that function that caused it to fail; and
     `exc_info` is a tuple returned by `sys.exc_info()`.  If `ignore_errors`
-    is `False` and `onerror` is None, an exception is raised.
+    is `False` and `onerror` is None, it attempts to set `path` as writeable and
+    then proceed with deletion if `path` is read-only, or raise an exception
+    if `path` is not read-only.
 
     >>> from pydu.system import makedirs
     >>> from pydu.system import remove
-    >>> from pydu.system import open_file
-    >>> makedirs('test1')
-    >>> remove('test1')
-    >>> open_file('test.txt')
-    >>> remove('test.txt')
-    >>> remove('test',ignore_errors=True)
+    >>> from pydu.system import touch
+    >>> makedirs('test')
     >>> remove('test')
+    >>> touch('test.txt')
+    >>> remove('test.txt')
+    >>> remove('test.txt', ignore_errors=True)
+    >>> remove('test.txt')
     Traceback (most recent call last):
-     ...    OSError: Remove path: test error
+     ...    OSError: Remove path: test error. Reason: [Errno 2] No such file or directory: 'test.txt'
 
 ..  py:function:: pydu.system.removes(paths, mode=0o755, ignore_errors=False, onerror)
 
