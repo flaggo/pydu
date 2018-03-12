@@ -1,6 +1,9 @@
 import os
 import sys
+import stat
+import errno
 import shutil
+import warnings
 
 from . import logger
 from .platform import WINDOWS
@@ -87,14 +90,25 @@ def remove(path, ignore_errors=False, onerror=None):
     path, exc_info) where func is platform and implementation dependent;
     path is the argument to that function that caused it to fail; and
     exc_info is a tuple returned by sys.exc_info().  If ignore_errors
-    is False and onerror is None, an exception is raised.
+    is False and onerror is None, it attempts to set path as writeable and
+    then proceed with deletion if path is read-only, or raise an exception
+    if path is not read-only.
     """
     if ignore_errors:
-        def onerror(*args):
+        def onerror(func, path, exc):
             pass
     elif onerror is None:
-        def onerror(*args):
-            raise OSError('Remove path: {} error'.format(path))
+        def onerror(func, path, exc):
+            default_error_msg = 'Remove path: {} error. Reason: {}'
+            if (os.stat(path).st_mode & stat.S_IREAD) or not os.access(path, os.W_OK):
+                try:
+                    os.chmod(path, stat.S_IWRITE | stat.S_IWUSR)
+                    func(path)
+                except Exception as e:
+                    raise OSError(default_error_msg.format(path, e))
+            else:
+                exc_type, exc_exception, exc_tb = exc
+                raise OSError(default_error_msg.format(path, exc_exception))
 
     if os.path.isdir(path):
         shutil.rmtree(path, ignore_errors=ignore_errors, onerror=onerror)
