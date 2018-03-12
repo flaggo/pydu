@@ -78,7 +78,7 @@ def makedirs(path, mode=0o755, ignore_errors=False, exist_ok=False):
         os.makedirs(path, mode)
     except:
         if not ignore_errors:
-            raise OSError('Create dir: {} error.'.format(path))
+            raise OSError('Create dir: {!r} error.'.format(path))
 
 
 def remove(path, ignore_errors=False, onerror=None):
@@ -99,16 +99,15 @@ def remove(path, ignore_errors=False, onerror=None):
             pass
     elif onerror is None:
         def onerror(func, path, exc):
-            default_error_msg = 'Remove path: {} error. Reason: {}'
-            if (os.stat(path).st_mode & stat.S_IREAD) or not os.access(path, os.W_OK):
-                try:
+            try:
+                if (os.stat(path).st_mode & stat.S_IREAD) or not os.access(path, os.W_OK):
                     os.chmod(path, stat.S_IWRITE | stat.S_IWUSR)
                     func(path)
-                except Exception as e:
-                    raise OSError(default_error_msg.format(path, e))
-            else:
-                exc_type, exc_exception, exc_tb = exc
-                raise OSError(default_error_msg.format(path, exc_exception))
+                else:
+                    exc_type, exc_exception, exc_tb = exc
+                    raise exc_exception
+            except Exception as e:
+                raise OSError('Remove path: {!r} error. Reason: {}'.format(path, e))
 
     if os.path.isdir(path):
         shutil.rmtree(path, ignore_errors=ignore_errors, onerror=onerror)
@@ -148,7 +147,7 @@ def open_file(path, mode='wb+', buffer_size=-1, ignore_errors=False):
             f = open(path, mode, buffer_size)
     except:
         if not ignore_errors:
-            raise OSError('Open file: {} error'.format(path))
+            raise OSError('Open file: {!r} error'.format(path))
     return f
 
 
@@ -185,7 +184,7 @@ def copy(src, dst, ignore_errors=False, follow_symlinks=True):
                 shutil.copy(src, dst)
     except:
         if not ignore_errors:
-            raise OSError('Copy {} to {} error'.format(src, dst))
+            raise OSError('Copy {!r} to {!r} error'.format(src, dst))
 
 
 def touch(path):
@@ -323,7 +322,7 @@ else:
             os.symlink(src, dst)
         except Exception:
             if not ignore_errors:
-                raise OSError('Link {} to {} error'.format(dst, src))
+                raise OSError('Link {!r} to {!r} error'.format(dst, src))
 
 
     def link(src, dst, overwrite=False, ignore_errors=False):
@@ -343,4 +342,4 @@ else:
             os.link(src, dst)
         except:
             if not ignore_errors:
-                raise OSError('Link {} to {} error'.format(dst, src))
+                raise OSError('Link {!r} to {!r} error'.format(dst, src))
