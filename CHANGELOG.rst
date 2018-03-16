@@ -3,9 +3,9 @@ v0.5.0 (2018-03-08)
 
 **Enhancements**
 
-* Add `network.private_ipv4s` which stores private IPV4 addresses.
-* Add `functional.compose` which composes all functions into one.
-* Add `TYPE HINT` for ALL MODULES by supplying STUB FILES!
+* Add ``network.private_ipv4s`` which stores private IPV4 addresses.
+* Add ``functional.compose`` which composes all functions into one.
+* Add ``TYPE HINT`` for ALL MODULES by supplying STUB FILES!
 
 **Bug fixes**
 
@@ -17,10 +17,10 @@ v0.4.2 (2018-2-5)
 
 **Enhancements**
 
-* Add `socket.inet_pton` and `socket.inetntop` for Windows if we `import pydu.network`.
-* Add `network.ip2int` and `network.int2ip` which convert ip to integer or integer to ip.
-* Add `process.get_processes_by_path` for getting processes which are running on given path or sub path of given path.
-* Add `first`, `last`, `all`, `any` and `join` to `pydu.iter`, which support many operations on iterable object.
+* Add ``socket.inet_pton`` and ``socket.inetntop`` for Windows if we ``import pydu.network``.
+* Add ``network.ip2int`` and ``network.int2ip`` which convert ip to integer or integer to ip.
+* Add ``process.get_processes_by_path`` for getting processes which are running on given path or sub path of given path.
+* Add ``first``, ``last``, ``all``, ``any`` and ``join`` to ``pydu.iter``, which support many operations on iterable object.
 
 **Bug fixes**
 
@@ -32,13 +32,13 @@ v0.4.1 (2018-1-20)
 
 **Enhancements**
 
-* Add `bin2oct`, `bin2dec`, `bin2hex`, `oct2bin`, `oct2dec`, `oct2hex`, `dec2bin`, `dec2oct`, `dec2hex`, `hex2bin`, `hex2oct`, `hex2dec` to `convert`, which support many base conversions
-* Add `path.is_super_path` which judges whether the given `path1` is the super path of `path2`
-* Add `environ.environ` which is a context manager for updating one or more environment variables
-* Add `environ.path` which is a context manager for updating the PATH environment variable
-* Add `list.tolist` which converts obj to list
-* Add `list.flatten` which generates each element of the given `seq`
-* Add `compat.strbytes_types` which includes all types about string
+* Add ``bin2oct``, ``bin2dec``, ``bin2hex``, ``oct2bin``, ``oct2dec``, ``oct2hex``, ``dec2bin``, ``dec2oct``, ``dec2hex``, ``hex2bin``, ``hex2oct``, ``hex2dec`` to ``convert``, which support many base conversions
+* Add ``path.is_super_path`` which judges whether the given ``path1`` is the super path of ``path2``
+* Add ``environ.environ`` which is a context manager for updating one or more environment variables
+* Add ``environ.path`` which is a context manager for updating the PATH environment variable
+* Add ``list.tolist`` which converts obj to list
+* Add ``list.flatten`` which generates each element of the given ``seq``
+* Add ``compat.strbytes_types`` which includes all types about string
 
 
 v0.4.0 (2018-1-9)
@@ -83,10 +83,10 @@ v0.3.0 (2017-12-26)
 * Add ``system.which`` which supports find executable file.
 * Add ``system.chmod`` which supports chmod recursively.
 * Add ``unit.Bytes`` which used to deal with bytes.
-* Add `preferredencoding` to ``string``.
-* Add ``cmd.chcp`` for Windows which is same like `chcp` on Windows cmd.
+* Add ``preferredencoding`` to ``string``.
+* Add ``cmd.chcp`` for Windows which is same like ``chcp`` on Windows cmd.
 * Add ``cmd.run_with_en_env`` which ensure the output of cmd is in English.
-* Add ``cmd.terminate`` which supports terminate process by given `pid`.
+* Add ``cmd.terminate`` which supports terminate process by given ``pid``.
 * ``cmd.run`` uses timeout feature on Python 3 but not implement by self.
 
 
@@ -103,8 +103,8 @@ v0.2.0 (2017-12-17)
 * Add ``exception.ignore``.
 * ``network.is_ipv6`` is available on Windows.
 * Set logging handler to avoid "No handler found" warnings.
-* Add `Makefile` which make development easier.
-* Update `readme` which is more readable.
+* Add ``Makefile`` which make development easier.
+* Update ``readme`` which is more readable.
 
 **Bug fixes**
 
