@@ -11,18 +11,24 @@ def environ(**kwargs):
 
     Preserves the previous environment variable (if available) and
     recovers when exiting the context manager.
+
+    If given variable_name=None, it means removing the variable from
+    environment temporarily.
     """
     original_kwargs = {}
 
     for key in kwargs:
         original_kwargs[key] = os.environ.get(key, None)
-        os.environ[key] = kwargs[key]
+        if kwargs[key] is None and original_kwargs[key] is not None:
+            del os.environ[key]
+        elif kwargs[key] is not None:
+            os.environ[key] = kwargs[key]
 
     yield
 
     for key, value in iteritems(original_kwargs):
         if value is None:
-            del os.environ[key]
+            os.environ.pop(key, None)
             continue
 
         os.environ[key] = value

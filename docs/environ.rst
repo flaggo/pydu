@@ -11,6 +11,9 @@ Utils for handling environment.
     Preserves the previous environment variable (if available) and
     recovers when exiting the context manager.
 
+    If given variable_name=None, it means removing the variable from
+    environment temporarily.
+
     >>> from pydu.environ import environ
     >>> with environ(a='a'):
     ...     print(os.environ['a'])
