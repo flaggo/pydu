@@ -1,3 +1,13 @@
+v0.5.1 (2018-03-19)
+-------------------
+
+**Enhancements**
+
+* Improve ``system.remove`` when path is read-only.
+* Add ``path.normjoin`` which join one or more path components intelligently and normalize it.
+* Improve ``environ.environ`` with supporting variable_name=None which means removing the variable from environment temporarily.
+
+
 v0.5.0 (2018-03-08)
 -------------------
 
