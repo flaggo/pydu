@@ -30,6 +30,12 @@ class TestIsSupoerPath:
 
 
 def test_normjoin():
-    assert normjoin('/a', 'b') == '/a/b'
-    assert normjoin('/a', '/b') == '/b'
-    assert normjoin('/a', '../b') == '/b'
+    if WINDOWS:
+        assert normjoin('C:\\', 'b') == 'C:\\b'
+        assert normjoin('C:\\', '\\b') == 'C:\\b'
+        assert normjoin('C:\\a', '\\b') == 'C:\\b'
+        assert normjoin('C:\\a', '..\\b') == 'C:\\b'
+    else:
+        assert normjoin('/a', 'b') == '/a/b'
+        assert normjoin('/a', '/b') == '/b'
+        assert normjoin('/a', '../b') == '/b'
