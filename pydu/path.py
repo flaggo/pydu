@@ -34,3 +34,8 @@ def is_super_path(path1, path2):
         parent_path2 = os.path.dirname(parent_path2)
 
     return False
+
+
+def normjoin(path, *paths):
+    """Join one or more path components intelligently and normalize it."""
+    return os.path.normpath(os.path.join(path, *paths))

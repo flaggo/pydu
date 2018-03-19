@@ -1,7 +1,7 @@
 import os
 import pytest
 from pydu.platform import WINDOWS
-from pydu.path import cd, is_super_path
+from pydu.path import cd, is_super_path, normjoin
 
 
 def test_cd(tmpdir):
@@ -27,3 +27,9 @@ class TestIsSupoerPath:
         assert is_super_path('c:/aa/bb', 'c:/aa\\bb/cc')
         assert is_super_path('c:/aa\\bb', 'c:\\aa/bb/cc')
         assert is_super_path('c:/', 'c:\\')
+
+
+def test_normjoin():
+    assert normjoin('/a', 'b') == '/a/b'
+    assert normjoin('/a', '/b') == '/b'
+    assert normjoin('/a', '../b') == '/b'
