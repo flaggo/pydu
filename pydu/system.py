@@ -1,9 +1,7 @@
 import os
 import sys
 import stat
-import errno
 import shutil
-import warnings
 
 from . import logger
 from .platform import WINDOWS
