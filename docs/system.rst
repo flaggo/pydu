@@ -193,3 +193,8 @@ Utils for handling system, like to track file, make directory, link and so on.
     >>>
 
     .. note:: ``chcp`` can only be used on ``Windows`` system.
+
+
+.. py:function:: pydu.system.preferredencoding(code)
+
+    Get best encoding for the system.
