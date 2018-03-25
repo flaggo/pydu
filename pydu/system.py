@@ -2,6 +2,7 @@ import os
 import sys
 import stat
 import shutil
+import locale
 
 from . import logger
 from .platform import WINDOWS
@@ -341,3 +342,16 @@ else:
         except:
             if not ignore_errors:
                 raise OSError('Link {!r} to {!r} error'.format(dst, src))
+
+
+def preferredencoding():
+    """
+    Get best encoding for the system.
+    """
+    try:
+        encoding = locale.getpreferredencoding()
+        'test encoding'.encode(encoding)
+    except UnicodeEncodeError:
+        encoding = 'UTF-8'
+
+    return encoding
