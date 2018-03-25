@@ -165,7 +165,7 @@ Utils for handling system, like to track file, make directory, link and so on.
     /bin/echo
 
 
-.. py:function:: pydu.cmd.chmod(path, mode, recursive=False)
+.. py:function:: pydu.system.chmod(path, mode, recursive=False)
 
     Change permissions to the given mode.
     If ``recursive`` is True perform recursively.
@@ -180,12 +180,12 @@ Utils for handling system, like to track file, make directory, link and so on.
         or a corresponding integer value). All other bits are ignored.
 
 
-.. py:function:: pydu.cmd.chcp(code)
+.. py:function:: pydu.system.chcp(code)
 
     Context manager which sets the active code page number.
     It could also be used as function.
 
-    >>> from pydu.cmd import chcp
+    >>> from pydu.system import chcp
     >>> chcp(437)
     <active code page number: 437>
     >>> with chcp(437):
