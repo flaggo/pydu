@@ -17,10 +17,12 @@ if PY2:
     import urllib as urlib
     import urlparse
     from urlparse import urljoin
+    from urllib import urlencode
 else:
     import urllib.request as urlib
     import urllib.parse as urlparse
     from urllib.parse import urljoin
+    from urllib.parse import urlencode
 
 # Dictionary iteration
 if PY2:

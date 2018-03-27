@@ -5,7 +5,7 @@ import socket
 
 from . import logger
 from .string import safeunicode
-from .compat import PY2, string_types, urlparse, urlib
+from .compat import PY2, string_types, urlparse, urlib, urlencode
 
 
 class FileName(object):
@@ -125,3 +125,15 @@ def check_connect(ip, port, retry=1, timeout=0.5):
         finally:
             retry -= 1
     return None
+
+
+def update_query_params(url, params):
+    """
+    Update query params of given url and return new url.
+    """
+    parts = list(urlparse.urlparse(url))
+    query = dict(urlparse.parse_qsl(parts[4]))
+    query.update(params)
+    parts[4] = urlencode(query)
+    new_url = urlparse.urlunparse(parts)
+    return new_url

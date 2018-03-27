@@ -2,7 +2,7 @@ import socket
 from .testing import mockserver
 import pydu.request
 from pydu.network import get_free_port
-from pydu.request import FileName, check_connect
+from pydu.request import FileName, check_connect, update_query_params
 
 
 def test_filename_from_url():
@@ -52,3 +52,9 @@ def test_check_connect(port=None):
 
     pydu.request.socket.socket = mock_socket
     assert not check_connect('127.0.0.1', port=port, timeout=0.01)
+
+
+def test_update_query_params():
+    assert update_query_params('http://example.com/', {'foo': 1}) == 'http://example.com/?foo=1'
+    assert update_query_params('http://example.com/?foo=1', {'foo': 2}) == 'http://example.com/?foo=2'
+    assert update_query_params('http://example.com/?foo=1', {'foo': 2, 'bar': 3}) == 'http://example.com/?foo=2&bar=3'
