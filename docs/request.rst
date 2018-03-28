@@ -39,4 +39,12 @@ Utils for handling request.
     >>> from pydu.request import check_connect
     >>> check_connect('http://www.baidu.com', 80)
     '192.168.3.8'
-    >>>
+
+
+.. py:function:: pydu.request.update_query_params(url, params)
+
+    Update query params of given url and return new url.
+
+    >>> from pydu.request import update_query_params
+    >>> update_query_params('http://example.com', {'foo': 1})
+    'http://example.com?foo=1'
