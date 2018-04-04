@@ -59,4 +59,4 @@ def test_update_query_params():
     assert update_query_params(base, {'foo': 1}) == base + '?foo=1'
     assert update_query_params(base + '?foo=1', {'foo': 2}) == base + '?foo=2'
     assert update_query_params(base + '?foo=1', {'foo': 2, 'bar': 3}) in \
-           (base + '?foo=2&bar=3', base + '?foo=2&bar=3')
+           (base + '?foo=2&bar=3', base + '?bar=3&foo=2')
