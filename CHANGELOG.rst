@@ -1,3 +1,13 @@
+v0.5.2 (2018-04-04)
+-------------------
+
+**Enhancements**
+
+* Add ``system.preferredencoding`` which gets best encoding for the system.
+* Add ``request.update_query_params`` which update query params of given url and return new url.
+* Update stub for ``requests.check_connect``.
+
+
 v0.5.1 (2018-03-19)
 -------------------
 
