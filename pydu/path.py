@@ -39,3 +39,9 @@ def is_super_path(path1, path2):
 def normjoin(path, *paths):
     """Join one or more path components intelligently and normalize it."""
     return os.path.normpath(os.path.join(path, *paths))
+
+
+def filename(path):
+    """Return the filename without extension."""
+    return os.path.splitext(os.path.basename(path))[0]
+
