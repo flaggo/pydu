@@ -28,3 +28,12 @@ Utils for handling path.
     True
     >>> is_super_path('/aa/b', '/aa/bb/cc')
     False
+
+
+.. py:function:: pydu.path.filename(path)
+
+    Return the filename without extension.
+
+    >>> from pydu.path import filename
+    >>> filename('/foo/bar.ext')
+    'bar'
