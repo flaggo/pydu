@@ -30,6 +30,15 @@ Utils for handling path.
     False
 
 
+.. py:function:: pydu.path.normjoin(path)
+
+    Join one or more path components intelligently and normalize it.
+
+    >>> from pydu.path import normjoin
+    >>> normjoin('/a', '../b')
+    '/b'
+
+
 .. py:function:: pydu.path.filename(path)
 
     Return the filename without extension.
