@@ -44,3 +44,11 @@ def normjoin(path, *paths):
 def filename(path):
     """Return the filename without extension."""
     return os.path.splitext(os.path.basename(path))[0]
+
+
+def fileext(path):
+    """
+    Return the file extension.
+    If file has not extension, return empty string.
+    """
+    return os.path.splitext(os.path.basename(path))[1]
