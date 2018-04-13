@@ -1,7 +1,7 @@
 import os
 import pytest
 from pydu.platform import WINDOWS
-from pydu.path import cd, is_super_path, normjoin, filename
+from pydu.path import cd, is_super_path, normjoin, filename, fileext
 
 
 def test_cd(tmpdir):
@@ -45,3 +45,9 @@ def test_filename():
     assert filename('/foo/bar') == 'bar'
     assert filename('/foo/bar.ext') == 'bar'
     assert filename('/foo/bar.more.ext') == 'bar.more'
+
+
+def test_fileext():
+    assert fileext('/foo/bar') == ''
+    assert fileext('/foo/bar.ext') == '.ext'
+    assert fileext('/foo/bar.more.ext') == '.ext'
