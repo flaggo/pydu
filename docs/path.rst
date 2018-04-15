@@ -46,3 +46,13 @@ Utils for handling path.
     >>> from pydu.path import filename
     >>> filename('/foo/bar.ext')
     'bar'
+
+
+.. py:function:: pydu.path.fileext(path)
+
+    Return the file extension.
+    If file has not extension, return empty string.
+
+    >>> from pydu.path import fileext
+    >>> filename('/foo/bar.ext')
+    '.ext'
