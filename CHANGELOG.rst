@@ -1,5 +1,12 @@
-v0.6.0
+v0.6.0 (2018-04-16)
 -------------------
+
+**Enhancements**
+
+* Add ``path.filename`` which return the filename without extension.
+* Add ``path.fileext`` which return the file extension.
+* Update stub for ``requests.check_connect``.
+
 
 
 v0.5.2 (2018-04-04)
