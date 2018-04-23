@@ -1,5 +1,8 @@
-v0.6.1
+v0.6.1 (2018-04-23)
 -------------------
+**Enhancements**
+
+* Add ``dt.timer`` which can time how long does calling take as a context manager or decorator.
 
 
 v0.6.0 (2018-04-16)
