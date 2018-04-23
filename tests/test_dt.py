@@ -12,12 +12,20 @@ class TestTimer(object):
         assert timeit.elapsed is not None
 
     def test_decorator(self):
-        import sys
-        timeit = timer(print_func=print)
+        timeit = timer()
 
         @timeit
         def foo():
             os.getcwd()
 
         foo()
+        assert timeit.elapsed is not None
+
+    def test_print_func(self):
+        import sys
+        timeit = timer(print_func=sys.stdout.write)
+
+        with timeit:
+            os.getcwd()
+
         assert timeit.elapsed is not None
