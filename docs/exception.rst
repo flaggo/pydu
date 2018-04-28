@@ -13,3 +13,14 @@ Utils for handling exceptions.
     ...     int.no_exists_func()
     ...
     >>>
+
+.. py:function:: pydu.exception.default_if_except(exception_clses, default=None)
+
+    A exception decorator which excepts given exceptions and return default value.
+
+    >>> from pydu.exception import default_if_except
+    >>> @default_if_except(ValueError, default=0)
+    ... def foo(value):
+    ...     return int(value)
+    >>> foo('abc')
+    0
