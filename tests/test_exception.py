@@ -9,7 +9,8 @@ def test_ignore():
 
 def test_default_if_except():
     @default_if_except(ValueError, default=0)
-    def foo():
-        return int('abc')
+    def foo(value):
+        return int(value)
 
-    assert foo() == 0
+    assert foo('abc') == 0
+    assert foo('1') == 1
