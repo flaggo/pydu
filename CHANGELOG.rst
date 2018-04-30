@@ -1,5 +1,8 @@
-v0.6.2
+v0.6.2 (2018-04-30)
 -------------------
+**Enhancements**
+
+* Add ``exception.default_if_except`` which excepts given exceptions and return default value as decorator.
 
 
 v0.6.1 (2018-04-23)
