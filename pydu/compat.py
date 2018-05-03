@@ -46,11 +46,12 @@ else:
     strbytes_types = (str, bytes)
     numeric_types = (int,)
 
-# imap
+# imap, izip
 if PY2:
-    from itertools import imap
+    from itertools import imap, izip
 else:
     imap = map
+    izip = zip
 
 if PY2:
     reduce = reduce
