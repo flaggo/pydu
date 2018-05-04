@@ -57,9 +57,14 @@ compatible data structures, libs, functions for Python 2 and 3.
     The numeric types are ``(int, long)`` on PY2 or ``(int,)`` on PY3.
 
 
-.. py:function:: pydu.compat.imap(function, sequence, *sequence_1)
+.. py:function:: pydu.compat.imap(func, *iterables)
 
     Same to ``itertools.imap`` on PY2 or ``map`` on PY3.
+
+
+.. py:function:: pydu.compat.izip(iter1 [,iter2 [...])
+
+    Same to ``itertools.izip`` on PY2 or ``zip`` on PY3.
 
 
 .. py:function:: pydu.compat.reduce(function, sequence, initial=None)
