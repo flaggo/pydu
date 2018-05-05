@@ -1,5 +1,4 @@
-from itertools import izip
-from .compat import iteritems
+from .compat import iteritems, izip
 
 
 class SlotBase(object):
