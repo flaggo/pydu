@@ -2,7 +2,7 @@
 
   * [Archive 归档](zh-cn/archive.md)
   * [Commad 命令](zh-cn/cmd.md)
-  * [Compat](zh-cn/compat.md)
+  * [Compat 兼容性](zh-cn/compat.md)
   * [Console](zh-cn/console.md)
   * [Convert](zh-cn/convert.md)
   * [Dict](zh-cn/dict.md)

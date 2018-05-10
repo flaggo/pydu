@@ -1,93 +1,132 @@
-Compat
-------
+# compat
 
-compatible data structures, libs, functions for Python 2 and 3.
+提供Python 2和3兼容的数据结构、库和函数。
 
-.. py:data:: pydu.compat.PY2
+## compat.PY2
 
-    Specify current Python interpreter is Python 2 or 3.
-
-
-.. py:function:: pydu.compat.urlib(base, url, allow_fragments=True)
-
-    Same to ``urllib`` on PY2 or ``urllib.request`` on PY3.
+判断当前Python解释器是Python 2还是3。
 
 
-.. py:function:: pydu.compat.urlparse(base, url, allow_fragments=True)
+## compat.urlib
+```python
+urlib(base, url, allow_fragments=True)
+```
 
-    Same to ``urlparse`` on PY2 or ``urllib.parse`` on PY3.
-
-
-.. py:function:: pydu.compat.urljoin(base, url, allow_fragments=True)
-
-    Same to ``urlparse.urljoin`` on PY2 or ``urllib.parse.urljoin`` on PY3.
+在PY2中是 ``urllib``，在PY3中是 ``urllib.request``。
 
 
-.. py:function:: pydu.compat.iterkeys(d)
+## compat.urlparse
+```python
+urlparse(base, url, allow_fragments=True)
+```
 
-    Return an iter object of dictionary keys.
-
-
-.. py:function:: pydu.compat.itervalues(d)
-
-    Return an iter object of dictionary values.
+在PY2中是 ``urlparse``，在PY3中是 ``urllib.parse``。
 
 
-.. py:function:: pydu.compat.iteritems(d)
+## compat.urljoin
+```python
+urljoin(base, url, allow_fragments=True)
+```
 
-    Return an iter object of dictionary items.
-
-
-.. py:data:: pydu.compat.text_type
-
-    The text type is ``unicode`` on PY2 or ``str`` on PY3.
+在PY2中是 ``urlparse.urljoin``，在PY3中是 ``urllib.parse.urljoin``。
 
 
-.. py:data:: pydu.compat.string_types
+## compat.iterkeys
+```python
+iterkeys(d)
+```
 
-    The string types are ``(str, unicode)`` on PY2 or ``(str,)`` on PY3.
-
-.. py:data:: pydu.compat.strbytes_types
-
-    The strbytes(string bytes) types are ``(str, unicode, bytes)`` on PY2 or ``(str, bytes)`` on PY3.
-
-
-.. py:data:: pydu.compat.numeric_types
-
-    The numeric types are ``(int, long)`` on PY2 or ``(int,)`` on PY3.
+返回字典键的iter对象。
 
 
-.. py:function:: pydu.compat.imap(func, *iterables)
+## compat.itervalues
+```python
+itervalues(d)
+```
 
-    Same to ``itertools.imap`` on PY2 or ``map`` on PY3.
-
-
-.. py:function:: pydu.compat.izip(iter1 [,iter2 [...])
-
-    Same to ``itertools.izip`` on PY2 or ``zip`` on PY3.
+返回字典值的iter对象。
 
 
-.. py:function:: pydu.compat.reduce(function, sequence, initial=None)
+## compat.iteritems
+```python
+iteritems(d)
+```
 
-    Same to built-in ``reduce`` on PY2 or ``functools.reduce`` on PY3.
-
-
-.. py:function:: pydu.compat.cmp(x, y)
-
-    Same to ``cmp`` on PY2, but implement on PY3.
+返回字典键值对的iter对象。
 
 
-.. py:function:: pydu.compat.has_next_attr(x)
+## compat.text_type
 
-    An implementation independent way of checking for next attribute.
+text类型在PY2中是 ``unicode``，在PY3中是 ``str``。
 
 
-.. py:function:: pydu.compat.is_iterable(x)
+## compat.string_types
 
-    An implementation independent way of checking for iterables.
+string类型在PY2中是 ``(str, unicode)``，在PY3中是 ``(str,)``。
 
-    >>> from pydu.compat import is_iterable
-    >>> is_iterable([])
-    True
-    >>> is_iterable(1)
-    False
+## compat.strbytes_types
+
+strbytes（string bytes）类型在PY2中是 ``(str, unicode, bytes)``，在PY3中是 ``(str, "
+"bytes)``。
+
+
+## compat.numeric_types
+
+在PY2中是 ``(int, long)``，在PY3中是 ``(int,)``。
+
+
+## compat.imap
+```python
+imap(func, *iterables)
+```
+
+在PY2中是 ``itertools.imap``，在PY3中是 ``map``。
+
+
+## compat.izip
+```python
+izip(iter1 [,iter2 [...])
+```
+
+在PY2中是 ``itertools.izip``，在PY3中是 ``zip``。
+
+
+## compat.reduce
+```python
+reduce(function, sequence, initial=None)
+```
+
+在PY2中是内建 ``reduce``，在PY3中是 ``functools.reduce``。
+
+
+## compat.cmp
+```python
+cmp(x, y)
+```
+
+Same to ``cmp`` on PY2, but implement on PY3.
+在PY2中是内建 ``cmp``，在PY3中则由pydu实现。
+
+
+## compat.has_next_attr
+```python
+has_next_attr(x)
+```
+
+查看是否有next属性。
+
+
+## compat.is_iterable
+```python
+is_iterable(x)
+```
+
+查看是否是可迭代的。
+
+```python
+>>> from pydu.compat import is_iterable
+>>> is_iterable([])
+True
+>>> is_iterable(1)
+False
+```
