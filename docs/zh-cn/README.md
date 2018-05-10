@@ -8,5 +8,5 @@
 要安装**pydu**，简单执行：
 
 ```bash
-    $ pip install pydu
+$ pip install pydu
 ```

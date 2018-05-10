@@ -8,5 +8,5 @@ for Python 2 and 3, which collected from open source projects and created by con
 To install **pydu**, simply:
 
 ```bash
-    $ pip install pydu
+$ pip install pydu
 ```
