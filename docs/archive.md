@@ -1,4 +1,4 @@
-# Archive
+# archive
 
 Utils for archiving files.
 
