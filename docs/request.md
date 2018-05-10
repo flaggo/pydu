@@ -1,50 +1,69 @@
-Request
--------
+# Request
 
 Utils for handling request.
 
-.. py:class:: pydu.request.Filename
+## request.Filename
 
-    Supply several methods to get filename.
+Supply several methods to get filename.
 
-    .. py:staticmethod:: from_url(url)
+```python
+Filename.from_url(url)
+```
 
-        Detected filename as unicode or None.
+Detected filename as unicode or None.
 
-    .. py:staticmethod:: from_headers(headers)
+```python
+Filename.from_headers(headers)
+```
 
-        Detect filename from Content-Disposition headers if present.
-        ``headers`` could be a dict, list or string.
+Detect filename from Content-Disposition headers if present.
+`headers` could be a dict, list or string.
 
-    .. py:staticmethod:: from_any(dst=None, headers=None, url=None)
+```python
+Filename.from_any(dst=None, headers=None, url=None)
+```
 
-        Detect filename from dst or headers or url.
-
-
-.. py:function:: pydu.request.download(url, dst=None)
-
-    High level function, which downloads URL into tmp file in current
-    directory and then renames it to filename autodetected from either URL
-    or HTTP headers.
-    ``url`` indicates which url to download.
-    ``dst`` is the filename or directory of destination. ``None`` as default, means
-    download to current directory.
+Detect filename from dst or headers or url.
 
 
-.. py:function:: pydu.request.check_connect(ip, port, retry=1, timeout=0.5)
+## request.download
+```python
+Filename.download(url, dst=None)
+```
 
-    Check whether given ``ip`` and ``port`` could connect or not.
-    It will ``retry`` and ``timeout`` on given.
+High level function, which downloads URL into tmp file in current
+directory and then renames it to filename autodetected from either URL
+or HTTP headers.
+`url` indicates which url to download.
+`dst` is the filename or directory of destination. `None` as default, means
+download to current directory.
 
-    >>> from pydu.request import check_connect
-    >>> check_connect('http://www.baidu.com', 80)
-    '192.168.3.8'
+
+## request.check_connect
+```python
+check_connect(ip, port, retry=1, timeout=0.5)
+```
+
+Check whether given `ip` and `port` could connect or not.
+It will `retry` and `timeout` on given.
+
+```python
+>>> from pydu.request import check_connect
+>>> check_connect('http://www.baidu.com', 80)
+'192.168.3.8'
+```
 
 
-.. py:function:: pydu.request.update_query_params(url, params)
+## request.update_query_params
+```python
+update_query_params(url, params)
+```
 
-    Update query params of given url and return new url.
+Update query params of given url and return new url.
 
-    >>> from pydu.request import update_query_params
-    >>> update_query_params('http://example.com', {'foo': 1})
-    'http://example.com?foo=1'
+```python
+>>> from pydu.request import update_query_params
+>>> update_query_params('http://example.com', {'foo': 1})
+'http://example.com?foo=1'
+```
+

@@ -1,58 +1,83 @@
-Path
-----
+# path
 
 Utils for handling path.
 
-.. py:function:: pydu.path.cd(path)
+## path.cd
+```python
+cd(path)
+```
 
-    Context manager for cd the given path.
+Context manager for cd the given path.
 
-    >>> from pydu.path import cd
-    >>> with cd('test'):
-    ...     pass
-
-
-.. py:function:: pydu.path.is_super_path(path1, path2)
-
-    Whether ``path1`` is the super path of ``path2``.
-    Note that if ``path1`` is same as ``path2``, it's also regarded as
-    the super path os ``path2``.
-
-    For instance "/", "/opt" and "/opt/test" are all the super paths of "/opt/test",
-    while "/opt/t" is the super path of "/opt/test".
-
-    >>> from pydu.path import is_super_path
-    >>> is_super_path('/aa/bb/cc', '/aa/bb/cc')
-    True
-    >>> is_super_path('/aa/bb', '/aa/bb/cc')
-    True
-    >>> is_super_path('/aa/b', '/aa/bb/cc')
-    False
+```python
+>>> from pydu.path import cd
+>>> with cd('test'):
+...     pass
+```
 
 
-.. py:function:: pydu.path.normjoin(path)
+## path.is_super_path
+```python
+is_super_path(path1, path2)
+```
 
-    Join one or more path components intelligently and normalize it.
+Whether `path1` is the super path of `path2`.
+Note that if `path1` is same as `path2`, it's also regarded as
+the super path os `path2`.
 
-    >>> from pydu.path import normjoin
-    >>> normjoin('/a', '../b')
-    '/b'
+For instance "/", "/opt" and "/opt/test" are all the super paths of "/opt/test",
+while "/opt/t" is the super path of "/opt/test".
+
+```python
+>>> from pydu.path import is_super_path
+>>> is_super_path('/aa/bb/cc', '/aa/bb/cc')
+True
+>>> is_super_path('/aa/bb', '/aa/bb/cc')
+True
+>>> is_super_path('/aa/b', '/aa/bb/cc')
+False
+```
 
 
-.. py:function:: pydu.path.filename(path)
+## path.normjoin
+```python
+normjoin(path)
+```
 
-    Return the filename without extension.
+Join one or more path components intelligently and normalize it.
 
-    >>> from pydu.path import filename
-    >>> filename('/foo/bar.ext')
-    'bar'
+```python
+>>> from pydu.path import normjoin
+>>> normjoin('/a', '../b')
+'/b'
+```
 
 
-.. py:function:: pydu.path.fileext(path)
+## path.filename
+```python
+filename(path)
+```
 
-    Return the file extension.
-    If file has not extension, return empty string.
+Return the filename without extension.
 
-    >>> from pydu.path import fileext
-    >>> filename('/foo/bar.ext')
-    '.ext'
+```python
+>>> from pydu.path import filename
+>>> filename('/foo/bar.ext')
+'bar'
+```
+
+
+## path.fileext
+```python
+fileext(path)
+```
+
+Return the file extension.
+If file has not extension, return empty string.
+
+```python
+>>> from pydu.path import fileext
+>>> filename('/foo/bar.ext')
+'.ext'
+```
+

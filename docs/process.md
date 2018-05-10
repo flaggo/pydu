@@ -1,15 +1,20 @@
-Process
--------
+# process
 
 Utils for handling processes.
 
-.. note:: ``pydu.process`` is based on ``psutil``. Need to ``pip install psutil`` first.
+`process` is based on `psutil`. Need to `pip install psutil` first.
 
 
-.. py:function:: pydu.process.get_processes_by_path(path)
+## process.get_processes_by_path
+```python
+get_processes_by_path(path)
+```
 
-    Get processes which are running on given path or sub path of given path.
+Get processes which are running on given path or sub path of given path.
 
-    >>> from pydu.process import get_processes_by_path
-    >>> get_processes_by_path('/usr/bin/python')
-    [{'cmdline': '/usr/bin/python2.7', 'pid': 23383, 'name': 'python'}]
+```python
+>>> from pydu.process import get_processes_by_path
+>>> get_processes_by_path('/usr/bin/python')
+[{'cmdline': '/usr/bin/python2.7', 'pid': 23383, 'name': 'python'}]
+```
+
