@@ -1,7 +1,7 @@
 * 模块
 
   * [Archive 归档](zh-cn/archive.md)
-  * [Commad](zh-cn/cmd.md)
+  * [Commad 命令](zh-cn/cmd.md)
   * [Compat](zh-cn/compat.md)
   * [Console](zh-cn/console.md)
   * [Convert](zh-cn/convert.md)
