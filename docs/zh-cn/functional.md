@@ -1,22 +1,26 @@
-Functional
-----------
+# functional
 
 Utils for functional programming.
 
-.. py:function:: pydu.functional.compose(*funcs)
+## functional.compose
+```python
+compose(*funcs)
+```
 
-    Compose all functions. The previous function must accept one argument,
-    which is the output of the next function. The last function can accept
-    any args and kwargs. 
-    
-    compose(f1, f2, f3)(\*x) is same to f1(f2(f3(\*x))).
+Compose all functions. The previous function must accept one argument,
+which is the output of the next function. The last function can accept
+any args and kwargs. 
+compose(f1, f2, f3)(\*x) is same to f1(f2(f3(\*x))).
 
-    >>> from pydu.functional import compose
-    >>> def f1(a):
-    ...     return a+1
-    ...
-    >>> def f2(a, b=2):
-    ...     return a+b
-    ...
-    >>> compose(f1, f2)(1, b=3)
-    5
+```python
+>>> from pydu.functional import compose
+>>> def f1(a):
+...     return a+1
+...
+>>> def f2(a, b=2):
+...     return a+b
+...
+>>> compose(f1, f2)(1, b=3)
+5
+```
+

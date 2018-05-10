@@ -1,51 +1,76 @@
-Iter
-----
+# iter
 
 Utils for handling iterations.
 
-.. py:function:: pydu.iter.first(iterable)
+## iter.first
+```python
+first(iterable)
+```
 
-    Get the first item in the iterable.
+Get the first item in the iterable.
 
-    >>> from pydu.iter import first
-    >>> first([1, 2])
-    1
-
-
-.. py:function:: pydu.iter.last(iterable)
-
-    Get the last item in the iterable.
-    Warning, this can be slow due to iter step by step to last one.
-
-    >>> from pydu.iter import last
-    >>> last([1, 2])
-    2
+```python
+>>> from pydu.iter import first
+>>> first([1, 2])
+1
+```
 
 
-.. py:function:: pydu.iter.all(iterable, predicate)
+## iter.last
+```python
+last(iterable)
+```
 
-    Returns True if all elements in the given iterable are True for the
-    given predicate function.
+Get the last item in the iterable.
+Warning, this can be slow due to iter step by step to last one.
 
-    >>> from pydu.iter import all
-    >>> all([0, 1, 2], lambda x: x+1)
-    True
-
-
-.. py:function:: pydu.iter.any(iterable)
-
-    Returns True if any element in the given iterable is True for the
-    given predicate function.
-
-    >>> from pydu.iter import any
-    >>> any([-1, -1, 0], lambda x: x+1)
-    True
+```python
+>>> from pydu.iter import last
+>>> last([1, 2])
+2
+```
 
 
-.. py:function:: pydu.iter.join(iterable, separator='')
+## iter.all
+```python
+all(iterable, predicate)
+```
 
-    Join each item of iterable to string.
+Returns True if all elements in the given iterable are True for the
+given predicate function.
 
-    >>> from pydu.iter import join
-    >>> join([1, '2', 3], separator=',')
-    '1,2,3'
+```python
+>>> from pydu.iter import all
+>>> all([0, 1, 2], lambda x: x+1)
+True
+```
+
+
+## iter.any
+```python
+any(iterable)
+```
+
+Returns True if any element in the given iterable is True for the
+given predicate function.
+
+```python
+>>> from pydu.iter import any
+>>> any([-1, -1, 0], lambda x: x+1)
+True
+```
+
+
+## iter.join
+```python
+join(iterable, separator='')
+```
+
+Join each item of iterable to string.
+
+```python
+>>> from pydu.iter import join
+>>> join([1, '2', 3], separator=',')
+'1,2,3'
+```
+

@@ -1,53 +1,52 @@
-Platform
---------
+# platform
 
 Constants which indicates specific platform.
 
-.. py:data:: pydu.platform.WINDOWS
+## platform.WINDOWS
 
-    Judge whether current platform is WINDOWS or not.
-
-
-.. py:data:: pydu.platform.LINUX
-
-    Judge whether current platform is LINUX or not.
+Judge whether current platform is WINDOWS or not.
 
 
-.. py:data:: pydu.platform.POSIX
+## platform.LINUX
 
-    Judge whether current platform is POSIX or not.
-
-
-.. py:data:: pydu.platform.DARWIN
-
-    Judge whether current platform is DARWIN or not.
+Judge whether current platform is LINUX or not.
 
 
-.. py:data:: pydu.platform.SUNOS
+## platform.POSIX
 
-    Judge whether current platform is SUNOS or not.
-
-
-.. py:data:: pydu.platform.SMARTOS
-
-    Judge whether current platform is SMARTOS or not.
+Judge whether current platform is POSIX or not.
 
 
-.. py:data:: pydu.platform.FREEBSD
+## platform.DARWIN
 
-    Judge whether current platform is FREEBSD or not.
-
-
-.. py:data:: pydu.platform.NETBSD
-
-    Judge whether current platform is NETBSD or not.
+Judge whether current platform is DARWIN or not.
 
 
-.. py:data:: pydu.platform.OPENBSD
+## platform.SUNOS
 
-    Judge whether current platform is OPENBSD or not.
+Judge whether current platform is SUNOS or not.
 
 
-.. py:data:: pydu.platform.AIX
+## platform.SMARTOS
 
-    Judge whether current platform is AIX or not.
+Judge whether current platform is SMARTOS or not.
+
+
+## platform.FREEBSD
+
+Judge whether current platform is FREEBSD or not.
+
+
+## platform.NETBSD
+
+Judge whether current platform is NETBSD or not.
+
+
+## platform.OPENBSD
+
+Judge whether current platform is OPENBSD or not.
+
+
+## platform.AIX
+
+Judge whether current platform is AIX or not.
