@@ -1,4 +1,4 @@
-# Functional
+# functional
 
 Utils for functional programming.
 
