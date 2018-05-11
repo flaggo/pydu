@@ -1,52 +1,52 @@
 # platform
 
-Constants which indicates specific platform.
+表示特定平台的常量。
 
 ## platform.WINDOWS
 
-Judge whether current platform is WINDOWS or not.
+判断当前操作系统是否为 `WINDOWS` 。
 
 
 ## platform.LINUX
 
-Judge whether current platform is LINUX or not.
+判断当前操作系统是否为 `LINUX` 。
 
 
 ## platform.POSIX
 
-Judge whether current platform is POSIX or not.
+判断当前操作系统是否为 `POSIX` 。
 
 
 ## platform.DARWIN
 
-Judge whether current platform is DARWIN or not.
+判断当前操作系统是否为 `DARWIN` 。
 
 
 ## platform.SUNOS
 
-Judge whether current platform is SUNOS or not.
+判断当前操作系统是否为 `SUNOS` 。
 
 
 ## platform.SMARTOS
 
-Judge whether current platform is SMARTOS or not.
+判断当前操作系统是否为 `SMARTOS` 。
 
 
 ## platform.FREEBSD
 
-Judge whether current platform is FREEBSD or not.
+判断当前操作系统是否为 `FREEBSD` 。
 
 
 ## platform.NETBSD
 
-Judge whether current platform is NETBSD or not.
+判断当前操作系统是否为 `NETBSD` 。
 
 
 ## platform.OPENBSD
 
-Judge whether current platform is OPENBSD or not.
+判断当前操作系统是否为 `OPENBSD` 。
 
 
 ## platform.AIX
 
-Judge whether current platform is AIX or not.
+判断当前操作系统是否为 `AIX` 。

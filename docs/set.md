@@ -7,7 +7,7 @@ Additional powerful sets.
 OrderedSet(iterable=None)
 ```
 
-  A set which keeps the ordering of the inserted items.
+A set which keeps the ordering of the inserted items.
 
 ```python
 >>> from pydu.set import OrderedSet

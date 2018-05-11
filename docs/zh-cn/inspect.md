@@ -1,18 +1,18 @@
 # inspect
 
-Utils for inspecting functions.
+提供函数参数检查的工具。
 
 ## inspect.getargspec
 ```python
 getargspec(func)
 ```
 
-Get the names and default values of a function's arguments.
+获得函数参数的名称和默认值。
 
-A tuple of four things is returned: (args, varargs, varkw, defaults).
-`args` is a list of the argument names (it may contain nested lists).
-`varargs` and `varkw` are the names of the * and ** arguments or None.
-`defaults` is an n-tuple of the default values of the last n arguments.
+返回由四个字符串组成的元组：(args, vargs, varkw, defaults)。
+`args` 是参数名称的列表（可能包含嵌套列表）。
+`varargs` 和 `varkw` 是 * 和 ** 参数的名称，或者为 `None`。
+`defaults` 是最后n个参数的默认值组成的元组。
 
 ```python
 >>> from pydu.inspect import getargspec
@@ -29,8 +29,7 @@ ArgSpec(args=['name', 'address', 'age'], varargs='args', keywords='kwargs', defa
 get_func_args(func)
 ```
 
-Return a list of the argument names. Arguments such as
-`*args` and `**kwargs` are not included.
+返回参数名称的列表。诸如 `*args` 和 `*kwargs` 的参数不被包含。
 
 ```python
 >>> from pydu.inspect import get_func_args
@@ -47,9 +46,8 @@ Return a list of the argument names. Arguments such as
 get_func_full_args(func)
 ```
 
-Return a list of (argument name, default value) tuples. If the argument
-does not have a default value, omit it in the tuple. Arguments such as
-`*args` and `**kwargs` are also included.
+返回(参数名称, 默认值)元组的列表。如果参数没有默认值，则在元组中丢弃。
+诸如 `*args` 和 `*kwargs` 的参数也被包含在内。
 
 ```python
 >>> from pydu.inspect import get_func_full_args
@@ -66,7 +64,7 @@ does not have a default value, omit it in the tuple. Arguments such as
 func_accepts_kwargs(func)
 ```
 
-Check whether or not the func accepts kwargs.
+检查函数是否接受关键字参数。
 
 ```python
 >>> from pydu.inspect import func_accepts_kwargs
@@ -83,7 +81,7 @@ True
 func_accepts_var_args(func)
 ```
 
-Check whether or not the func accepts var args.
+检查函数是否接受位置参数。
 
 ```python
 >>> from pydu.inspect import func_accepts_var_args
@@ -100,7 +98,7 @@ True
 func_supports_parameter(func)
 ```
 
-Check whether or the func supports the given parameter.
+检查函数是否接受给定参数。
 
 ```python
 >>> from pydu.inspect import func_supports_parameter
@@ -119,7 +117,7 @@ Fasle
 func_has_no_args(func)
 ```
 
-Check whether or not the func has any args.
+检查函数是否接受任意参数。
 
 ```python
 >>> from pydu.inspect import func_has_no_args

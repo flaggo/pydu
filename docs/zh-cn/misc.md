@@ -1,15 +1,14 @@
 # misc
 
-Miscellaneous utils like `timeout`, `trace` and so on.
+提供诸如 `timeout`、 `trace` 等综合性工具。
 
 ## misc.timeout
 ```python
 timeout(seconds)
 ```
 
-This func decorates any func which may be hang for a while. The param `seconds`
-can be either integer or float.
-In `test.py`, you may write like below:
+该函数装饰任何可能会hang住一段时间的函数。参数 `seconds` 应为整数。
+在 `test.py` 中，你可以这么写：
 
 ```python
 import time
@@ -20,7 +19,7 @@ time.sleep(1.01)
 f()
 ```
 
-And run `test.py`, will see `TimeoutError`.
+然后运行 `test.py`，将会看到 `TimeoutError`。
 
 
 ## misc.trace
@@ -28,8 +27,7 @@ And run `test.py`, will see `TimeoutError`.
 trace(obj)
 ```
 
-Tracing every statement and line number for running program, like `bash -x`.
-In `test.py`, you may write like below:
+跟踪运行中程序的每条语句和行号，就像 `bash -x` 。在 `test.py` 中，你可以这么写：
 
 ```python
 from pydu.misc import trace
@@ -42,7 +40,7 @@ print(2)
 f()
 ```
 
-And run `test.py`, will see below output from console:
+然后运行 `test.py`，将会看到如下控制台输出：
 
 ```console
 test.py(4):     print(1)
@@ -59,9 +57,8 @@ test.py(7):     print(2)
 memoize(obj)
 ```
 
-A simple memoize decorator for functions supporting (hashable)
-positional arguments.
-It also provides a `cache_clear()` function for clearing the cache.
+简单的缓存装饰器，可供支持可哈希的位置参数的函数使用。
+它还提供 `cache_clear()` 方法来清除缓存。
 
 ```python
 >>> @memoize
@@ -80,10 +77,8 @@ It also provides a `cache_clear()` function for clearing the cache.
 memoize_when_activated(obj)
 ```
 
-A memoize decorator which is disabled by default. It can be
-activated and deactivated on request.
-For efficiency reasons it can be used only against class methods
-accepting no arguments.
+缓存装饰器，默认禁用。它能根据需求启用和禁用。
+为效率起见，它只能用于没有参数的类方法。
 
 ```python
 >>> class Foo:
@@ -113,8 +108,8 @@ accepting no arguments.
 super_len(obj)
 ```
 
-Get length of object which has attribute named `__len__`, `len`, `fileno`, `tell`,
-such as `list`, `tuple`, `dict`, `file` and so on.
+获取具有 `__len__` ， `len` ， `fileno` ， `tell` 等属性的对的长度，
+比如： `list` ， `tuple` ， `dict`， `file` 等等。
 
 ```python
 >>> from pydu.misc import super_len

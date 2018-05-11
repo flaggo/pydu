@@ -1,6 +1,6 @@
 # Environ
 
-Utils for handling environment.
+提供处理环境相关内容的工具。
 
 
 ## environ.environ
@@ -8,13 +8,11 @@ Utils for handling environment.
 environ(**kwargs)
 ```
 
-Context manager for updating one or more environment variables.
+更新一个或多个环境变量的上下文管理器。
 
-Preserves the previous environment variable (if available) and
-recovers when exiting the context manager.
+保存先前的环境变量（如果有），并在退出上下文管理器时还原。
 
-If given variable_name=None, it means removing the variable from
-environment temporarily.
+如果给定 variable_name=None，表示从环境变量中临时移除该变量。
 
 ```python
 >>> from pydu.environ import environ
@@ -30,9 +28,8 @@ a
 path(append=None, prepend=None, replace=None)
 ```
 
-Context manager for updating the PATH environment variable which
-appends, prepends or replaces the PATH with given string or
-a list of strings.
+更新PATH环境变量的上下文管理器。可将给定的字符串或字符串列表，
+插入在PATH的开头和末尾，也可替换PATH。
 
 ```python
 >>> import os

@@ -1,13 +1,13 @@
 # path
 
-Utils for handling path.
+提供处理路径的工具。
 
 ## path.cd
 ```python
 cd(path)
 ```
 
-Context manager for cd the given path.
+进入到给定目录的上下文管理器。
 
 ```python
 >>> from pydu.path import cd
@@ -21,12 +21,11 @@ Context manager for cd the given path.
 is_super_path(path1, path2)
 ```
 
-Whether `path1` is the super path of `path2`.
-Note that if `path1` is same as `path2`, it's also regarded as
-the super path os `path2`.
+判断 `path1` 是否是 `path2` 的父路径（或父父路径等）。
+注意如果 `path1` 和 `path2` 一样，它也被视作是 `path2` 的父路径。
 
-For instance "/", "/opt" and "/opt/test" are all the super paths of "/opt/test",
-while "/opt/t" is the super path of "/opt/test".
+比如，\"/\"、\"opt\"或者\"/opt/test\"是\"/opt/test\"的超级父路径，
+而\"/opt/t\"则不是。
 
 ```python
 >>> from pydu.path import is_super_path
@@ -44,7 +43,7 @@ False
 normjoin(path)
 ```
 
-Join one or more path components intelligently and normalize it.
+将一个或多个路径联接，并将之标准化。
 
 ```python
 >>> from pydu.path import normjoin
@@ -58,7 +57,7 @@ Join one or more path components intelligently and normalize it.
 filename(path)
 ```
 
-Return the filename without extension.
+返回没有扩展名的文件名。
 
 ```python
 >>> from pydu.path import filename
@@ -72,8 +71,8 @@ Return the filename without extension.
 fileext(path)
 ```
 
-Return the file extension.
-If file has not extension, return empty string.
+返回文件扩展名。
+如果文件没有扩展名，则返回空字符串。
 
 ```python
 >>> from pydu.path import fileext

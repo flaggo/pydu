@@ -1,13 +1,13 @@
 # iter
 
-Utils for handling iterations.
+提供处理迭代对象的工具。
 
 ## iter.first
 ```python
 first(iterable)
 ```
 
-Get the first item in the iterable.
+获取可迭代对象的第一个项。
 
 ```python
 >>> from pydu.iter import first
@@ -21,8 +21,7 @@ Get the first item in the iterable.
 last(iterable)
 ```
 
-Get the last item in the iterable.
-Warning, this can be slow due to iter step by step to last one.
+获取可迭代对象的最后一个项。注意，由于逐步迭代到最后一项，这可能会较慢。
 
 ```python
 >>> from pydu.iter import last
@@ -36,8 +35,7 @@ Warning, this can be slow due to iter step by step to last one.
 all(iterable, predicate)
 ```
 
-Returns True if all elements in the given iterable are True for the
-given predicate function.
+如果给定可迭代对象的所有元素套用判定函数都是True，则返回True。
 
 ```python
 >>> from pydu.iter import all
@@ -51,8 +49,7 @@ True
 any(iterable)
 ```
 
-Returns True if any element in the given iterable is True for the
-given predicate function.
+如果给定可迭代对象的任一元素套用判定函数是True，则返回True。
 
 ```python
 >>> from pydu.iter import any
@@ -66,7 +63,7 @@ True
 join(iterable, separator='')
 ```
 
-Join each item of iterable to string.
+将可迭代对象中的每一项连接为字符串。
 
 ```python
 >>> from pydu.iter import join

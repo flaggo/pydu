@@ -1,6 +1,6 @@
 # System
 
-Utils for handling system, like to track file, make directory, link and so on.
+提供处理系统（如追踪文件、创建目录、链接等）的工具。
 
 
 ## system.FileTracker
@@ -8,27 +8,25 @@ Utils for handling system, like to track file, make directory, link and so on.
 FileTracker()
 ```
 
-Track current opening files, started with `FileTracker.track()`.
-When opening several files, `FileTracker` tracks them and you can locate them by calling
-`FileTraker.get_openfiles()`.
+跟踪当前打开的文件，调用 `FileTracker.track()` 开始跟踪。当打开许多文件时，`FileTracker` 能够跟踪它们，你可以通过调用 `FileTracker.get_openfiles()` 来定位得到这些文件对象。
 
 ```python
 FiltTracker.track()
 ```
 
-Start tracking opening files.
+开始跟踪打开文件。
 
 ```python
 FiltTracker.untrack()
 ```
 
-Stop tracking opening files.
+停止跟踪打开文件。
 
 ```python
 FiltTracker.get_openfiles()
 ```
 
-Get current opening files.
+获取当前已打开的文件。
 
 ```python
 >>> from pydu.system import FileTracker
@@ -51,10 +49,10 @@ set()
 makedirs(path, mode=0o755, ignore_errors=False, exist_ok=False)
 ```
 
-Based on `os.makedirs`,create a leaf directory and all intermediate ones.
-`mode` default is `0o755`. When make an exists path, if exist_ok is false,
-`makedirs` will raise an `Exception`. If `ignore_errors` which will ignore
-all errors raised by `os.makedirs`.
+`makedirs` 基于 `os.makedirs` ，它会创建目标文件夹，以及中间文件夹
+（当中间文件夹不存在的时候）。 `mode` 默认值为 `0o75`，当被创建的文件夹已经存在的时候，
+如果 `eist_ok` 的值为 `False`，`makedirs` 将会抛出异常。
+如果 `ignore_errors` 的值为 `True`，所有的异常将会被忽略。
 
 ```python
 >>> from pydu.system import makedirs
@@ -70,16 +68,15 @@ Traceback (most recent call last):
 remove(path, mode=0o755, ignore_errors=False, onerror)
 ```
 
-Remove a file or directory.
+删除文件或者文件夹。
 
-If `ignore_errors` is set, errors are ignored; otherwise, if `onerror`
-is set, it is called to handle the error with arguments (`func` ,
-`path` , `exc_info` ) where func is platform and implementation dependent;
-`path` is the argument to that function that caused it to fail; and
-`exc_info` is a tuple returned by `sys.exc_info()`.  If `ignore_errors`
-is `False` and `onerror` is None, it attempts to set `path` as writeable and
-then proceed with deletion if `path` is read-only, or raise an exception
-if `path` is not read-only.
+如果 `ignore_errors` 的值为 `True` ，异常将会被忽略；
+否者，如果 `onerror` 的值不为 `None` ，那么 `onerror` 函数将会处理这些异常。
+`onerror` 的参数包括 `func` ， `path` 和 `exc_info` 。
+`path` 表示 `func` 函数处理该路径时抛出的异常；
+`exc_info` 是由 `sys.exc_info` 返回的元组。
+如果 `ignore_errors` 为 `False`，并且 `onerror` 的值为 `None`，
+则尝试将只读的 `path` 改为可写并尝试删除，若非只读则抛出异常。
 
 ```python
 >>> from pydu.system import makedirs
@@ -100,7 +97,7 @@ Traceback (most recent call last):
 removes(paths, mode=0o755, ignore_errors=False, onerror)
 ```
 
-Remove a list of file and/or directory.Other parameters same as `remove`.
+删除多个文件或者（和）文件夹，其他的参数见 `remove`。
 
 ```python
 >>> from pydu.system import makedirs
@@ -117,8 +114,7 @@ Remove a list of file and/or directory.Other parameters same as `remove`.
 open_file(path, mode='wb+', buffer_size=-1, ignore_errors=False):
 ```
 
-Open a file, defualt mode `wb+`. If path not exists, it will be created
-automatically. If `ignore_errors` is set, errors are ignored.
+默认以 `wb+` 的方式打开文件，如果需要被创建的文件的上级目录不存在，该目录将会被创建。如果 `ignore_errors` 为 `True` ，异常将会被忽略。
 
 ```python
 >>> from pydu.system import open_file
@@ -135,14 +131,11 @@ Traceback (most recent call last):
 copy(src, dst, ignore_errors=False, follow_symlinks=True):
 ```
 
-Copy data and mode bits (`cp src dst`).Both the source and destination
-may be a directory.When `copy` a directory,which contains a symlink,if
-the optional symlinks flag is true, symbolic  links in the source tree
-result in symbolic links in the  destination tree; if it is false, the
-contents of the files pointed to by symbolic links are copied.When copy
-a file,if follow_symlinks is false and src is a symbolic link, a new
-symlink will be created instead of copying the file it points to,else
-the contents of the file pointed to by symbolic links is copied.
+复制源文件（文件夹）到目标文件（文件夹）。当复制的文件夹包含软连接时，
+如果 `symlink` 的值为 `True` ，那么在目标文件夹中会创建相应的软连接；
+否者将会复制软连接所指向的文件。当复制的文件为软连接的时候，
+如果 `symlink` 的值为 `False` ，那么将会创建与软连接指向相同的软连接；
+否者，将会复制软连接所指向的文件。
 
 ```python
 >>> from pydu.system import copy,symlink
@@ -158,7 +151,7 @@ the contents of the file pointed to by symbolic links is copied.
 touch(path):
 ```
 
-Open a file as write,and then close it.
+生成一个新的文件。
 
 ```python
 >>> from pydu.system import touch
@@ -170,32 +163,30 @@ Open a file as write,and then close it.
 symlink(src, dst, overwrite=False, ignore_errors=False)
 ```
 
-`symlink` only work on `Unix-like` system, it create a symbolic link pointing
-to source named link_name.If dist is exist and overwrite is true,a new
-symlink will be created.
+创建指向源文件的软连接。
+如果 `overwrite` 的值为 `True` ，那么已存在的软连接将会被覆盖。
 
 ```python
 >>> from pydu.system import symlink
 >>> symlink('test.txt','test.link')
 ```
 
-!> `symlink` can only be used on `unix-like` system.
+!> `symlink` 只支持 `Unix类` 的系统。
 
 ## system.link
 ```python
 link(src, dst, overwrite=False, ignore_errors=False):
 ```
 
-`link` only work on `Unix-like` system, it create a hard link pointing to
-source named link_name.If dist is exist and overwrite is true,a
-new link will be created.
+创建指向源文件的硬连接。
+如果 `overwrite` 的值为 `True` ，那么已存在的硬连接将会被覆盖。
 
 ```python
 >>> from pydu.system import link
 >>> link('test.txt','test.link')
 ```
 
-!> `link` can only be used on `unix-like` system.
+!> `link` 只支持 `Unix类` 的系统。
 
 
 ## system.which
@@ -203,15 +194,13 @@ new link will be created.
 which(cmd, mode=os.F_OK | os.X_OK, path=None):
 ```
 
-Given a command, mode, and a PATH string, return the path which
-conforms to the given mode on the PATH, or None if there is no such
-file.
+给定命令名称、模式、和环境变量PATH，返回在PATH下符合给定模式的命令的路径，
+如果找不到就返回None。
 
-`mode` defaults to os.F_OK | os.X_OK. `path` defaults to the result
-of os.environ.get("PATH"), or can be overridden with a custom search
-path.
+`mode` 默认是 os.F_OK | os.X_OK。
+`path` 默认是 os.environ.get("PATH")的结果，也可被被自定义的搜索路径重载。
 
-`which` is `shutil.which` in Python 3.
+在Python 3中，`which` 就是 `shutil.which`。
 
 ```python
 >>> from pydu.system import which
@@ -225,8 +214,7 @@ path.
 chmod(path, mode, recursive=False)
 ```
 
-Change permissions to the given mode.
-If `recursive` is True perform recursively.
+将权限改成给定模式。如果 `recursive` 是True，将会递归。
 
 ```python
 >>> from pydu.system import chmod
@@ -235,9 +223,9 @@ If `recursive` is True perform recursively.
 '744'
 ```
 
-!> Although Windows supports `chmod`, you can only set the file’s
-read-only flag with it (via the stat.S_IWRITE and stat.S_IREAD constants
-or a corresponding integer value). All other bits are ignored.
+!> 尽管Windows支持 `chmod`，但你只能使用它设置文件的只读标志
+（通过 tat.S_IWRITE 和 stat.S_IREAD）常量或者相关整数值。
+其他所有位会被忽略。
 
 
 ## system.chcp
@@ -245,8 +233,7 @@ or a corresponding integer value). All other bits are ignored.
 chcp(code)
 ```
 
-Context manager which sets the active code page number.
-It could also be used as function.
+设置活动代码页号的上下文管理器。它也能够被当做函数使用。
 
 ```python
 >>> from pydu.system import chcp
@@ -257,7 +244,7 @@ It could also be used as function.
 >>>
 ```
 
-!> `chcp` can only be used on `Windows` system.
+!> `chcp` 只能用于 `Windows` 系统。
 
 
 ## system.preferredencoding
@@ -265,4 +252,4 @@ It could also be used as function.
 preferredencoding(code)
 ```
 
-Get best encoding for the system.
+以最佳的方式获取系统编码。

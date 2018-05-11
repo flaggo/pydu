@@ -1,16 +1,15 @@
 # list
 
-Utils for handling list.
+提供处理列表的工具。
 
 ## list.uniq
 ```python
 uniq(seq, key=None)
 ```
 
-Removes duplicate elements from a list while preserving the order of the rest.
+从列表中删除重复的元素，同时保留其余的顺序。
 
-The value of the optional `key` parameter should be a function that
-takes a single argument and returns a key to test the uniqueness.
+可选参数 `key` 的值应该是一个函数，它接受一个参数并返回一个 `key` 来测试唯一性。
 
 ```python
 >>> from pydu.list import uniq
@@ -24,9 +23,9 @@ takes a single argument and returns a key to test the uniqueness.
 tolist(obj)
 ```
 
-Convert given `obj` to list.
+将给定的 `obj` 转换为列表。
 
-If `obj` is not a list, return `[obj]`, else return `obj` itself.
+如果 `obj` 不是列表，返回 `[obj]`，否则返回 `obj` 本身。
 
 ```python
 >>> from pydu.list import tolist
@@ -40,8 +39,8 @@ If `obj` is not a list, return `[obj]`, else return `obj` itself.
 flatten(seq)
 ```
 
-Generate each element of the given `seq`. If the element is iterable and
-is not string, it yields each sub-element of the element recursively.
+生成给定 `seq` 中的每个元素。如果元素是可迭代的并且不是字符串，
+就递归 `yield` 元素中的每个子元素。
 
 ```python
 >>> from pydu.list import flatten

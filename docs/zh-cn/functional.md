@@ -1,16 +1,15 @@
 # functional
 
-Utils for functional programming.
+提供函数式编程的工具。
 
 ## functional.compose
 ```python
 compose(*funcs)
 ```
 
-Compose all functions. The previous function must accept one argument,
-which is the output of the next function. The last function can accept
-any args and kwargs. 
-compose(f1, f2, f3)(\*x) is same to f1(f2(f3(\*x))).
+组成所有函数。前一个函数必须接受一个参数，该参数为后一个函数的输出值。
+最后一个函数可以接受任意位置参数和关键字参数。
+`compose(f1, f2, f3)(*x)` 同 `f1(f2(f3(*x)))`。
 
 ```python
 >>> from pydu.functional import compose

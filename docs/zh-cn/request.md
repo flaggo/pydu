@@ -1,29 +1,29 @@
 # Request
 
-Utils for handling request.
+提供处理请求的工具。
 
 ## request.Filename
 
-Supply several methods to get filename.
+提供各类获取文件名的方法。
 
 ```python
 Filename.from_url(url)
 ```
 
-Detected filename as unicode or None.
+检测文件名为 unicode 或 None。
 
 ```python
 Filename.from_headers(headers)
 ```
 
-Detect filename from Content-Disposition headers if present.
-`headers` could be a dict, list or string.
+从响应头的Content-Disposition（如果有）中获取文件名。
+`headers` 可以使字典、列表或者字符串。
 
 ```python
 Filename.from_any(dst=None, headers=None, url=None)
 ```
 
-Detect filename from dst or headers or url.
+从目录、响应头部或者路径获取文件名称。
 
 
 ## request.download
@@ -31,12 +31,9 @@ Detect filename from dst or headers or url.
 Filename.download(url, dst=None)
 ```
 
-High level function, which downloads URL into tmp file in current
-directory and then renames it to filename autodetected from either URL
-or HTTP headers.
-`url` indicates which url to download.
-`dst` is the filename or directory of destination. `None` as default, means
-download to current directory.
+将URL下载到当前目录的临时文件中，然后重命名为从URL或者HTTP头中自动检测出的文件名。
+`url` 是要下载的URL地址。
+`dst` 是文件名或目录的目标路径，默认为 `None`，表示下载到当前目录。
 
 
 ## request.check_connect
@@ -44,8 +41,7 @@ download to current directory.
 check_connect(ip, port, retry=1, timeout=0.5)
 ```
 
-Check whether given `ip` and `port` could connect or not.
-It will `retry` and `timeout` on given.
+在给定的 `timeout` 时间内尝试连接给定的 `ip` 和 `port` 。
 
 ```python
 >>> from pydu.request import check_connect
@@ -59,7 +55,7 @@ It will `retry` and `timeout` on given.
 update_query_params(url, params)
 ```
 
-Update query params of given url and return new url.
+更新给定url的查询参数并返回新的url。
 
 ```python
 >>> from pydu.request import update_query_params

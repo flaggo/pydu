@@ -1,13 +1,13 @@
 # String
 
-Utils for handling string.
+提供处理字符串的工具。
 
 ## string.safeunicode
 ```python
 safeunicode(obj, encoding='utf-8')
 ```
 
-Converts any given object to unicode string.
+将任何对象转换为 `unicode` 字符串。
 
 ```python
 >>> from pydu.string import safeunicode
@@ -25,7 +25,7 @@ u'中文'
 safeencode(obj, encoding='utf-8')
 ```
 
-Converts any given object to encoded string (default: utf-8).
+将任何对象转换为编码后字符串（默认为 `utf-8`）。
 
 ```python
 >>> from pydu.string import safeencode
@@ -43,7 +43,7 @@ Converts any given object to encoded string (default: utf-8).
 lstrips(text, remove)
 ```
 
-Removes the string `remove` from the left of `text`.
+移除字符串 `text` 左侧的 `remove`。
 
 ```python
 >>> from pydu.string import lstrips
@@ -61,7 +61,7 @@ Removes the string `remove` from the left of `text`.
 rstrips(text, remove)
 ```
 
-Removes the string `remove` from the right of `text`.
+移除字符串 `text` 右侧的 `remove`。
 
 ```python
 >>> from pydu.string import rstrips
@@ -75,7 +75,7 @@ Removes the string `remove` from the right of `text`.
 strips(text, remove)
 ```
 
-Removes the string `remove` from the both sides of `text`.
+移除字符串 `text` 两边的 `remove`。
 
 ```python
 >>> from pydu.string import strips
@@ -88,7 +88,7 @@ Removes the string `remove` from the both sides of `text`.
 common_prefix(l)
 ```
 
-Return common prefix of the stings
+返回字符串的共有前缀。
 
 ```python
 >>> from pydu.string import common_prefix
@@ -102,7 +102,7 @@ Return common prefix of the stings
 common_suffix(l)
 ```
 
-Return common suffix of the stings
+返回字符串的共有后缀
 
 ```python
 >>> from pydu.string import common_suffix
@@ -116,8 +116,7 @@ Return common suffix of the stings
 sort(s, reversed=False)
 ```
 
-Sort given string by ascending order.
-If `reverse` is `True`, sorting given string by descending order.
+对给定的字符串进行排序，默认是升序，如果 `reverse` 的值为 `True`，将以降序排序。
 
 ```python
 >>> from pydu.string import sort

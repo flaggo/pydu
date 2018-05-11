@@ -1,13 +1,13 @@
 # Set
 
-Additional powerful sets.
+增强的集合。
 
 ## set.OrderedSet
 ```python
 OrderedSet(iterable=None)
 ```
 
-  A set which keeps the ordering of the inserted items.
+保持插入元素有序的集合。
 
 ```python
 >>> from pydu.set import OrderedSet

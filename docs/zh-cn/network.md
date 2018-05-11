@@ -1,14 +1,14 @@
 # network
 
-Utils for handling network.
+提供处理网络的工具。
 
 ## network.dotted_netmask
 ```python
 dotted_netmask(mask)
 ```
 
-Converts mask from /`xx` format to `xxx.xxx.xxx.xxx`.
-`mask` can be either `int` or `str`.
+将mask从 /`xx` 转化为 `xxx.xxx.xxx.xxx` 形式。
+`mask` 可以是 `int` 或者 `str`。
 
 ```python
 >>> from pydu.network import dotted_netmask
@@ -25,15 +25,14 @@ Converts mask from /`xx` format to `xxx.xxx.xxx.xxx`.
 private_ipv4s
 ```
 
-A list of private ipv4 addresses. Each item is a tuple of
-(ipv4 address, mask).
+ipv4地址列表。每个项是（ipv4地址，掩码）这样的元组。
 
 ## network.is_ipv4
 ```python
 is_ipv4(ip)
 ```
 
-Judge whether the given `ip` is IPV4 address.
+判断给定的 `ip` 是否为 IPV4。
 
 ```python
 >>> from pydu.network import is_ipv4
@@ -49,7 +48,7 @@ False
 is_ipv6(ip)
 ```
 
-Judge whether the given `ip` is IPV6 address.
+判断给定的 `ip` 是否为 IPV6。
 
 ```python
 >>> from pydu.network import is_ipv6
@@ -65,7 +64,7 @@ False
 get_free_port()
 ```
 
-Get free port which could be bound.
+获取可以绑定的空闲端口。
 
 ```python
 >>> from pydu.network import get_free_port
@@ -79,8 +78,7 @@ Get free port which could be bound.
 ip2int(ip_str)
 ```
 
-Convert ip to integer. Support IPV4 and IPV6.
-Raise `ValueError` if convert failed.
+将IP转换为整数。支持IPV4和IPV6。如果转换失败，将会抛出 `ValueError`。
 
 ```python
 >>> from pydu.network import ip2int
@@ -94,8 +92,7 @@ Raise `ValueError` if convert failed.
 int2ip(ip_int)
 ```
 
-Convert integer to ip. Support IPV4 and IPV6.
-Raise `ValueError` if convert failed.
+将整数转换为IP。支持IPV4和IPV6。如果转换失败，将会抛出 `ValueError`。
 
 ```python
 >>> from pydu.network import int2ip

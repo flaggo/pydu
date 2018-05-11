@@ -1,8 +1,8 @@
 # process
 
-Utils for handling processes.
+提供处理进程的工具。
 
-`process` is based on `psutil`. Need to `pip install psutil` first.
+`process` 的实现基于 `psutil`。需要先 `pip install psutil`。
 
 
 ## process.get_processes_by_path
@@ -10,7 +10,7 @@ Utils for handling processes.
 get_processes_by_path(path)
 ```
 
-Get processes which are running on given path or sub path of given path.
+获取占用给定路径或者其子路径的进程。
 
 ```python
 >>> from pydu.process import get_processes_by_path

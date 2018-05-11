@@ -158,7 +158,7 @@ the contents of the file pointed to by symbolic links is copied.
 touch(path):
 ```
 
-Open a file as write,and then close it.
+Make a new file.
 
 ```python
 >>> from pydu.system import touch
@@ -170,7 +170,7 @@ Open a file as write,and then close it.
 symlink(src, dst, overwrite=False, ignore_errors=False)
 ```
 
-`symlink` only work on `Unix-like` system, it create a symbolic link pointing
+It create a symbolic link pointing
 to source named link_name.If dist is exist and overwrite is true,a new
 symlink will be created.
 
@@ -186,8 +186,8 @@ symlink will be created.
 link(src, dst, overwrite=False, ignore_errors=False):
 ```
 
-`link` only work on `Unix-like` system, it create a hard link pointing to
-source named link_name.If dist is exist and overwrite is true,a
+It create a hard link pointing to
+source named link_name.If dist is exist and overwrite is true, a
 new link will be created.
 
 ```python

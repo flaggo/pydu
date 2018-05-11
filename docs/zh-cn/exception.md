@@ -1,13 +1,13 @@
 # Exception
 
-Utils for handling exceptions.
+提供处理异常的工具。
 
 ## exception.ignore
 ```python
 ignore(*exceptions)
 ```
 
-A context manager which can ignore given exceptions.
+忽略给定异常的上下文管理器。
 
 ```python
 >>> from pydu.exception import ignore
@@ -23,7 +23,7 @@ A context manager which can ignore given exceptions.
 default_if_except(exception_clses, default=None)
 ```
 
-A exception decorator which excepts given exceptions and return default value.
+捕捉给定异常（可以是一组异常，以元组表示）并返回默认值的异常装饰器。
 
 ```python
 >>> from pydu.exception import default_if_except
