@@ -12,15 +12,21 @@ Track current opening files, started with `FileTracker.track()`.
 When opening several files, `FileTracker` tracks them and you can locate them by calling
 `FileTraker.get_openfiles()`.
 
-.. py:staticmethod:: track()
+```python
+FiltTracker.track()
+```
 
 Start tracking opening files.
 
-.. py:staticmethod:: untrack()
+```python
+FiltTracker.untrack()
+```
 
 Stop tracking opening files.
 
-.. py:staticmethod:: get_openfiles()
+```python
+FiltTracker.get_openfiles()
+```
 
 Get current opening files.
 
