@@ -1,16 +1,18 @@
 # Date and Time
 
-Utils for handling date and time.
+处理日期和时间的工具。
+
 
 ## dt.timer
 ```python
 timer(path)
 ```
 
-A timer can time how long does calling take as a context manager or decorator.
-If assign `print_func` with `sys.stdout.write`, `logger.info` and so on,
-timer will print the spent time.
+timer可以上下文管理器或装饰器的方式统计一次调用的时间。
+如果将 `print_func` 赋值为 `sys.stdout.write`、 `logger.info` 或其他，
+timer将会打印所花时长。
 
+```python
 timeit = timer(print_func=sys.stdout.write)
 with timeit:
 foo()
@@ -18,9 +20,9 @@ foo()
 @timeit
 def foo():
 pass
+```
 
-`timer.elapsed` contains the total amount of elapsed
-time of running `foo`.
+`timer.elapsed` 包含了 `foo` 所花费的整个时间。
 
 ```python
 >>> timeit = timer(print_func=sys.stdout.write)
