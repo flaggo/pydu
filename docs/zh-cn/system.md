@@ -179,7 +179,7 @@ symlink will be created.
 >>> symlink('test.txt','test.link')
 ```
 
-.. note:: `symlink` can only be used on `unix-like` system.
+!> `symlink` can only be used on `unix-like` system.
 
 ## system.link
 ```python
@@ -195,7 +195,7 @@ new link will be created.
 >>> link('test.txt','test.link')
 ```
 
-.. note:: `link` can only be used on `unix-like` system.
+!> `link` can only be used on `unix-like` system.
 
 
 ## system.which
@@ -235,7 +235,7 @@ If `recursive` is True perform recursively.
 '744'
 ```
 
-.. note:: Although Windows supports `chmod`, you can only set the file’s
+!> Although Windows supports `chmod`, you can only set the file’s
 read-only flag with it (via the stat.S_IWRITE and stat.S_IREAD constants
 or a corresponding integer value). All other bits are ignored.
 
@@ -257,7 +257,7 @@ It could also be used as function.
 >>>
 ```
 
-.. note:: `chcp` can only be used on `Windows` system.
+!> `chcp` can only be used on `Windows` system.
 
 
 ## system.preferredencoding
