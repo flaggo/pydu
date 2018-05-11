@@ -1,1 +1,1 @@
-include requirements-dev.txt
+include requirements-dev.txt README.md CHANGELOG.md LICENSE.txt
