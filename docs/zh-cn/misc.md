@@ -123,4 +123,3 @@ such as `list`, `tuple`, `dict`, `file` and so on.
 >>> super_len(open('test', 'w'))
 0
 ```
-

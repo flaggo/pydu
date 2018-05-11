@@ -33,4 +33,3 @@ A exception decorator which excepts given exceptions and return default value.
 >>> foo('abc')
 0
 ```
-

@@ -73,4 +73,3 @@ Join each item of iterable to string.
 >>> join([1, '2', 3], separator=',')
 '1,2,3'
 ```
-

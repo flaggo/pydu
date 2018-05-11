@@ -124,4 +124,3 @@ If `reverse` is `True`, sorting given string by descending order.
 >>> sort('dabc')
 'abcd'
 ```
-

@@ -48,4 +48,3 @@ is not string, it yields each sub-element of the element recursively.
 >>> flatten([1, [2, [3, 4]]])
 [1, 2, 3, 4]
 ```
-

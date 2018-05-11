@@ -18,4 +18,3 @@ OrderedSet(iterable=None)
 >>> list(s)
 [1, 2]
 ```
-

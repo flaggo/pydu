@@ -28,4 +28,3 @@ time of running `foo`.
 ...     os.getcwd()
 Spent time: 1.7881393432617188e-05s
 ```
-

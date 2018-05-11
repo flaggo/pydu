@@ -42,4 +42,3 @@ a list of strings.
 ...
 /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/foo
 ```
-

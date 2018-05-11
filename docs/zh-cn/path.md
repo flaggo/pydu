@@ -80,4 +80,3 @@ If file has not extension, return empty string.
 >>> filename('/foo/bar.ext')
 '.ext'
 ```
-

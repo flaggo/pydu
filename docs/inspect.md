@@ -129,4 +129,3 @@ Check whether or not the func has any args.
 >>> func_has_no_args(f)
 True
 ```
-

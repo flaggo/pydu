@@ -66,4 +66,3 @@ Update query params of given url and return new url.
 >>> update_query_params('http://example.com', {'foo': 1})
 'http://example.com?foo=1'
 ```
-

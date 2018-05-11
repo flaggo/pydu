@@ -23,4 +23,3 @@ compose(f1, f2, f3)(\*x) is same to f1(f2(f3(\*x))).
 >>> compose(f1, f2)(1, b=3)
 5
 ```
-
