@@ -38,4 +38,4 @@ To install pydu, simply:
 
 Document
 --------
-Fantastic documentation is available at: `English <http://pydu.readthedocs.io/en/stable>`_ | `中文版 <http://pydu.readthedocs.io/zh/stable>`_.
+Fantastic documentation is available at: `English <https://flaggo.github.io/pydu/>`_ | `中文版 <https://flaggo.github.io/pydu/#/zh-cn/>`_.
