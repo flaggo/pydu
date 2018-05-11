@@ -1,14 +1,13 @@
 # Dict
 
-Additional powerful dictionaries and relative functions.
+增强的字典和相关函数。
 
 ## dict.AttrDict
 ```python
 AttrDict(seq=None, **kwargs)
 ```
 
-A AttrDict object is like a dictionary except `obj.foo` can be used
-in addition to `obj['foo']`.
+AttrDict 对象类似于字典，除了能使用 `obj['foo']`，还能使用 `obj.foo`。
 
 ```python
 >>> from pydu.dict import AttrDict
@@ -32,13 +31,10 @@ Traceback (most recent call last):
 CaseInsensitiveDict(data=None, **kwargs)
 ```
 
-A case-insensitive `dict`-like object.
-Implements all methods and operations of `collections.MutableMapping`
-as well as dict's `copy`. Also provides `lower_items`.
-All keys are expected to be strings. The structure remembers the
-case of the last key to be set, and `iter(instance)`, `keys()`,
-`items()`, `iterkeys()`, and `iteritems()` will contain
-case-sensitive keys.
+大小写不敏感类 `字典` 对象。实现了 `collections.MutableMapping` 的所有方法和操作，
+也实现了字典的 `copy`，此外还提供 `lower_items`。所有的键都应是字符串。
+内部结构会记住最后一次被设置的键的大小写，`iter(instance)`、`keys()`、`items()`、
+`iterkeys()` 和 `iteritems()` 将会包含大小写敏感的键。
 
 ```python
 >>> from pydu.dict import CaseInsensitiveDict
@@ -56,7 +52,7 @@ True
 LookupDict(name=None)
 ```
 
-Dictionary lookup object.
+字典查找对象。
 
 ```python
 >>> from pydu.dict import LookupDict
@@ -73,15 +69,11 @@ None
 OrderedDefaultDict(default_factory=None, *args, **kwds)
 ```
 
-Dictionary that remembers insertion order and has default value
-with default factory.
+记住插入顺序且能根据默认工厂提供默认值的字典。
 
-The default factory is called without arguments to produce
-a new value when a key is not present, in `__getitem__` only.
-An `OrderedDefaultDict` compares equal to a `collections.defaultdict`
-with the same items. All remaining arguments are treated the same
-as if they were passed to the `defaultdict` constructor,
-including keyword arguments.
+当key不存在（仅限通过 `__getitem__` 中）时，无参数调用默认工厂来产生新值。
+`OrderedDefaultDict` 和 `collections.defaultdict` 在比较时是等同的。
+所有剩余参数和传入 `defaultdict` 构造器中的相同，包括关键字参数。
 
 ```python
 >>> from pydu.dict import OrderedDefaultDict
@@ -100,8 +92,8 @@ odict_keys(['b', 'a'])
 attrify(obj)
 ```
 
-Attrify obj into `AttriDict` or `list of AttriDict` if the obj is list.
-If obj or the item of obj is not list or dict, will return itself.
+将对象属性化为 `AttriDict` 或 包含 `AttriDict` 的列表（如果对象为列表）。
+如果对象或对象中的元素不是列表或字典，将会返回其本身。
 
 ```python
 >>> from pydu.dict import attrify

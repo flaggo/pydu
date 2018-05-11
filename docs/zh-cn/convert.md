@@ -1,6 +1,6 @@
 # Convert
 
-Utils for converting one type of data to another.
+提供将一类数据转换为另一类的工具。
 
 
 ## convert.boolean
@@ -8,15 +8,15 @@ Utils for converting one type of data to another.
 boolean(obj)
 ```
 
-Convert obj to a boolean value.
+将对象转换为布尔值。
 
-If obj is string, obj will converted by case-insensitive way:
+如果对象是字符串，将会以不区分大小写的形式转换：
 
-* convert `yes`, `y`, `on`, `true`, `t`, `1` to True
-* convert `no`, `n`, `off`, `false`, `f`, `0` to False
-* raising TypeError if other values passed
+* 将 `yes`、 `y`、 `on`、 `true`、 `t`、 `1` 转换为True
+* 将 `no`、 `n`、 `off`、 `false`、 `f`、 `0` 转换为False
+* 如果传入其他值，抛出TypeError
 
-If obj is non-string, obj will converted by `bool(obj)`.
+如果对象不是字符串，将会使用 `bool(obj)` 转换。
 
 ```python
 >>> from pydu.string import boolean
@@ -32,8 +32,8 @@ False
 bin2oct(x)
 ```
 
-Convert binary string to octal string.
-For instance: '1001' -> '11'
+把二进制字符串转换为八进制字符串。
+比如：'1001' -> '11'
 
 ```python
 >>> from pydu.convert import bin2oct
@@ -47,8 +47,8 @@ For instance: '1001' -> '11'
 bin2dec(x)
 ```
 
-Convert binary string to decimal number.
-For instance: '11' -> 3
+把二进制字符串转换为十进制数字。
+比如：'11' -> 3
 
 ```python
 >>> from pydu.convert import bin2dec
@@ -62,8 +62,8 @@ For instance: '11' -> 3
 bin2hex(x)
 ```
 
-Convert binary string to hexadecimal string.
-For instance: '11010' -> '1a'
+把二进制字符串转换为十六进制字符串。
+比如：'11010' -> '1a'
 
 ```python
 >>> from pydu.convert import bin2hex
@@ -77,8 +77,8 @@ For instance: '11010' -> '1a'
 oct2bin(x)
 ```
 
-Convert octal string to binary string.
-For instance: '11' -> '1001'
+把八进制字符串转换为二进制字符串。
+比如：'11' -> '1001'
 
 ```python
 >>> from pydu.convert import oct2bin
@@ -92,8 +92,8 @@ For instance: '11' -> '1001'
 oct2dec(x)
 ```
 
-Convert octal string to decimal number.
-For instance: '11' -> 9
+把八进制字符串转换为十进制数字。
+比如：'11' -> 9
 
 ```python
 >>> from pydu.convert import oct2dec
@@ -107,8 +107,8 @@ For instance: '11' -> 9
 oct2hex(x)
 ```
 
-Convert octal string to hexadecimal string.
-For instance: '32' -> '1a'
+把八进制字符串转换为十六进制字符串。
+比如：'32' -> '1a'
 
 ```python
 >>> from pydu.convert import oct2hex
@@ -122,8 +122,8 @@ For instance: '32' -> '1a'
 dec2bin(x)
 ```
 
-Convert decimal number to binary string.
-For instance: 3 -> '11'
+把十进制数字转换为二进制字符串。
+比如：3 -> '11'
 
 ```python
 >>> from pydu.convert import dec2bin
@@ -137,8 +137,8 @@ For instance: 3 -> '11'
 dec2oct(x)
 ```
 
-Convert decimal number to octal string.
-For instance: 9 -> '11'
+把十进制数字转换为八进制字符串。
+比如：9 -> '11'
 
 ```python
 >>> from pydu.convert import dec2oct
@@ -152,8 +152,8 @@ For instance: 9 -> '11'
 dec2hex(x)
 ```
 
-Convert decimal number to hexadecimal string.
-For instance: 26 -> '1a'
+把十进制数字转换为十六进制字符串。
+比如：26 -> '1a'
 
 ```python
 >>> from pydu.convert import dec2hex
@@ -167,8 +167,8 @@ For instance: 26 -> '1a'
 hex2bin(x)
 ```
 
-Convert hexadecimal string to binary string.
-For instance: '1a' -> '11010'
+把十六进制字符串转换为二进制字符串。
+比如：'1a' -> '11010'
 
 ```python
 >>> from pydu.convert import hex2bin
@@ -182,8 +182,8 @@ For instance: '1a' -> '11010'
 hex2oct(x)
 ```
 
-Convert hexadecimal string to octal string.
-For instance: '1a' -> '32'
+把十六进制字符串转换为八进制字符串。
+比如：'1a' -> '32'
 
 ```python
 >>> from pydu.convert import hex2oct
@@ -197,8 +197,8 @@ For instance: '1a' -> '32'
 hex2dec(x)
 ```
 
-Convert hexadecimal string to decimal number.
-For instance: '1a' -> 26
+把十六进制字符串转换为十进制数字。
+比如：'1a' -> 26
 
 ```python
 >>> from pydu.convert import hex2dec
