@@ -25,4 +25,4 @@
   * [System](system.md)
   * [Unit](unit.md)
 
-* [Changelog](../changelog.md)
+* [Changelog](changelog.md)

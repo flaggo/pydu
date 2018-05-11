@@ -25,4 +25,4 @@
   * [System 系统](zh-cn/system.md)
   * [Unit 单位](zh-cn/unit.md)
 
-* [变更记录](../changelog.md)
+* [变更记录](changelog.md)
