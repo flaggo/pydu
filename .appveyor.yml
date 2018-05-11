@@ -19,7 +19,6 @@ environment:
 
 install:
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
-  - "pip install --disable-pip-version-check --user --upgrade pip"
   - "%CMD_IN_ENV% pip install tox codecov"
 
 test_script:
