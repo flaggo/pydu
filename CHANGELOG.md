@@ -1,5 +1,11 @@
-v0.7.0 (2018-05-xx)
+v0.7.0 (2018-05-14)
 -------------------
+
+**Enhancements**
+
+* Upgrade to **brand new document** powerd by docsify
+* Add slot.SlotBase which is the base class for class using `__slots__`
+* Add compat.izip
 
 
 v0.6.2 (2018-04-30)
@@ -62,8 +68,8 @@ v0.5.0 (2018-03-08)
 * Fix reduce error on Python 3.
 
 
-v0.4.2 (2018-2-5)
------------------
+v0.4.2 (2018-02-05)
+-------------------
 
 **Enhancements**
 
@@ -77,8 +83,8 @@ v0.4.2 (2018-2-5)
 * Fix several convert functions return values with unnecessary value 'L' when given big number on Python 2.
 
 
-v0.4.1 (2018-1-20)
-------------------
+v0.4.1 (2018-01-20)
+-------------------
 
 **Enhancements**
 
@@ -91,8 +97,8 @@ v0.4.1 (2018-1-20)
 * Add ``compat.strbytes_types`` which includes all types about string
 
 
-v0.4.0 (2018-1-9)
------------------
+v0.4.0 (2018-01-09)
+-------------------
 
 **Importance**
 * Remove support for Python 3.4
