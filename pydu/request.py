@@ -151,9 +151,9 @@ def cookies_string_to_dict(cookies_string):
     Transform cookies which is type of string  to the type of dict
     """
     if cookies_string is None or cookies_string == '':
-        raise RequestException("Invalidate param of cookies_str which is blank !")
+        raise RequestException("Invalidate param of cookies_string which is blank !")
     if not isinstance(cookies_string, str):
-        raise RequestException("Invalidate param of cookies_str which is type of string")
+        raise RequestException("Invalidate param of cookies_string which is type of string")
     cookies_dict = {}
     for item in [single_mapping_item.strip().replace('\t', '').replace('\n', '') for single_mapping_item in
                  cookies_string.split(';')]:
