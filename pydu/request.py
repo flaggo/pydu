@@ -137,3 +137,29 @@ def update_query_params(url, params):
     parts[4] = urlencode(query)
     new_url = urlparse.urlunparse(parts)
     return new_url
+
+class RequestException(Exception):
+    """Request Exception"""
+    def __init__(self,message):
+        Exception.__init__(self,message)
+
+def cookies_string_to_dict(cookies_string):
+    """
+    Transform cookies which is type of string  to the type of dict
+    """
+    if cookies_string is None or cookies_string=='':
+        raise RequestException("Invalidate param of cookies_str which is blank !")
+    if not isinstance(cookies_string,str):
+        raise RequestException("Invalidate param of cookies_str which is type of string")
+    cookies_dict = {}
+    for item in [single_mapping_item.strip().replace('\t','').replace('\n','') for single_mapping_item in cookies_string.split(';')]:
+        if not item.__contains__('='):
+            continue
+        kv_list = item.split('=')
+        if len(kv_list)==0:
+            continue
+        if len(kv_list)<2:
+            cookies_dict[kv_list[0]] = ''
+        else:
+            cookies_dict[kv_list[0]] = kv_list[1]
+    return cookies_dict
