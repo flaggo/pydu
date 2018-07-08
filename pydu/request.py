@@ -142,8 +142,7 @@ def update_query_params(url, params):
 class RequestException(Exception):
     """Request Exception"""
 
-    def __init__(self, message):
-        Exception.__init__(self, message)
+    pass
 
 
 def cookies_string_to_dict(cookies_string):
