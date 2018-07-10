@@ -139,30 +139,21 @@ def update_query_params(url, params):
     return new_url
 
 
-class RequestException(Exception):
-    """Request Exception"""
-
-    pass
-
-
 def cookies_string_to_dict(cookies_string):
     """
     Transform cookies which is type of string  to the type of dict
     """
-    if cookies_string is None or cookies_string == '':
-        raise RequestException("Invalidate param of cookies_string which is blank !")
+    if not cookies_string or cookies_string == '':
+        raise ValueError("Invalid blank param of cookies_string !")
     if not isinstance(cookies_string, str):
-        raise RequestException("Invalidate param of cookies_string which is type of string")
+        raise TypeError("Invalid type of cookies_string !")
     cookies_dict = {}
-    for item in [single_mapping_item.strip().replace('\t', '').replace('\n', '') for single_mapping_item in
-                 cookies_string.split(';')]:
-        if not item.__contains__('='):
+    for single_mapping_item in cookies_string.split(";"):
+        single_mapping_item = single_mapping_item.strip().replace("\t", "").replace("\n", "")
+        if not single_mapping_item.__contains__('='):
             continue
-        kv_list = item.split('=')
+        kv_list = single_mapping_item.split('=')
         if len(kv_list) == 0:
             continue
-        if len(kv_list) < 2:
-            cookies_dict[kv_list[0]] = ''
-        else:
-            cookies_dict[kv_list[0]] = kv_list[1]
+        cookies_dict[kv_list[0]] = kv_list[1]
     return cookies_dict
