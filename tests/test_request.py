@@ -65,4 +65,6 @@ def test_cookies_string_to_dict():
     cookies_string = """
     _ga=GA1.2.129780172.1530933530; _gid=GA1.2.1377057427.1530933530; ajs_anonymous_id=%228c887ac4-df75-4251-bd83-453dffab984f%22;
     """
-    assert cookies_string_to_dict(cookies_string)
+    cookies_dict = cookies_string_to_dict(cookies_string=cookies_string)
+    assert cookies_dict is not None
+    assert isinstance(cookies_dict,dict)
