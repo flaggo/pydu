@@ -150,7 +150,7 @@ def cookies_string_to_dict(cookies_string):
     cookies_dict = {}
     for single_mapping_item in cookies_string.split(";"):
         single_mapping_item = single_mapping_item.strip().replace("\t", "").replace("\n", "")
-        if not single_mapping_item.__contains__('='):
+        if '=' not in single_mapping_item:
             continue
         kv_list = single_mapping_item.split('=')
         if len(kv_list) == 0:
