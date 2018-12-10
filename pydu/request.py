@@ -139,21 +139,18 @@ def update_query_params(url, params):
     return new_url
 
 
-def cookies_string_to_dict(cookies_string):
+def cookies_str_to_dict(cookies):
     """
-    Transform cookies which is type of string  to the type of dict
+    Convert cookies from str to dict.
     """
-    if not cookies_string or cookies_string == '':
-        raise ValueError("Invalid blank param of cookies_string !")
-    if not isinstance(cookies_string, str):
-        raise TypeError("Invalid type of cookies_string !")
-    cookies_dict = {}
-    for single_mapping_item in cookies_string.split(";"):
-        single_mapping_item = single_mapping_item.strip().replace("\t", "").replace("\n", "")
-        if '=' not in single_mapping_item:
+    if not isinstance(cookies, str):
+        raise TypeError('Invalid type of cookies_string !')
+
+    cookies_obj = {}
+    for item in cookies.split(';'):
+        item = item.strip().replace('\t', '').replace('\n', '')
+        if '=' not in item:
             continue
-        kv_list = single_mapping_item.split('=')
-        if len(kv_list) == 0:
-            continue
-        cookies_dict[kv_list[0]] = kv_list[1]
-    return cookies_dict
+        key, value = item.split('=', 1)
+        cookies_obj[key] = value
+    return cookies_obj

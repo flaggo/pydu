@@ -2,7 +2,7 @@ import socket
 from .testing import mockserver
 import pydu.request
 from pydu.network import get_free_port
-from pydu.request import FileName, check_connect, update_query_params, cookies_string_to_dict
+from pydu.request import FileName, check_connect, update_query_params, cookies_str_to_dict
 
 
 def test_filename_from_url():
@@ -62,10 +62,9 @@ def test_update_query_params():
            (base + '?foo=2&bar=3', base + '?bar=3&foo=2')
 
 
-def test_cookies_string_to_dict():
-    cookies_string = """
-    _ga=GA1.2.129780172.1530933530; _gid=GA1.2.1377057427.1530933530; ajs_anonymous_id=%228c887ac4-df75-4251-bd83-453dffab984f%22;
-    """
-    cookies_dict = cookies_string_to_dict(cookies_string=cookies_string)
-    assert cookies_dict is not None
-    assert isinstance(cookies_dict, dict)
+def test_cookies_str_to_dict():
+    cookies = cookies_str_to_dict('a=a;  \tb=b;\nc=c;d;e=')
+    assert cookies['a'] == 'a'
+    assert cookies['b'] == 'b'
+    assert cookies['c'] == 'c'
+    assert cookies['e'] == ''
