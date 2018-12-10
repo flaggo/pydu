@@ -66,3 +66,17 @@ Update query params of given url and return new url.
 >>> update_query_params('http://example.com', {'foo': 1})
 'http://example.com?foo=1'
 ```
+
+
+## request.cookies_str_to_dict
+```python
+cookies_str_to_dict(cookies)
+```
+
+Convert cookies from str to dict.
+
+```python
+>>> from pydu.request import cookies_str_to_dict
+>>> cookies_str_to_dict('a=a;b=b')
+{'a': 'a', 'b': 'b'}
+```

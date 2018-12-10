@@ -62,3 +62,17 @@ update_query_params(url, params)
 >>> update_query_params('http://example.com', {'foo': 1})
 'http://example.com?foo=1'
 ```
+
+
+## request.cookies_str_to_dict
+```python
+cookies_str_to_dict(cookies)
+```
+
+将字符串类型的Cookies转换为字典对象。
+
+```python
+>>> from pydu.request import cookies_str_to_dict
+>>> cookies_str_to_dict('a=a;b=b')
+{'a': 'a', 'b': 'b'}
+```
