@@ -32,6 +32,7 @@ help:
 
 init:
 	pip install -r requirements-dev.txt
+	npm i docsify-cli -g
 
 test: test-py2 test-py3
 
@@ -52,8 +53,7 @@ publish:
 	rm -rf build dist *.egg-info .eggs
 
 docs:
-	cd docs && make html
-	@echo "\033[95m\n\nBuild successful! View the docs homepage at docs/_build/html/index.html.\n\033[0m"
+	docsify serve docs
 
 clean: clean-pyc clean-build
 

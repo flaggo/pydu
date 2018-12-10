@@ -3,7 +3,7 @@ Useful data structures, utils for Python.
 """
 from __future__ import absolute_import
 
-__version__ = '0.7.0'
+__version__ = '0.7.1'
 
 
 # Set logging handler to avoid "No handler found" warnings.
