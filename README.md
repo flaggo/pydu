@@ -8,7 +8,7 @@
 [![pydu](https://codecov.io/github/flaggo/pydu/coverage.svg?branch=master)](https://codecov.io/github/flaggo/pydu)
 [![pydu](https://img.shields.io/github/contributors/flaggo/pydu.svg)](https://github.com/flaggo/pydu/graphs/contributors)
 
-**pydu** (python data structures and utils) is a library of useful data structures and utils
+**pydu** is a library of useful **d**ata structures and **u**tils
 for Python 2 and 3, which collected from open source projects and created by contributors.
 
 
