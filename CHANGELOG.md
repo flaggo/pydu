@@ -1,3 +1,11 @@
+v0.7.2 (2018-12-24)
+-------------------
+
+**Bug fixes**
+
+* Fix collections ABCs deprecation warning
+
+
 v0.7.0 (2018-05-14)
 -------------------
 

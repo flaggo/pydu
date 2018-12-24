@@ -1,6 +1,13 @@
 # coding: utf-8
 import collections
 
+try:
+    # Python 3
+    from collections.abc import Callable, Mapping, MutableMapping
+except ImportError:
+    # Python 2.7
+    from collections import Callable, Mapping, MutableMapping
+
 from .compat import PY2
 
 
@@ -44,11 +51,11 @@ class AttrDict(dict):
         return '<AttrDict ' + dict.__repr__(self) + '>'
 
 
-class CaseInsensitiveDict(collections.MutableMapping):
+class CaseInsensitiveDict(MutableMapping):
     """
     A case-insensitive ``dict``-like object.
     Implements all methods and operations of
-    ``collections.MutableMapping`` as well as dict's ``copy``. Also
+    ``MutableMapping`` as well as dict's ``copy``. Also
     provides ``lower_items``.
     All keys are expected to be strings. The structure remembers the
     case of the last key to be set, and ``iter(instance)``,
@@ -66,6 +73,7 @@ class CaseInsensitiveDict(collections.MutableMapping):
     operations are given keys that have equal ``.lower()``s, the
     behavior is undefined.
     """
+
     def __init__(self, data=None, **kwargs):
         self._store = {}
         if data is None:
@@ -98,7 +106,7 @@ class CaseInsensitiveDict(collections.MutableMapping):
         )
 
     def __eq__(self, other):
-        if isinstance(other, collections.Mapping):
+        if isinstance(other, Mapping):
             other = CaseInsensitiveDict(other)
         else:
             return NotImplemented
@@ -107,7 +115,7 @@ class CaseInsensitiveDict(collections.MutableMapping):
 
     # Copy is required
     def copy(self):
-         return CaseInsensitiveDict(self._store.values())
+        return CaseInsensitiveDict(self._store.values())
 
     def __repr__(self):
         return '%s(%r)' % (self.__class__.__name__, dict(self.items()))
@@ -144,9 +152,10 @@ class OrderedDefaultDict(collections.OrderedDict):
     as if they were passed to the `defaultdict` constructor,
     including keyword arguments.
     """
+
     def __init__(self, default_factory=None, *args, **kwds):
         if (default_factory is not None and
-           not isinstance(default_factory, collections.Callable)):
+                not isinstance(default_factory, Callable)):
             raise TypeError('First argument must be callable')
         super(OrderedDefaultDict, self).__init__(*args, **kwds)
         self.default_factory = default_factory

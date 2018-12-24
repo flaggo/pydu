@@ -1,4 +1,11 @@
-from collections import Iterable
+
+try:
+    # Python 3
+    from collections.abc import Iterable
+except ImportError:
+    # Python 2.7
+    from collections import Iterable
+
 from pydu.compat import strbytes_types
 
 
