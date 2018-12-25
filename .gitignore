@@ -105,3 +105,8 @@ ENV/
 
 # pytest
 .pytest_cache/
+
+# Mac
+
+.DS_Store
+
