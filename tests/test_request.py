@@ -50,8 +50,10 @@ def test_check_connect(port=None):
     def mock_socket(*args):
         raise socket.error
 
+    old_socket = pydu.request.socket.socket
     pydu.request.socket.socket = mock_socket
     assert not check_connect('127.0.0.1', port=port, timeout=0.01)
+    pydu.request.socket.socket = old_socket
 
 
 def test_update_query_params():
