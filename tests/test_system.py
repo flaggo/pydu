@@ -352,13 +352,17 @@ class TestWhich:
         assert which(mycmd) == mycmd
 
     def test_cmd_path(self, tmpdir, mycmd):
-        path = str(tmpdir)
-        assert which('mycmd') is None
-        assert which('mycmd', path=path) == mycmd
+        original_path = os.environ['PATH']
+        try:
+            path = str(tmpdir)
+            assert which('mycmd') is None
+            assert which('mycmd', path=path) == mycmd
 
-        os.environ['PATH'] = path + os.pathsep + \
-            os.environ.get('PATH', os.defpath)
-        assert which('mycmd') == mycmd
+            os.environ['PATH'] = path + os.pathsep + \
+                os.environ.get('PATH', os.defpath)
+            assert which('mycmd') == mycmd
+        finally:
+            os.environ['PATH'] = original_path
 
 
 @pytest.mark.skipif(not WINDOWS, reason='Not support non Windows')
