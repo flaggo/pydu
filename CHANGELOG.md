@@ -1,3 +1,16 @@
+v0.7.4 (2026-06-15)
+-------------------
+
+**Enhancements**
+
+* Manage the project with ``uv`` and add automated GitHub Release and PyPI publishing workflows.
+
+**Bug fixes**
+
+* Fix Windows ``which`` tests for PATHEXT handling on modern Python.
+* Isolate publishing dependencies from the Python 3.9 development environment.
+
+
 v0.7.3 (2026-06-15)
 -------------------
 
