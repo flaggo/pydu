@@ -43,4 +43,4 @@ def test_github_workflows_use_current_setup_uv_action():
     ]
 
     for workflow in workflows:
-        assert 'astral-sh/setup-uv@v8' in workflow.read_text()
+        assert 'astral-sh/setup-uv@v8.1.0' in workflow.read_text()
