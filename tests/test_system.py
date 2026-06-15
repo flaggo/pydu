@@ -338,11 +338,20 @@ class TestCopy:
 
 @pytest.fixture()
 def mycmd(tmpdir):
-    mycmd = str(tmpdir.join('mycmd'))
+    filename = 'mycmd.exe' if WINDOWS else 'mycmd'
+    mycmd = str(tmpdir.join(filename))
+    original_pathext = os.environ.get('PATHEXT')
     touch(mycmd)
     os.chmod(mycmd, os.F_OK | stat.S_IXUSR)
-    os.environ['PATHEXT'] = ''
-    return mycmd
+    if WINDOWS:
+        os.environ['PATHEXT'] = '.exe'
+    try:
+        yield mycmd
+    finally:
+        if original_pathext is None:
+            os.environ.pop('PATHEXT', None)
+        else:
+            os.environ['PATHEXT'] = original_pathext
 
 
 @pytest.mark.usefixtures('mycmd')
@@ -355,12 +364,13 @@ class TestWhich:
         original_path = os.environ['PATH']
         try:
             path = str(tmpdir)
-            assert which('mycmd') is None
-            assert which('mycmd', path=path) == mycmd
+            command = 'mycmd' if WINDOWS else os.path.basename(mycmd)
+            assert which(command) is None
+            assert which(command, path=path) == mycmd
 
             os.environ['PATH'] = path + os.pathsep + \
                 os.environ.get('PATH', os.defpath)
-            assert which('mycmd') == mycmd
+            assert which(command) == mycmd
         finally:
             os.environ['PATH'] = original_path
 
