@@ -34,8 +34,10 @@ dev = [
     "pytest-xdist",
     "setuptools>=77",
     "tomli>=2.0.1; python_version < '3.11'",
-    "twine>=6.0.0",
     "wheel",
+]
+publish = [
+    "twine>=6.0.0; python_version >= '3.10'",
 ]
 
 [build-system]

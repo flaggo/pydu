@@ -48,7 +48,7 @@ build: clean-build
 	uv build $(UV_PYTHON_FLAG)
 
 check:
-	uv run $(UV_PYTHON_FLAG) twine check dist/*
+	uv run $(UV_PYTHON_FLAG) --group publish twine check dist/*
 
 publish:
 	uv publish

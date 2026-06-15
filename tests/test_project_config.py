@@ -17,6 +17,17 @@ def test_pyproject_configures_uv_and_setuptools_build():
     assert 'dev' in pyproject['dependency-groups']
 
 
+def test_publish_tools_are_isolated_from_python39_dev_group():
+    dependency_groups = tomllib.loads((ROOT / 'pyproject.toml').read_text())['dependency-groups']
+
+    assert all('twine' not in dependency for dependency in dependency_groups['dev'])
+    assert 'publish' in dependency_groups
+    assert any(
+        'twine' in dependency and "python_version >= '3.10'" in dependency
+        for dependency in dependency_groups['publish']
+    )
+
+
 def test_makefile_uses_uv_for_common_development_tasks():
     makefile = (ROOT / 'Makefile').read_text()
 
@@ -31,6 +42,7 @@ def test_release_workflow_builds_github_release_and_publishes_with_uv():
 
     assert 'v*.*.*' in workflow
     assert 'uv build' in workflow
+    assert 'twine check' in workflow
     assert 'softprops/action-gh-release' in workflow
     assert 'UV_PUBLISH_TOKEN: ${{ secrets.PYPI_TOKEN }}' in workflow
     assert 'uv publish' in workflow

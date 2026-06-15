@@ -4,5 +4,4 @@ coverage
 psutil
 setuptools>=77
 tomli>=2.0.1; python_version < "3.11"
-twine>=6.0.0
 wheel
