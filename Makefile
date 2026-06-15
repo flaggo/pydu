@@ -1,24 +1,24 @@
 # Env
 export PYTHONDONTWRITEBYTECODE=1
 TEST_PATH=./tests
-DEFAULT_PYTHON2=`python -c "import sys;print(sys.version_info.major)" | grep 2`
-PY2=$(if $(DEFAULT_PYTHON2),python,python2)
-PY3=$(if $(DEFAULT_PYTHON2),python3,python)
+UV_PYTHON_FLAG=$(if $(PY),--python $(PY),)
 
 # Func
-.PHONY: docs
+.PHONY: help install init test coverage build check publish docs clean clean-pyc clean-build
 
 help:
+	@echo "\033[32minstall\033[0m"
+	@echo "    Install dependencies with uv."
 	@echo "\033[32minit\033[0m"
 	@echo "    Init environment for pydu."
 	@echo "\033[32mtest\033[0m"
-	@echo "    Run pytest with Python 2 and 3."
-	@echo "\033[32mtest-py2\033[0m"
-	@echo "    Run pytest with Python 2."
-	@echo "\033[32mtest-py3\033[0m"
-	@echo "    Run pytest with Python 3."
+	@echo "    Run pytest."
 	@echo "\033[32mcoverage\033[0m"
 	@echo "    Run pytest and report coverage."
+	@echo "\033[32mbuild\033[0m"
+	@echo "    Build distributions."
+	@echo "\033[32mcheck\033[0m"
+	@echo "    Check built distributions."
 	@echo "\033[32mpublish\033[0m"
 	@echo "    Publish pydu to PyPI."
 	@echo "\033[32mdocs\033[0m"
@@ -30,27 +30,28 @@ help:
 	@echo "\033[32mclean-build\033[0m"
 	@echo "    Remove build artifacts."
 
+install:
+	uv sync $(UV_PYTHON_FLAG) --group dev
+
 init:
-	pip install -r requirements-dev.txt
+	$(MAKE) install
 	npm i docsify-cli -g
 
-test: test-py2 test-py3
-
-test-py2: clean-pyc
-	 $(PY2) -m pytest --color=yes $(TEST_PATH)
-
-test-py3: clean-pyc
-	 $(PY3) -m pytest --color=yes $(TEST_PATH)
+test: clean-pyc
+	uv run $(UV_PYTHON_FLAG) pytest --color=yes $(TEST_PATH)
 
 coverage:
-	coverage run --source=pydu -m pytest tests
-	coverage report
+	uv run $(UV_PYTHON_FLAG) coverage run --source=pydu -m pytest tests
+	uv run $(UV_PYTHON_FLAG) coverage report
+
+build: clean-build
+	uv build $(UV_PYTHON_FLAG)
+
+check:
+	uv run $(UV_PYTHON_FLAG) twine check dist/*
 
 publish:
-	pip install 'twine>=1.5.0'
-	python setup.py sdist
-	twine upload dist/*
-	rm -rf build dist *.egg-info .eggs
+	uv publish
 
 docs:
 	docsify serve docs

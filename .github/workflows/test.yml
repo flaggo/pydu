@@ -1,0 +1,37 @@
+name: Run Tests
+
+on:
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '*'
+  pull_request:
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, windows-2022, macos-14]
+        python-version: ['3.14']
+        include:
+          - os: ubuntu-22.04
+            python-version: '3.9'
+          - os: ubuntu-22.04
+            python-version: '3.12'
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v5
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+      - name: Install dependencies
+        run: uv sync --group dev
+      - name: Build distributions
+        run: uv build
+      - name: Run tests
+        run: uv run pytest

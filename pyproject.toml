@@ -1,0 +1,49 @@
+[project]
+name = "pydu"
+dynamic = ["version"]
+description = "Useful data structures, utils for Python."
+authors = [{ name = "Prodesire", email = "wangbinxin001@126.com" }]
+license = "MIT"
+license-files = ["LICENSE.txt"]
+readme = { file = "README.md", content-type = "text/markdown" }
+requires-python = ">=3.9"
+keywords = ["pydu", "utilities", "data-structures"]
+classifiers = [
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development :: Libraries",
+]
+
+[project.urls]
+Homepage = "https://github.com/flaggo/pydu"
+Repository = "https://github.com/flaggo/pydu"
+
+[dependency-groups]
+dev = [
+    "coverage",
+    "psutil",
+    "pytest>=7.0.0",
+    "pytest-xdist",
+    "setuptools>=77",
+    "tomli>=2.0.1; python_version < '3.11'",
+    "twine>=6.0.0",
+    "wheel",
+]
+
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.dynamic]
+version = { attr = "pydu.__version__" }
+
+[tool.setuptools.packages.find]
+include = ["pydu*", "tests*"]

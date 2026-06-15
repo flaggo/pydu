@@ -1,0 +1,66 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v5
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+      - name: Install dependencies
+        run: uv sync --group dev
+      - name: Build distributions
+        run: uv build
+      - name: Run tests
+        run: uv run pytest
+      - name: Upload distribution artifacts
+        uses: actions/upload-artifact@v5
+        with:
+          name: pydu-dist
+          path: dist
+
+  publish:
+    needs: build
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v5
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+      - name: Download distribution artifacts
+        uses: actions/download-artifact@v5
+        with:
+          name: pydu-dist
+          path: dist
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*
+      - name: Publish to PyPI
+        env:
+          UV_PUBLISH_TOKEN: ${{ secrets.PYPI_TOKEN }}
+        run: |
+          for attempt in 1 2 3; do
+            uv publish --check-url https://pypi.org/simple/ dist/* && exit 0
+            if [ "$attempt" -lt 3 ]; then
+              sleep $((attempt * 60))
+            fi
+          done
+          exit 1
