@@ -118,3 +118,37 @@ b
 >>> attrd.c
 c
 ```
+
+
+## dict.pick
+```python
+pick(mapping, keys)
+```
+
+Return a new dict with selected keys from `mapping`. Missing keys are ignored.
+`keys` can be a single key or an iterable of keys.
+
+```python
+>>> from pydu.dict import pick
+>>> data = {'name': 'pydu', 'version': '0.7.3', 'private': True}
+>>> pick(data, ['name', 'version'])
+{'name': 'pydu', 'version': '0.7.3'}
+>>> pick(data, 'name')
+{'name': 'pydu'}
+```
+
+
+## dict.omit
+```python
+omit(mapping, keys)
+```
+
+Return a new dict without selected keys from `mapping`. Missing keys are ignored.
+`keys` can be a single key or an iterable of keys.
+
+```python
+>>> from pydu.dict import omit
+>>> data = {'name': 'pydu', 'version': '0.7.3', 'private': True}
+>>> omit(data, 'private')
+{'name': 'pydu', 'version': '0.7.3'}
+```

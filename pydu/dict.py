@@ -8,7 +8,7 @@ except ImportError:
     # Python 2.7
     from collections import Callable, Mapping, MutableMapping
 
-from .compat import PY2
+from .compat import PY2, string_types
 
 
 class AttrDict(dict):
@@ -214,3 +214,32 @@ def attrify(obj):
         return attrd
     else:
         return obj
+
+
+def _normalize_keys(keys):
+    if isinstance(keys, string_types):
+        return (keys,)
+    try:
+        iter(keys)
+    except TypeError:
+        return (keys,)
+    return keys
+
+
+def pick(mapping, keys):
+    """
+    Return a new dict with selected keys from mapping.
+    Missing keys are ignored.
+    """
+    return dict((key, mapping[key]) for key in _normalize_keys(keys)
+                if key in mapping)
+
+
+def omit(mapping, keys):
+    """
+    Return a new dict without selected keys from mapping.
+    Missing keys are ignored.
+    """
+    keys = set(_normalize_keys(keys))
+    return dict((key, value) for key, value in mapping.items()
+                if key not in keys)

@@ -110,3 +110,37 @@ b
 >>> attrd.c
 c
 ```
+
+
+## dict.pick
+```python
+pick(mapping, keys)
+```
+
+返回一个只包含指定键的新字典。不存在的键会被忽略。
+`keys` 可以是单个键，也可以是键的可迭代对象。
+
+```python
+>>> from pydu.dict import pick
+>>> data = {'name': 'pydu', 'version': '0.7.3', 'private': True}
+>>> pick(data, ['name', 'version'])
+{'name': 'pydu', 'version': '0.7.3'}
+>>> pick(data, 'name')
+{'name': 'pydu'}
+```
+
+
+## dict.omit
+```python
+omit(mapping, keys)
+```
+
+返回一个移除指定键后的新字典。不存在的键会被忽略。
+`keys` 可以是单个键，也可以是键的可迭代对象。
+
+```python
+>>> from pydu.dict import omit
+>>> data = {'name': 'pydu', 'version': '0.7.3', 'private': True}
+>>> omit(data, 'private')
+{'name': 'pydu', 'version': '0.7.3'}
+```

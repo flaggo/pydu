@@ -1,7 +1,8 @@
 import pytest
 import unittest
 
-from pydu.dict import AttrDict, LookupDict, CaseInsensitiveDict, OrderedDefaultDict, attrify
+from pydu.dict import (AttrDict, LookupDict, CaseInsensitiveDict,
+                       OrderedDefaultDict, attrify, pick, omit)
 
 
 class TestAttrDict:
@@ -120,3 +121,33 @@ def test_attrify():
     })
     assert attrd.a == 1
     assert attrd.b == (1, 2)
+
+
+def test_pick_returns_selected_keys_without_mutating_source():
+    data = {'name': 'pydu', 'version': '0.7.3', 'private': True}
+
+    result = pick(data, ['name', 'version', 'missing'])
+
+    assert result == {'name': 'pydu', 'version': '0.7.3'}
+    assert data == {'name': 'pydu', 'version': '0.7.3', 'private': True}
+
+
+def test_pick_accepts_single_string_key():
+    data = {'name': 'pydu', 'private': True}
+
+    assert pick(data, 'name') == {'name': 'pydu'}
+
+
+def test_omit_returns_unwanted_keys_removed_without_mutating_source():
+    data = {'name': 'pydu', 'version': '0.7.3', 'private': True}
+
+    result = omit(data, ['private', 'missing'])
+
+    assert result == {'name': 'pydu', 'version': '0.7.3'}
+    assert data == {'name': 'pydu', 'version': '0.7.3', 'private': True}
+
+
+def test_omit_accepts_single_string_key():
+    data = {'name': 'pydu', 'private': True}
+
+    assert omit(data, 'private') == {'name': 'pydu'}

@@ -1,3 +1,11 @@
+v0.7.3 (2026-06-15)
+-------------------
+
+**Enhancements**
+
+* Add ``dict.pick`` and ``dict.omit`` helpers for selecting or excluding dictionary keys.
+
+
 v0.7.2 (2019-02-08)
 -------------------
 
