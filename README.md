@@ -3,9 +3,7 @@
 [![pydu](https://img.shields.io/pypi/v/pydu.svg)](https://pypi.python.org/pypi/pydu)
 [![pydu](https://img.shields.io/pypi/l/pydu.svg)](https://pypi.python.org/pypi/pydu)
 [![pydu](https://img.shields.io/pypi/pyversions/pydu.svg)](https://pypi.python.org/pypi/pydu)
-[![pydu](https://img.shields.io/travis/flaggo/pydu/master.svg?label=Linux)](https://travis-ci.org/flaggo/pydu)
-[![pydu](https://img.shields.io/appveyor/ci/flaggo/pydu/master.svg?label=Windows)](https://ci.appveyor.com/project/flaggo/pydu)
-[![pydu](https://codecov.io/github/flaggo/pydu/coverage.svg?branch=master)](https://codecov.io/github/flaggo/pydu)
+[![Run Tests](https://github.com/flaggo/pydu/actions/workflows/test.yml/badge.svg)](https://github.com/flaggo/pydu/actions/workflows/test.yml)
 [![pydu](https://img.shields.io/github/contributors/flaggo/pydu.svg)](https://github.com/flaggo/pydu/graphs/contributors)
 
 **pydu** is a library of useful **d**ata structures and **u**tils
