@@ -1,7 +1,7 @@
 ## pydu
 
 > **pydu(Python Data structures and Utils)** is a library of useful data structures and utils
-for Python 2 and 3, which collected from open source projects and created by contributors.
+for Python 3.9+, which collected from open source projects and created by contributors.
 
 
 ## Installation

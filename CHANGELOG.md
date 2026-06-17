@@ -1,3 +1,13 @@
+v0.8.0 (2026-06-16)
+-------------------
+
+**Enhancements**
+
+* Add ``dict.get_path`` and ``dict.set_path`` helpers for nested mapping access.
+* Add ``dict.deep_merge`` for recursive mapping merges.
+* Align public documentation with the current Python 3.9+ support policy.
+
+
 v0.7.4 (2026-06-15)
 -------------------
 

@@ -2,7 +2,8 @@ import pytest
 import unittest
 
 from pydu.dict import (AttrDict, LookupDict, CaseInsensitiveDict,
-                       OrderedDefaultDict, attrify, pick, omit)
+                       OrderedDefaultDict, attrify, pick, omit,
+                       get_path, set_path, deep_merge)
 
 
 class TestAttrDict:
@@ -151,3 +152,48 @@ def test_omit_accepts_single_string_key():
     data = {'name': 'pydu', 'private': True}
 
     assert omit(data, 'private') == {'name': 'pydu'}
+
+
+def test_get_path_reads_dotted_and_iterable_paths():
+    data = {'user': {'profile': {'name': 'pydu'}}}
+
+    assert get_path(data, 'user.profile.name') == 'pydu'
+    assert get_path(data, ('user', 'profile', 'name')) == 'pydu'
+
+
+def test_get_path_returns_default_when_missing():
+    data = {'user': {'profile': {}}}
+
+    assert get_path(data, 'user.profile.name', default='unknown') == 'unknown'
+    assert get_path(data, 'user.profile.name') is None
+
+
+def test_set_path_creates_nested_dicts_and_returns_mapping():
+    data = {}
+
+    result = set_path(data, 'user.profile.name', 'pydu')
+
+    assert result is data
+    assert data == {'user': {'profile': {'name': 'pydu'}}}
+
+
+def test_set_path_replaces_non_mapping_intermediate_values():
+    data = {'user': 'legacy'}
+
+    set_path(data, ('user', 'profile', 'name'), 'pydu')
+
+    assert data == {'user': {'profile': {'name': 'pydu'}}}
+
+
+def test_deep_merge_recursively_combines_mappings_without_mutating_inputs():
+    base = {'user': {'name': 'pydu', 'active': True}, 'tags': ['old']}
+    override = {'user': {'active': False, 'role': 'admin'}, 'tags': ['new']}
+
+    result = deep_merge(base, override)
+
+    assert result == {
+        'user': {'name': 'pydu', 'active': False, 'role': 'admin'},
+        'tags': ['new'],
+    }
+    assert base == {'user': {'name': 'pydu', 'active': True}, 'tags': ['old']}
+    assert override == {'user': {'active': False, 'role': 'admin'}, 'tags': ['new']}

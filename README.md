@@ -9,7 +9,7 @@
 [![pydu](https://img.shields.io/github/contributors/flaggo/pydu.svg)](https://github.com/flaggo/pydu/graphs/contributors)
 
 **pydu** is a library of useful **d**ata structures and **u**tils
-for Python 2 and 3, which collected from open source projects and created by contributors.
+for Python 3.9+, which collected from open source projects and created by contributors.
 
 
 ## Installation

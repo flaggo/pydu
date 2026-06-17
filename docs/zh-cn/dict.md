@@ -144,3 +144,56 @@ omit(mapping, keys)
 >>> omit(data, 'private')
 {'name': 'pydu', 'version': '0.7.3'}
 ```
+
+
+## dict.get_path
+```python
+get_path(mapping, path, default=None, separator='.')
+```
+
+从 `mapping` 中读取嵌套值。如果任意路径片段不存在，返回 `default`。
+`path` 可以是点分隔字符串，也可以是路径片段的可迭代对象。
+
+```python
+>>> from pydu.dict import get_path
+>>> data = {'user': {'profile': {'name': 'pydu'}}}
+>>> get_path(data, 'user.profile.name')
+'pydu'
+>>> get_path(data, ('user', 'profile', 'missing'), default='unknown')
+'unknown'
+```
+
+
+## dict.set_path
+```python
+set_path(mapping, path, value, separator='.')
+```
+
+在 `mapping` 中设置嵌套值，并按需创建中间字典。原 mapping 会被更新并返回。
+
+```python
+>>> from pydu.dict import set_path
+>>> data = {}
+>>> set_path(data, 'user.profile.name', 'pydu')
+{'user': {'profile': {'name': 'pydu'}}}
+>>> data
+{'user': {'profile': {'name': 'pydu'}}}
+```
+
+
+## dict.deep_merge
+```python
+deep_merge(*mappings)
+```
+
+返回一个从左到右递归合并 mappings 后的新字典。后面的值覆盖前面的值。
+嵌套 mapping 会被递归合并，其他值会被替换。
+
+```python
+>>> from pydu.dict import deep_merge
+>>> deep_merge(
+...     {'user': {'name': 'pydu', 'active': True}},
+...     {'user': {'active': False, 'role': 'admin'}},
+... )
+{'user': {'name': 'pydu', 'active': False, 'role': 'admin'}}
+```

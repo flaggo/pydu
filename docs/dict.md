@@ -152,3 +152,58 @@ Return a new dict without selected keys from `mapping`. Missing keys are ignored
 >>> omit(data, 'private')
 {'name': 'pydu', 'version': '0.7.3'}
 ```
+
+
+## dict.get_path
+```python
+get_path(mapping, path, default=None, separator='.')
+```
+
+Return a nested value from `mapping`. If any path segment is missing, return
+`default`. `path` can be a dotted string or an iterable of path segments.
+
+```python
+>>> from pydu.dict import get_path
+>>> data = {'user': {'profile': {'name': 'pydu'}}}
+>>> get_path(data, 'user.profile.name')
+'pydu'
+>>> get_path(data, ('user', 'profile', 'missing'), default='unknown')
+'unknown'
+```
+
+
+## dict.set_path
+```python
+set_path(mapping, path, value, separator='.')
+```
+
+Set a nested value on `mapping`, creating intermediate dictionaries as needed.
+The original mapping is updated and returned.
+
+```python
+>>> from pydu.dict import set_path
+>>> data = {}
+>>> set_path(data, 'user.profile.name', 'pydu')
+{'user': {'profile': {'name': 'pydu'}}}
+>>> data
+{'user': {'profile': {'name': 'pydu'}}}
+```
+
+
+## dict.deep_merge
+```python
+deep_merge(*mappings)
+```
+
+Return a new dict by recursively merging mappings from left to right. Later
+values override earlier values. Nested mappings are merged; other values are
+replaced.
+
+```python
+>>> from pydu.dict import deep_merge
+>>> deep_merge(
+...     {'user': {'name': 'pydu', 'active': True}},
+...     {'user': {'active': False, 'role': 'admin'}},
+... )
+{'user': {'name': 'pydu', 'active': False, 'role': 'admin'}}
+```

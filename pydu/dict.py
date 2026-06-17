@@ -226,6 +226,20 @@ def _normalize_keys(keys):
     return keys
 
 
+def _normalize_path(path, separator='.'):
+    if isinstance(path, string_types):
+        if path == '':
+            return tuple()
+        if separator is None:
+            return (path,)
+        return tuple(path.split(separator))
+    try:
+        iter(path)
+    except TypeError:
+        return (path,)
+    return tuple(path)
+
+
 def pick(mapping, keys):
     """
     Return a new dict with selected keys from mapping.
@@ -243,3 +257,54 @@ def omit(mapping, keys):
     keys = set(_normalize_keys(keys))
     return dict((key, value) for key, value in mapping.items()
                 if key not in keys)
+
+
+def get_path(mapping, path, default=None, separator='.'):
+    """
+    Return the nested value at path, or default when any segment is missing.
+    """
+    value = mapping
+    for key in _normalize_path(path, separator=separator):
+        try:
+            value = value[key]
+        except (KeyError, IndexError, TypeError):
+            return default
+    return value
+
+
+def set_path(mapping, path, value, separator='.'):
+    """
+    Set a nested value at path, creating dictionaries as needed.
+    """
+    keys = _normalize_path(path, separator=separator)
+    if not keys:
+        raise ValueError('path must not be empty')
+
+    current = mapping
+    for key in keys[:-1]:
+        try:
+            next_value = current[key]
+        except (KeyError, TypeError):
+            next_value = {}
+            current[key] = next_value
+        if not isinstance(next_value, MutableMapping):
+            next_value = {}
+            current[key] = next_value
+        current = next_value
+    current[keys[-1]] = value
+    return mapping
+
+
+def deep_merge(*mappings):
+    """
+    Return a new dict by recursively merging mappings from left to right.
+    """
+    result = {}
+    for mapping in mappings:
+        for key, value in mapping.items():
+            existing = result.get(key)
+            if isinstance(existing, Mapping) and isinstance(value, Mapping):
+                result[key] = deep_merge(existing, value)
+            else:
+                result[key] = value
+    return result
